@@ -1,0 +1,38 @@
+-- Insert 2 satny
+INSERT INTO Satna VALUES(1,'Italská budova');
+INSERT INTO Satna VALUES(2,'Nová budova');
+
+-- Insert 2 satnařky
+INSERT INTO Satnarka VALUES(1,1,'Marcelka','Nováková');
+INSERT INTO Satnarka VALUES(2,2,'Jana','Kovářová');
+INSERT INTO Satnarka VALUES(3,1,'Lucie','Zmrzlá');
+
+
+-- Insert 4 students
+INSERT INTO Student VALUES(1, 'S420300843379J', 'David', 'Brablc', 'brad14@vse.cz');
+INSERT INTO Student VALUES(2, 'S420301053878J', 'Lukáš', 'Kočí', 'kocl14@vse.cz');
+INSERT INTO Student VALUES(3, 'S420301010529M', 'Tomáš', 'Kotouč', 'kott10@vse.cz');
+INSERT INTO Student VALUES(4, 'S420301051745J', 'Daniel', 'Petr', 'petd19@vse.cz');
+
+
+-- Insert 450 instances for Italská budova
+WITH RECURSIVE
+    cnt(x) AS (
+        SELECT 1
+        UNION ALL
+        SELECT x+1 FROM cnt
+        LIMIT 450 -- number of rows to insert
+    )
+INSERT INTO Umisteni (cislo, typ_umisteni, student, id_satny_fk)
+SELECT case when x <= 400 then x else x - 400 END, CASE WHEN x <= 400 THEN 'věšák' ELSE 'podlaha' END, NULL, 1 FROM cnt;
+
+-- Insert 300 instances for Nová budova
+WITH RECURSIVE
+    cnt(x) AS (
+        SELECT 1
+        UNION ALL
+        SELECT x+1 FROM cnt
+        LIMIT 300 -- number of rows to insert
+    )
+INSERT INTO Umisteni (cislo, typ_umisteni, student, id_satny_fk)
+SELECT x, 'věšák', NULL, 2 FROM cnt;
