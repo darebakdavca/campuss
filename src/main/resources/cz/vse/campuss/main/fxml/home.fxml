@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
+         <image>
+            <Image url="@campuss.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="250.0" layoutX="694.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="16.0">
+         <image>
+            <Image url="@Historie_uložení.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="225.0" fitWidth="300.0" layoutX="267.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="92.0" AnchorPane.leftAnchor="267.0">
+         <image>
+            <Image url="@Uschovat.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="225.0" fitWidth="300.0" layoutX="510.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="92.0" AnchorPane.rightAnchor="266.3265380859375">
+         <image>
+            <Image url="@Vyzvednout.PNG" />
+         </image>
+      </ImageView>
+      <TextField editable="false" layoutY="80.0" prefHeight="50.0" prefWidth="325.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="635.0">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@campuss.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="50.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vítej studente!">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Text>
+      <HBox layoutX="93.0" layoutY="208.0" spacing="20.0" AnchorPane.leftAnchor="93.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Šatna:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <TextField alignment="TOP_LEFT" editable="false" prefHeight="39.0" prefWidth="300.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <Text layoutX="62.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Věci máš uschované v:">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <HBox layoutX="93.0" layoutY="325.0" spacing="20.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění zavazadla:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <TextField alignment="TOP_LEFT" editable="false" prefHeight="39.0" prefWidth="80.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox layoutX="93.0" layoutY="270.0" spacing="20.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění oblečení:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <TextField alignment="TOP_LEFT" editable="false" prefHeight="39.0" prefWidth="80.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox layoutX="90.0" layoutY="399.0" spacing="20.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas uložení:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <TextField alignment="TOP_LEFT" editable="false" prefHeight="39.0" prefWidth="200.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox layoutX="90.0" layoutY="448.0" spacing="20.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas uzavření šatny:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <TextField alignment="TOP_LEFT" editable="false" prefHeight="39.0" prefWidth="200.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
