@@ -12,11 +12,11 @@
             <Image url="@pictures/campuss.png"/>
         </ImageView>
         <Text style="-fx-font-size: 50px; -fx-font-weight: bold;"  text="Přihlášení do systému" />
-        <ImageView style="-fx-cursor: hand;" onMouseClicked="#prihlaseni"  fitHeight="200.0" fitWidth="350.0" layoutX="44.0" layoutY="278.0" pickOnBounds="true"
+        <ImageView style="-fx-cursor: hand;" onMouseClicked="#prihlaseniKlik" fitHeight="200.0" fitWidth="350.0" layoutX="44.0" layoutY="278.0" pickOnBounds="true"
                    preserveRatio="true">
             <Image url="@pictures/microsoft.PNG"/>
         </ImageView>
-        <ImageView style="-fx-cursor: hand;" onMouseClicked="#prihlaseni" fitHeight="200.0" fitWidth="350.0" layoutX="44.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView style="-fx-cursor: hand;" onMouseClicked="#prihlaseniKlik" fitHeight="200.0" fitWidth="350.0" layoutX="44.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@pictures/moje_id.PNG"/>
         </ImageView>
     </VBox>

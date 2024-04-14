@@ -15,7 +15,7 @@
             <Image url="@pictures/campuss.png" />
          </image>
       </ImageView>
-      <ImageView fitWidth="350.0"  pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView onMouseClicked="#historieKlik" fitWidth="350.0"  pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@pictures/historie_uložení.png" />
          </image>

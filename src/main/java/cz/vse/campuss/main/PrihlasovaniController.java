@@ -16,7 +16,7 @@ public class PrihlasovaniController {
     }
 
     @FXML
-    public void prihlaseni(MouseEvent mouseEvent) {
+    public void prihlaseniKlik(MouseEvent mouseEvent) {
         // Get the stage of the current scene
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
 
