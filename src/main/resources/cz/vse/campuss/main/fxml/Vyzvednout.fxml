@@ -13,12 +13,12 @@
    <children>
       <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
          <image>
-            <Image url="@campuss.png" />
+            <Image url="@pictures/campuss.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="846.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0">
          <image>
-            <Image url="@home.PNG" />
+            <Image url="@pictures/home.PNG" />
          </image>
       </ImageView>
       <Text layoutX="42.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vyzvednout" AnchorPane.leftAnchor="50.0">

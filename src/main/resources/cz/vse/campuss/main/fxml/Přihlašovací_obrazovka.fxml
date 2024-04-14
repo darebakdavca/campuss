@@ -24,17 +24,17 @@
                <children>
                   <ImageView fitHeight="124.0" fitWidth="438.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@campuss.png" />
+                        <Image url="@pictures/campuss.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="350.0" layoutX="44.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@microsoft.PNG" />
+                        <Image url="@pictures/microsoft.PNG" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="350.0" layoutX="44.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@moje_id.PNG" />
+                        <Image url="@pictures/moje_id.PNG" />
                      </image>
                   </ImageView>
                   <Text layoutX="36.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Přihlášení do systému">

@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
          <image>
-            <Image url="@campuss.png" />
+            <Image url="@pictures/campuss.png" />
          </image>
       </ImageView>
       <Text layoutX="50.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uschovat" AnchorPane.leftAnchor="50.0">
@@ -23,7 +23,7 @@
       </Text>
       <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="846.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.663719177246094" AnchorPane.topAnchor="14.0">
          <image>
-            <Image url="@home.PNG" />
+            <Image url="@pictures/home.PNG" />
          </image>
       </ImageView>
       <TextField alignment="CENTER" editable="false" layoutX="206.0" layoutY="206.0" prefHeight="245.0" prefWidth="250.0" style="-fx-background-color: D9D9D9;" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="504.0" AnchorPane.topAnchor="206.0">
