@@ -5,62 +5,82 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
+      <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@pictures/campuss.png" />
          </image>
       </ImageView>
-      <Text layoutX="50.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uschovat" AnchorPane.leftAnchor="50.0">
+      <Text layoutX="71.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uschovat" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0">
          <font>
-            <Font name="System Bold" size="48.0" />
+            <Font name="System Bold" size="64.0" />
          </font>
       </Text>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="846.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.663719177246094" AnchorPane.topAnchor="14.0">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="846.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <image>
             <Image url="@pictures/home.PNG" />
          </image>
       </ImageView>
-      <TextField alignment="CENTER" editable="false" layoutX="206.0" layoutY="206.0" prefHeight="245.0" prefWidth="250.0" style="-fx-background-color: D9D9D9;" AnchorPane.bottomAnchor="89.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="504.0" AnchorPane.topAnchor="206.0">
-         <font>
-            <Font name="System Bold" size="96.0" />
-         </font></TextField>
-      <TextField alignment="CENTER" editable="false" layoutX="516.0" layoutY="206.0" prefHeight="245.0" prefWidth="250.0" style="-fx-background-color: D9D9D9;" AnchorPane.bottomAnchor="89.0" AnchorPane.rightAnchor="194.0" AnchorPane.topAnchor="206.0">
-         <font>
-            <Font name="System Bold" size="96.0" />
-         </font></TextField>
-      <Button layoutX="174.0" layoutY="470.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="425.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2;" text="Potvrdit uschování" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="361.0">
-         <font>
-            <Font name="System Bold" size="26.0" />
-         </font>
-      </Button>
-      <Button layoutX="635.0" layoutY="470.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2;" text="Zrušit" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="175.0">
-         <font>
-            <Font name="System Bold" size="26.0" />
-         </font>
-      </Button>
-      <Pane layoutX="206.0" layoutY="135.0" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: D9D9D9;" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="504.0">
+      <HBox layoutX="285.0" layoutY="216.0" spacing="150.0" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="285.0" AnchorPane.topAnchor="216.0">
          <children>
-            <Text layoutX="55.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oblečení" textAlignment="CENTER">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Text>
+            <VBox spacing="20.0">
+               <children>
+                  <Pane style="-fx-background-color: D9D9D9;">
+                     <children>
+                        <Text layoutX="160.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oblečení">
+                           <font>
+                              <Font size="72.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <TextField alignment="CENTER" editable="false" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: D9D9D9;">
+                     <font>
+                        <Font name="System Bold" size="96.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            <VBox spacing="20.0">
+               <children>
+                  <Pane style="-fx-background-color: D9D9D9;">
+                     <children>
+                        <Text layoutX="140.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zavazadlo">
+                           <font>
+                              <Font size="72.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <TextField alignment="CENTER" editable="false" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: D9D9D9;">
+                     <font>
+                        <Font name="System Bold" size="96.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
          </children>
-      </Pane>
-      <Pane layoutX="516.0" layoutY="135.0" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: D9D9D9;" AnchorPane.rightAnchor="194.0">
+      </HBox>
+      <HBox layoutX="285.0" layoutY="867.0" spacing="50.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="285.0" AnchorPane.rightAnchor="285.0">
          <children>
-            <Text layoutX="45.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zavazadlo" textAlignment="CENTER">
+            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="1000.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2;" text="Potvrdit uschování">
                <font>
-                  <Font size="36.0" />
+                  <Font name="System Bold" size="36.0" />
                </font>
-            </Text>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2;" text="Zrušit">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Button>
          </children>
-      </Pane>
+      </HBox>
    </children>
 </AnchorPane>

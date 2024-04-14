@@ -10,41 +10,44 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
+      <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
          <image>
             <Image url="@pictures/campuss.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="843.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="843.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <image>
             <Image url="@pictures/home.PNG" />
          </image>
       </ImageView>
-      <Text layoutX="50.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historie uložení" AnchorPane.leftAnchor="50.0">
+      <Text layoutX="44.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historie uložení" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0">
          <font>
-            <Font name="System Bold" size="48.0" />
+            <Font name="System Bold" size="64.0" />
          </font>
       </Text>
-      <Button layoutX="842.0" layoutY="127.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="99.0" style="-fx-background-color: #90EE90;" text="Odeslat" AnchorPane.rightAnchor="19.0">
+      <Button layoutX="827.0" layoutY="195.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90;" text="Odeslat" AnchorPane.rightAnchor="14.0">
          <font>
-            <Font size="18.0" />
+            <Font size="24.0" />
          </font>
       </Button>
-      <TextField layoutX="25.0" layoutY="127.0" prefHeight="50.0" prefWidth="810.0" promptText="Vyhledat..." style="-fx-border-color: D9D9D9; -fx-border-width: 2;" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="128.0">
+      <TextField layoutX="24.0" layoutY="195.0" prefHeight="60.0" prefWidth="761.0" promptText="Vyhledat..." style="-fx-border-color: D9D9D9; -fx-border-width: 2;" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="179.0">
          <font>
-            <Font size="18.0" />
+            <Font size="24.0" />
          </font>
       </TextField>
-      <TableView layoutX="25.0" layoutY="193.0" prefHeight="308.0" prefWidth="920.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="193.0">
+      <TableView layoutX="25.0" layoutY="265.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="265.0">
         <columns>
-            <TableColumn prefWidth="300.0" text="Jméno" />
-          <TableColumn prefWidth="260.0" text="ISIC ID" />
-          <TableColumn prefWidth="120.0" text="Číslo věšáku" />
-            <TableColumn prefWidth="120.0" text="Čas uložení" />
-            <TableColumn prefWidth="120.0" text="Čas vyzvednutí" />
+            <TableColumn maxWidth="560.0" minWidth="300.0" prefWidth="-1.0" text="Jméno" />
+          <TableColumn minWidth="200.0" prefWidth="215.0" text="ISIC ID" />
+          <TableColumn minWidth="120.0" prefWidth="-1.0" text="Číslo věšáku" />
+            <TableColumn minWidth="120.0" prefWidth="-1.0" text="Čas uložení" />
+            <TableColumn minWidth="120.0" prefWidth="-1.0" text="Čas vyzvednutí" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </children>
 </AnchorPane>

@@ -10,7 +10,7 @@ import java.net.URL;
 public class Start extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        showScene(primaryStage, "file:src/main/resources/cz/vse/campuss/main/fxml/prihlasovani.fxml");
+        showScene(primaryStage, "file:src/main/resources/cz/vse/campuss/main/fxml/student.fxml");
     }
 
     public static void main(String[] args) {
