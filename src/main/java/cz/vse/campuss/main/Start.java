@@ -12,16 +12,21 @@ import java.net.URL;
 public class Start extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(new URL("file:src/main/resources/cz/vse/campuss/main/fxml/home.fxml"));
-        Scene home = new Scene(loader.load());
-        primaryStage.setTitle("Campuss");
-        primaryStage.setScene(home);
-        primaryStage.setMaximized(true);
-        primaryStage.show();
+        showScene(primaryStage, "file:src/main/resources/cz/vse/campuss/main/fxml/prihlasovani.fxml");
     }
 
     public static void main(String[] args) {
         launch();
+    }
+
+    private void showScene(Stage stage, String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(new URL(fxmlPath));
+        Scene scene = new Scene(loader.load());
+        stage.setMaximized(true);
+        stage.setScene(scene);
+
+        stage.setTitle("Campuss");
+        stage.show();
     }
 }
