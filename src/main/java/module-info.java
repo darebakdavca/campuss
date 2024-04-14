@@ -4,6 +4,7 @@ module cz.vse.campuss {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires java.sql;
 
 
     opens cz.vse.campuss.main to javafx.fxml;
