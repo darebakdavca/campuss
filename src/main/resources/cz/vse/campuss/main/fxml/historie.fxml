@@ -12,18 +12,13 @@
 
 <?import javafx.geometry.Insets?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
       <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
             <Image url="@pictures/campuss.png" />
-         </image>
       </ImageView>
       <ImageView fitWidth="150.0"  pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
             <Image url="@pictures/home.PNG" />
-         </image>
       </ImageView>
-      <Text layoutX="44.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historie uložení" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Historie uložení" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
          <font>
             <Font name="System Bold" size="64.0" />
          </font>
@@ -51,7 +46,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-   </children>
     <padding>
         <Insets top="20.0" left="20.0" right="20.0" bottom="20.0" />
     </padding>

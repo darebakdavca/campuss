@@ -11,60 +11,64 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@pictures/campuss.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="50.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uschovat" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0">
-         <font>
-            <Font name="System Bold" size="64.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="846.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
-         <image>
-            <Image url="@pictures/home.PNG" />
-         </image>
-      </ImageView>
-      <Button layoutX="180.0" layoutY="914.0" mnemonicParsing="false" style="-fx-background-color: #CCCC#D3D3D3CC; -fx-background-radius: 30;" text="Zobrazit pozice pro uschování" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0">
-         <font>
-            <Font size="64.0" />
-         </font>
-      </Button>
-      <Button layoutX="1786.0" layoutY="208.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90;" text="Odeslat" AnchorPane.rightAnchor="14.0">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Pane layoutX="50.0" layoutY="208.0" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #D3D3D3;" AnchorPane.leftAnchor="50.0">
-         <children>
+   <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+      <Image url="@pictures/campuss.png"/>
+   </ImageView>
+   <ImageView fitWidth="150.0"  pickOnBounds="true"
+              preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Image url="@pictures/home.PNG"/>
+   </ImageView>
+   <Text  strokeType="OUTSIDE" strokeWidth="0.0" text="Uschovat" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
+      <font>
+         <Font name="System Bold" size="64.0" />
+      </font>
+   </Text>
+   <HBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Pane layoutX="50.0" layoutY="208.0" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #D3D3D3;" AnchorPane.leftAnchor="0.0">
             <Text layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISIC ID">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
             </Text>
-         </children>
       </Pane>
-      <TextField layoutX="196.0" layoutY="208.0" prefHeight="60.0" prefWidth="1839.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="185.0">
+      <TextField HBox.hgrow="ALWAYS" prefHeight="60.0">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <VBox layoutX="610.0" layoutY="432.0" spacing="50.0" AnchorPane.leftAnchor="610.0" AnchorPane.rightAnchor="610.0">
-         <children>
-            <CheckBox alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" prefWidth="1000.0" text="Oblečení">
-               <font>
-                  <Font size="72.0" />
-               </font>
-            </CheckBox>
-            <CheckBox alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" prefWidth="1000.0" text="Zavazadlo">
-               <font>
-                  <Font size="72.0" />
-               </font>
-            </CheckBox>
-         </children>
-      </VBox>
-   </children>
+      <Button  mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90;" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+   </HBox>
+
+   <VBox spacing="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
+      <CheckBox alignment="CENTER" mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
+         <font>
+            <Font size="80.0" />
+         </font>
+      </CheckBox>
+      <Line style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="620.0" />
+      <CheckBox alignment="CENTER" mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
+         <font>
+            <Font size="80.0" />
+         </font>
+      </CheckBox>
+      <HBox alignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <Button HBox.hgrow="ALWAYS" mnemonicParsing="false" style="-fx-background-color: #CCCC#D3D3D3CC; -fx-background-radius: 30;" text="Zobrazit pozice pro uschování" AnchorPane.bottomAnchor="31.0">
+            <font>
+               <Font size="64.0" />
+            </font>
+         </Button>
+      </HBox>
+   </VBox>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 </AnchorPane>
