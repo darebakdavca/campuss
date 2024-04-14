@@ -8,6 +8,7 @@ public class HomeController {
     private Text uvitani;
     @FXML
     private void initialize() {
-        uvitani.setText("Vítejte Marcelko!");
+        String username = DatabaseHelper.fetchUserNameSatnarka(1);
+        uvitani.setText("Vítejte " + username + "!");
     }
 }
