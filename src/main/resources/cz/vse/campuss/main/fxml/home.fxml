@@ -6,19 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.text.Text?>
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.main.HomeController">
-   <children>
-      <ImageView fitWidth="500" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
+<AnchorPane fx:controller="cz.vse.campuss.main.HomeController" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
+      <ImageView fitWidth="500.0"  preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Image url="@pictures/campuss.png" />
-         </image>
       </ImageView>
-      <ImageView onMouseClicked="#historieKlik" fitWidth="350.0"  pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@pictures/historie_uložení.png" />
-         </image>
+      <ImageView onMouseClicked="#historieKlik" style="-fx-cursor: hand; -fx-background-color: blue" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fitWidth="600.0">
+          <Image url="@pictures/historie.png"/>
       </ImageView>
        <HBox alignment="TOP_CENTER"  AnchorPane.topAnchor="130.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
            <Text fx:id="uvitani" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0" style="-fx-font-size: 50px; -fx-font-weight: bold"/>
@@ -26,20 +20,13 @@
 
 
        <HBox alignment="CENTER" spacing="80.0"  AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <children>
-                <ImageView fx:id="uschovat" fitWidth="300.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
-                <image>
+                <ImageView style="-fx-cursor: hand" onMouseClicked="#uschovatKlik" fitWidth="300.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
                     <Image url="@pictures/Uschovat.PNG" />
-                </image>
                 </ImageView>
-                <ImageView fx:id="vyzvednout" fitWidth="300.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
-                <image>
+                <ImageView fitWidth="300.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
                     <Image url="@pictures/Vyzvednout.PNG" />
-                </image>
                 </ImageView>
-            </children>
       </HBox>
-   </children>
    <padding>
       <Insets top="20.0" left="20.0" right="20.0" />
    </padding>

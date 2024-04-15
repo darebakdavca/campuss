@@ -7,13 +7,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PrihlasovaniController extends BaseController {
-    @FXML
+public class Uschovat1Controller extends BaseController {
+
     private void initialize() {
     }
 
+
     @FXML
-    public void prihlaseniKlik(MouseEvent mouseEvent) {
+    public void domuKlik(MouseEvent mouseEvent) {
         // Get the stage of the current scene
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
 

@@ -1,23 +1,16 @@
 package cz.vse.campuss.main;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 
-public class HomeController {
+public class HomeController extends BaseController {
     @FXML
     private Text uvitani;
-
-    @FXML
-    private ImageView historie;
 
 
     @FXML
@@ -27,7 +20,7 @@ public class HomeController {
     }
 
     @FXML
-    private void historieKlik(MouseEvent mouseEvent) {
+    public void historieKlik(MouseEvent mouseEvent) {
         // Get the stage of the current scene
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
 
@@ -40,13 +33,17 @@ public class HomeController {
         }
     }
 
-    private void showScene(Stage stage, String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(new URL(fxmlPath));
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.setTitle("Campuss");
-        stage.show();
+    @FXML
+    public void uschovatKlik(MouseEvent mouseEvent) {
+        // Get the stage of the current scene
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+
+        try {
+            // Load the home.fxml file
+            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/uschovat1.fxml");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
