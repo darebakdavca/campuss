@@ -49,6 +49,3 @@ CREATE TABLE IF NOT EXISTS "Satnarka"
     prijmeni    TEXT    not null
 );
 COMMIT;
-
-
-select * from Umisteni join satna on Umisteni.id_satny_fk = satna.id_satny where nazev = 'Italská budova';
