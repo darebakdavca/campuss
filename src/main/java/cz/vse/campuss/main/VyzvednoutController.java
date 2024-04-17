@@ -7,11 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Uschovat1Controller extends BaseController {
+public class VyzvednoutController extends BaseController {
 
+    @FXML
     private void initialize() {
-    }
 
+    }
 
     @FXML
     public void domuKlik(MouseEvent mouseEvent) {
@@ -28,10 +29,21 @@ public class Uschovat1Controller extends BaseController {
     }
 
     @FXML
-    public void zobrazitPoziceKlik(MouseEvent mouseEvent) {
+    public void potvrditVyzvednutiKlik(MouseEvent mouseEvent) {
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         try {
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/uschovat2.fxml");
+            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/potvrzeni.fxml");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void zrusitKlik(MouseEvent mouseEvent) {
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        try {
+            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/home.fxml");
 
         } catch (IOException e) {
             e.printStackTrace();

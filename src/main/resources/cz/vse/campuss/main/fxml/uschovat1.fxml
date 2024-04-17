@@ -21,7 +21,7 @@
    </ImageView>
    <ImageView onMouseClicked="#domuKlik" style="-fx-cursor: hand;" fitWidth="150.0"  pickOnBounds="true"
               preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <Image url="@pictures/home.png"/>
+      <Image url="@pictures/home.PNG"/>
    </ImageView>
    <Text  strokeType="OUTSIDE" strokeWidth="0.0" text="Uschovat" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
       <font>
@@ -61,7 +61,7 @@
          </font>
       </CheckBox>
       <HBox alignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <Button HBox.hgrow="ALWAYS" mnemonicParsing="false" style="-fx-background-color: #CCCC#D3D3D3CC; -fx-background-radius: 30;" text="Zobrazit pozice pro uschování" AnchorPane.bottomAnchor="31.0">
+         <Button onMouseClicked="#zobrazitPoziceKlik" HBox.hgrow="ALWAYS" mnemonicParsing="false" style="-fx-background-color: #CCCC#D3D3D3CC; -fx-background-radius: 30;" text="Zobrazit pozice pro uschování" AnchorPane.bottomAnchor="31.0">
             <font>
                <Font size="64.0" />
             </font>

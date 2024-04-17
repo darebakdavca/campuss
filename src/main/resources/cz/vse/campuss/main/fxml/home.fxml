@@ -23,7 +23,7 @@
                 <ImageView style="-fx-cursor: hand" onMouseClicked="#uschovatKlik" fitWidth="300.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
                     <Image url="@pictures/Uschovat.PNG" />
                 </ImageView>
-                <ImageView fitWidth="300.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
+                <ImageView onMouseClicked="#vyzvednoutKlik" fitWidth="300.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
                     <Image url="@pictures/Vyzvednout.PNG" />
                 </ImageView>
       </HBox>
