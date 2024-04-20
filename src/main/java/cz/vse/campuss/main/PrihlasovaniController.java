@@ -4,7 +4,8 @@ import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -14,20 +15,21 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class PrihlasovaniController extends BaseController {
-    @FXML
-    public CheckBox CheckBoxStudent;
-    @FXML
-    public CheckBox CheckBoxSatnarka;
+
     @FXML
     public Text errorText;
     @FXML
     public AnchorPane rootPane;
     @FXML
-    public Text errorTextBoth;
+    public RadioButton rButtonRole2;
+    @FXML
+    public RadioButton rButtonRole1;
 
     @FXML
     private void initialize() {
-        rootPane.requestFocus();
+        ToggleGroup group = new ToggleGroup();
+        rButtonRole1.setToggleGroup(group);
+        rButtonRole2.setToggleGroup(group);
     }
 
     @FXML
@@ -35,18 +37,14 @@ public class PrihlasovaniController extends BaseController {
         // Get the stage of the current scene
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
 
-        if (CheckBoxStudent.isSelected() && CheckBoxSatnarka.isSelected()) {
-            errorText.setVisible(false);
-            errorTextBoth.setVisible(true);
-            hideAfterSeconds(errorTextBoth);
-        } else if (CheckBoxStudent.isSelected()) {
+        if (rButtonRole2.isSelected()) {
             // Load the student.fxml file
             try {
                 showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/student.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (CheckBoxSatnarka.isSelected()) {
+        } else if (rButtonRole1.isSelected()) {
             // Load the home.fxml file
             try {
                 showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/home.fxml");
@@ -54,11 +52,12 @@ public class PrihlasovaniController extends BaseController {
                 e.printStackTrace();
             }
         } else {
-            errorTextBoth.setVisible(false);
             errorText.setVisible(true);
             hideAfterSeconds(errorText);
         }
     }
+
+
 
     private void hideAfterSeconds(Node node) {
         // Create a FadeTransition for the fade-in effect
