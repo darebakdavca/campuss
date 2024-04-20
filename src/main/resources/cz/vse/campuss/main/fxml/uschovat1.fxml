@@ -49,13 +49,13 @@
    </HBox>
 
    <VBox spacing="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
-      <CheckBox alignment="CENTER" mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
+      <CheckBox mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
          <font>
             <Font size="80.0" />
          </font>
       </CheckBox>
-      <Line style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="620.0" />
-      <CheckBox alignment="CENTER" mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
+      <Line style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="500.0" />
+      <CheckBox  mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
          <font>
             <Font size="80.0" />
          </font>
