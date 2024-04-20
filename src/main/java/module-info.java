@@ -5,6 +5,7 @@ module cz.vse.campuss {
     requires javafx.fxml;
     requires javafx.web;
     requires java.sql;
+    requires java.desktop;
 
 
     opens cz.vse.campuss.main to javafx.fxml;
