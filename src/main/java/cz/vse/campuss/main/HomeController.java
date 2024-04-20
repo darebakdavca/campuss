@@ -16,7 +16,7 @@ public class HomeController extends BaseController {
     @FXML
     private void initialize() {
         String username = DatabaseHelper.fetchUserNameSatnarka(1);
-        uvitani.setText("Vítejte " + username + "!");
+        uvitani.setText("Vítáme uživatele " + username + "!");
     }
 
     @FXML

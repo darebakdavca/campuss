@@ -36,12 +36,12 @@
                </font>
             </Text>
       </Pane>
-      <TextField HBox.hgrow="ALWAYS" prefHeight="60.0">
+      <TextField fx:id="TextInput" text="S420300843379J" HBox.hgrow="ALWAYS" prefHeight="60.0">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <Button  mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+      <Button onAction="#odeslatISIC" mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

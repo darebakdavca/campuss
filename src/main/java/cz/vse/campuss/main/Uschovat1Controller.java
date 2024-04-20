@@ -1,7 +1,10 @@
 package cz.vse.campuss.main;
 
+import cz.vse.campuss.model.Student;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -9,7 +12,11 @@ import java.io.IOException;
 
 public class Uschovat1Controller extends BaseController {
 
+    public TextField TextInput;
+
+    @FXML
     private void initialize() {
+        TextInput.setOnAction(this::odeslatISIC);
     }
 
 
@@ -36,5 +43,10 @@ public class Uschovat1Controller extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void odeslatISIC(ActionEvent actionEvent) {
+        Student student = DatabaseHelper.fetchStudentByISIC(TextInput.getText());
     }
 }

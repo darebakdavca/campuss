@@ -1,4 +1,6 @@
 package cz.vse.campuss.main;
+import cz.vse.campuss.model.Student;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,5 +25,19 @@ public class DatabaseHelper {
             System.out.println("Database error: " + e.getMessage());
         }
         return name;
+    }
+
+    public static Student fetchStudentByISIC(String isic) {
+        Student student = null;
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Student WHERE isic = '" + isic + "'")) {
+            if (rs.next()) {
+                student = new Student(rs.getInt("id_studenta"), rs.getString("jmeno"), rs.getString("prijmeni"), rs.getString("isic"));
+            }
+        } catch (Exception e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+        return student;
     }
 }
