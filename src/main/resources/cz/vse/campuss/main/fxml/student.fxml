@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="cz.vse.campuss.main.StudentController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -35,7 +35,7 @@
                         <Font name="System Bold" size="48.0" />
                      </font>
                   </Text>
-                  <TextField alignment="TOP_LEFT" editable="false">
+                  <TextField fx:id="satnaOut" alignment="TOP_LEFT" editable="false">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -49,7 +49,7 @@
                         <Font name="System Bold" size="48.0" />
                      </font>
                   </Text>
-                  <TextField alignment="TOP_LEFT" editable="false">
+                  <TextField fx:id="obleceniOut" alignment="TOP_LEFT" editable="false">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -63,7 +63,7 @@
                         <Font name="System Bold" size="48.0" />
                      </font>
                   </Text>
-                  <TextField alignment="TOP_LEFT" editable="false">
+                  <TextField fx:id="zavazadlaOut" alignment="TOP_LEFT" editable="false">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -77,7 +77,7 @@
                         <Font name="System Bold" size="48.0" />
                      </font>
                   </Text>
-                  <TextField alignment="TOP_LEFT" editable="false">
+                  <TextField fx:id="timeOut" alignment="TOP_LEFT" editable="false">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -91,7 +91,7 @@
                         <Font name="System Bold" size="48.0" />
                      </font>
                   </Text>
-                  <TextField alignment="TOP_LEFT" editable="false">
+                  <TextField fx:id="closingOut" alignment="TOP_LEFT" editable="false">
                      <font>
                         <Font size="36.0" />
                      </font>

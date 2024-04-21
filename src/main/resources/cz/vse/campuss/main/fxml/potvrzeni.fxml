@@ -5,21 +5,22 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 <?import javafx.geometry.Insets?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21">
-      <ImageView fitHeight="150.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Image url="@pictures/campuss.png" />
-      </ImageView>
-      <ImageView style="-fx-cursor: hand" fitHeight="150.0" fitWidth="150.0" layoutX="871.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Image url="@pictures/home.png" />
-      </ImageView>
-      <TextField alignment="CENTER" editable="false" layoutX="272.0" layoutY="140.0" prefHeight="260.0" prefWidth="416.0" style="-fx-border-width: 0;" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="272.0" AnchorPane.topAnchor="140.0">
-         <font>
+
+<AnchorPane fx:controller="cz.vse.campuss.main.PotrvzeniController" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fitHeight="150.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Image url="@pictures/campuss.png" />
+    </ImageView>
+    <ImageView onMouseClicked="#domuKlik" style="-fx-cursor: hand" fitHeight="150.0" fitWidth="150.0" layoutX="871.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Image url="@pictures/home.png"/>
+    </ImageView>
+    <TextField fx:id="potrvzeniText" alignment="CENTER" editable="false" layoutX="272.0" layoutY="140.0" prefHeight="260.0" prefWidth="416.0" style="-fx-border-width: 0;" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="272.0" AnchorPane.topAnchor="140.0">
+        <font>
             <Font size="64.0" />
-         </font>
-      </TextField>
+        </font>
+    </TextField>
     <padding>
-         <Insets top="20.0" left="20.0" right="20.0" bottom="20.0" />
+        <Insets top="20.0" left="20.0" right="20.0" bottom="20.0" />
     </padding>
 </AnchorPane>
