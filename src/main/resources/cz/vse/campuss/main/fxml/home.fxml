@@ -21,10 +21,10 @@
 
        <HBox alignment="CENTER" spacing="80.0"  AnchorPane.topAnchor="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                 <ImageView style="-fx-cursor: hand" onMouseClicked="#uschovatKlik" fitWidth="400.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
-                    <Image url="@pictures/Uschovat.PNG" />
+                    <Image url="@pictures/uschovat.png" />
                 </ImageView>
                 <ImageView style="-fx-cursor: hand" onMouseClicked="#vyzvednoutKlik" fitWidth="400.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
-                    <Image url="@pictures/Vyzvednout.PNG" />
+                    <Image url="@pictures/vyzvednout.png" />
                 </ImageView>
       </HBox>
    <padding>

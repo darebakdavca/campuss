@@ -77,7 +77,7 @@
                       </font>
                   </Text>
                   <ImageView fitHeight="310.0" fitWidth="300.0" pickOnBounds="true">
-                      <Image url="@pictures/foto.PNG" />
+                      <Image url="@pictures/foto.png" />
                   </ImageView>
 
               </VBox>

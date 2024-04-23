@@ -9,96 +9,90 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:controller="cz.vse.campuss.main.StudentController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
-   <children>
+<?import javafx.geometry.Insets?>
+<AnchorPane fx:controller="cz.vse.campuss.main.StudentController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
       <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
             <Image url="@pictures/campuss.png" />
-         </image>
       </ImageView>
-      <Text layoutX="199.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vítej studente!" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0">
+      <ImageView onMouseClicked="#domuKlik" style="-fx-cursor: hand;" fitWidth="150.0"  pickOnBounds="true"
+                 preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <Image url="@pictures/home.png"/>
+      </ImageView>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vítej studente!" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
          <font>
             <Font name="System Bold" size="64.0" />
          </font>
       </Text>
-      <Text layoutX="115.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Věci máš uschované v:" AnchorPane.leftAnchor="150.0">
+   <AnchorPane style="-fx-background-color: #e4e4e4; -fx-background-radius: 10; -fx-border-radius: 10" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="230.0" AnchorPane.bottomAnchor="0.0">
+      <Text layoutX="115.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Věci máš uschované v:"  AnchorPane.topAnchor="0.0">
          <font>
-            <Font size="64.0" />
+            <Font size="40.0" />
          </font>
       </Text>
-      <VBox layoutX="271.0" layoutY="432.0" spacing="40.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="300.0">
-         <children>
-            <HBox spacing="20.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Šatna:">
-                     <font>
-                        <Font name="System Bold" size="48.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="satnaOut" alignment="TOP_LEFT" editable="false">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox spacing="20.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění oblečení:">
-                     <font>
-                        <Font name="System Bold" size="48.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="obleceniOut" alignment="TOP_LEFT" editable="false">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox spacing="20.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění zavazadla:">
-                     <font>
-                        <Font name="System Bold" size="48.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="zavazadlaOut" alignment="TOP_LEFT" editable="false">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox spacing="20.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas uložení:">
-                     <font>
-                        <Font name="System Bold" size="48.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="timeOut" alignment="TOP_LEFT" editable="false">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox spacing="20.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas uzavření šatny:">
-                     <font>
-                        <Font name="System Bold" size="48.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="closingOut" alignment="TOP_LEFT" editable="false">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-         </children>
+      <VBox layoutX="271.0" layoutY="432.0" spacing="40.0" AnchorPane.topAnchor="90.0" AnchorPane.leftAnchor="300.0">
+         <HBox spacing="20.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Šatna:">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <TextField fx:id="satnaOut" alignment="TOP_LEFT" editable="false">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </HBox>
+         <HBox spacing="20.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění oblečení:">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <TextField fx:id="obleceniOut" alignment="TOP_LEFT" editable="false">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </HBox>
+         <HBox spacing="20.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění zavazadla:">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <TextField fx:id="zavazadlaOut" alignment="TOP_LEFT" editable="false">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </HBox>
+         <HBox spacing="20.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas uložení:">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <TextField fx:id="timeOut" alignment="TOP_LEFT" editable="false">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </HBox>
+         <HBox spacing="20.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas uzavření šatny:">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <TextField fx:id="closingOut" alignment="TOP_LEFT" editable="false">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+         </HBox>
       </VBox>
-   </children>
+   </AnchorPane>
+   <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 </AnchorPane>

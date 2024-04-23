@@ -13,7 +13,7 @@
         <Image url="@pictures/campuss.png" />
     </ImageView>
     <ImageView onMouseClicked="#domuKlik" style="-fx-cursor: hand" fitHeight="150.0" fitWidth="150.0" layoutX="871.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Image url="@pictures/home.PNG"/>
+        <Image url="@pictures/home.png"/>
     </ImageView>
     <TextField fx:id="potrvzeniText" alignment="CENTER" editable="false" layoutX="272.0" layoutY="140.0" prefHeight="260.0" prefWidth="416.0" style="-fx-border-width: 0;" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="272.0" AnchorPane.topAnchor="140.0">
         <font>
