@@ -14,6 +14,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.layout.StackPane?>
 <AnchorPane fx:controller="cz.vse.campuss.main.Uschovat1Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0"
               AnchorPane.topAnchor="0.0">
@@ -36,30 +37,49 @@
                </font>
             </Text>
       </Pane>
-      <TextField fx:id="TextInput" text="S420300843379J" HBox.hgrow="ALWAYS" prefHeight="60.0">
+      <TextField onAction="#odeslatISIC" fx:id="vstupISIC" text="S420300843379J" HBox.hgrow="ALWAYS" prefHeight="60.0">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <Button onAction="#odeslatISIC" mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+      <Button onAction="#odeslatISIC" fx:id="tlacitkoOdeslat" mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
    </HBox>
 
-   <VBox spacing="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
-      <CheckBox mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
+   <HBox AnchorPane.topAnchor="300.0" alignment="CENTER" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0">
+      <Pane>
+         <Text fx:id="textPotvrzeni" style="-fx-fill: #90EE90">
+            <font>
+               <Font size="25.0" />
+            </font>
+         </Text>
+      </Pane>
+   </HBox>
+
+   <VBox spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
+      <CheckBox fx:id="checkBoxObleceni" onAction="#checkboxKlik" disable="true" style="-fx-cursor: not_allowed;" mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
          <font>
             <Font size="80.0" />
          </font>
       </CheckBox>
       <Line style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="500.0" />
-      <CheckBox  mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
+      <CheckBox fx:id="checkBoxZavazadlo" onAction="#checkboxKlik" disable="true" mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
          <font>
             <Font size="80.0" />
          </font>
       </CheckBox>
+      <HBox alignment="CENTER" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <StackPane>
+            <Text fx:id="textKontrolaZaskrtnuti" style="-fx-fill: #90EE90">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+         </StackPane>
+      </HBox>
       <HBox alignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <Button onMouseClicked="#zobrazitPoziceKlik" HBox.hgrow="ALWAYS" mnemonicParsing="false" style="-fx-background-color: #CCCC#D3D3D3CC; -fx-background-radius: 30; -fx-cursor: hand" text="Zobrazit pozice pro uschování" AnchorPane.bottomAnchor="31.0">
             <font>
@@ -68,6 +88,7 @@
          </Button>
       </HBox>
    </VBox>
+
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
