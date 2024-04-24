@@ -29,7 +29,7 @@
          <Font name="System Bold" size="64.0" />
       </font>
    </Text>
-   <HBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+   <HBox fx:id="zadavaniISIC" alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
       <Pane layoutX="50.0" layoutY="208.0" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #D3D3D3;" AnchorPane.leftAnchor="0.0">
             <Text layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISIC ID">
                <font>
@@ -59,7 +59,7 @@
       </Pane>
    </HBox>
 
-   <VBox spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
+   <VBox fx:id="hlavniPrvky" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
       <CheckBox fx:id="checkBoxObleceni" onAction="#checkboxKlik" disable="true" style="-fx-cursor: not_allowed;" mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
          <font>
             <Font size="80.0" />
