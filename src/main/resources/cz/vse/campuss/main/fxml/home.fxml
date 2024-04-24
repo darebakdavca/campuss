@@ -7,7 +7,7 @@
 
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
-<AnchorPane fx:controller="cz.vse.campuss.main.HomeController" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane fx:controller="cz.vse.campuss.main.HomeController" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
       <ImageView fitWidth="500.0"  preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Image url="@pictures/campuss.png" />
       </ImageView>
@@ -19,7 +19,7 @@
        </HBox>
 
 
-       <HBox alignment="CENTER" spacing="80.0"  AnchorPane.topAnchor="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+       <HBox fx:id="volbyCinnosti" alignment="CENTER" spacing="80.0"  AnchorPane.topAnchor="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                 <ImageView style="-fx-cursor: hand" onMouseClicked="#uschovatKlik" fitWidth="400.0" pickOnBounds="true" HBox.hgrow="ALWAYS" preserveRatio="true">
                     <Image url="@pictures/uschovat.png" />
                 </ImageView>

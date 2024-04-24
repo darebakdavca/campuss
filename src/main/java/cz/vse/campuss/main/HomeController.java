@@ -3,12 +3,15 @@ package cz.vse.campuss.main;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HomeController extends BaseController {
+
+    public HBox volbyCinnosti;
     @FXML
     private Text uvitani;
 
@@ -17,6 +20,7 @@ public class HomeController extends BaseController {
     private void initialize() {
         String username = DatabaseHelper.fetchUserNameSatnarka(1);
         uvitani.setText("Vítáme uživatele " + username + "!");
+        fadeIn(volbyCinnosti);
     }
 
     @FXML

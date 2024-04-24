@@ -44,7 +44,7 @@
         </Button>
     </HBox>
     <VBox alignment="CENTER" spacing="30.0" AnchorPane.topAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
-    <HBox alignment="CENTER" spacing="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0" AnchorPane.bottomAnchor="0.0">
+    <HBox fx:id="blokInformaci" alignment="CENTER" spacing="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0" AnchorPane.bottomAnchor="0.0">
               <VBox spacing="20.0"  alignment="CENTER" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Oblečení">
                       <font>
@@ -82,7 +82,7 @@
 
               </VBox>
       </HBox>
-        <HBox  spacing="60.0" alignment="CENTER" AnchorPane.bottomAnchor="30.0">
+        <HBox fx:id="ovladaciPrvky"  spacing="60.0" alignment="CENTER" AnchorPane.bottomAnchor="30.0">
             <Button HBox.hgrow="ALWAYS" onMouseClicked="#potvrditVyzvednutiKlik" mnemonicParsing="false" prefWidth="800.0"  style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2; -fx-cursor: hand;" text="Potvrdit uschování">
                 <font>
                     <Font size="50.0" />
