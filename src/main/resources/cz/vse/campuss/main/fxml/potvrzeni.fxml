@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+
 
 <AnchorPane fx:controller="cz.vse.campuss.main.PotrvzeniController" maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
@@ -15,11 +21,23 @@
     <ImageView onMouseClicked="#domuKlik" style="-fx-cursor: hand" fitHeight="150.0" fitWidth="150.0" layoutX="871.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Image url="@pictures/home.png"/>
     </ImageView>
-    <TextField fx:id="potrvzeniText" alignment="CENTER" editable="false" layoutX="272.0" layoutY="140.0" prefHeight="260.0" prefWidth="416.0" style="-fx-border-width: 0;" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="272.0" AnchorPane.topAnchor="140.0">
-        <font>
-            <Font size="64.0" />
-        </font>
-    </TextField>
+    <VBox fx:id="hlavniPrvky" alignment="CENTER" spacing="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="190.0" AnchorPane.bottomAnchor="190.0">
+        <StackPane>
+            <Text fx:id="potrvzeniText" layoutX="272.0" layoutY="140.0"  style="-fx-border-width: 0;" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="272.0" AnchorPane.topAnchor="140.0">
+                <font>
+                    <Font size="100.0" />
+                </font>
+            </Text>
+        </StackPane>
+        <HBox alignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button onMouseClicked="#uschovatKlik" mnemonicParsing="false" prefWidth="800.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-cursor: hand;" text="Uschovat další věc">
+                <font>
+                    <Font  size="50.0" />
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+
     <padding>
         <Insets top="20.0" left="20.0" right="20.0" bottom="20.0" />
     </padding>

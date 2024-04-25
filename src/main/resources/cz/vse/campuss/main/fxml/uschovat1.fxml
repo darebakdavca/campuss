@@ -60,20 +60,22 @@
    </HBox>
 
    <VBox fx:id="hlavniPrvky" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
-      <CheckBox fx:id="checkBoxObleceni" onAction="#checkboxKlik" disable="true" style="-fx-cursor: not_allowed;" mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
-         <font>
-            <Font size="80.0" />
-         </font>
-      </CheckBox>
-      <Line style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="500.0" />
-      <CheckBox fx:id="checkBoxZavazadlo" onAction="#checkboxKlik" disable="true" mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
-         <font>
-            <Font size="80.0" />
-         </font>
-      </CheckBox>
+     <VBox onMouseClicked="#checkboxKlik" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
+         <CheckBox fx:id="checkBoxObleceni"  disable="true"  mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
+            <font>
+               <Font size="80.0" />
+            </font>
+         </CheckBox>
+         <Line style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="500.0" />
+         <CheckBox fx:id="checkBoxZavazadlo"  disable="true" mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
+            <font>
+               <Font size="80.0" />
+            </font>
+         </CheckBox>
+      </VBox>
       <HBox alignment="CENTER" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <StackPane>
-            <Text fx:id="textKontrolaZaskrtnuti" style="-fx-fill: #90EE90">
+            <Text fx:id="textKontrolaZaskrtnuti" opacity="0.0" style="-fx-fill: #FF6347;" text="Musíte zaškrtnout alespoň jednu možnost.">
                <font>
                   <Font size="25.0" />
                </font>
@@ -81,7 +83,7 @@
          </StackPane>
       </HBox>
       <HBox alignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <Button onMouseClicked="#zobrazitPoziceKlik" HBox.hgrow="ALWAYS" mnemonicParsing="false" style="-fx-background-color: #CCCC#D3D3D3CC; -fx-background-radius: 30; -fx-cursor: hand" text="Zobrazit pozice pro uschování" AnchorPane.bottomAnchor="31.0">
+         <Button fx:id="tlacitkoZobrazit" onMouseClicked="#zobrazitPoziceKlik" HBox.hgrow="ALWAYS" mnemonicParsing="false" style="-fx-background-color: #CCCC#D3D3D3CC; -fx-background-radius: 30; -fx-cursor: hand" text="Zobrazit pozice pro uschování" AnchorPane.bottomAnchor="31.0">
             <font>
                <Font size="64.0" />
             </font>

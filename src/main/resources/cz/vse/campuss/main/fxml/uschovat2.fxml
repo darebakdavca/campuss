@@ -32,9 +32,9 @@
                             <Font size="72.0" />
                         </font>
                     </Text>
-                <TextField alignment="CENTER" editable="false" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: D9D9D9;">
+                <TextField fx:id="vystupCisloObleceni" alignment="CENTER" editable="false" prefHeight="370.0" prefWidth="370.0" style="-fx-background-color: D9D9D9;">
                     <font>
-                        <Font name="System Bold" size="96.0" />
+                        <Font name="System Bold" size="140.0" />
                     </font>
                 </TextField>
             </VBox>
@@ -45,17 +45,17 @@
                             <Font size="72.0" />
                         </font>
                     </Text>
-                <TextField alignment="CENTER" editable="false" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: D9D9D9;">
+                <TextField fx:id="vystupCisloZavazadlo" alignment="CENTER" editable="false" prefHeight="370.0" prefWidth="370.0" style="-fx-background-color: D9D9D9; -fx-border-width: 0">
                     <font>
-                        <Font name="System Bold" size="96.0" />
+                        <Font name="System Bold" size="140.0" />
                     </font>
                 </TextField>
             </VBox>
         </HBox>
-        <HBox fx:id="ovladaciPrvky" spacing="60.0" alignment="CENTER" AnchorPane.bottomAnchor="30.0">
+        <HBox fx:id="ovladaciPrvky" spacing="60.0" alignment="CENTER" AnchorPane.bottomAnchor="60.0">
             <Button onMouseClicked="#potvrditUschovaniKlik" mnemonicParsing="false" prefWidth="800.0"  style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2; -fx-cursor: hand;" text="Potvrdit uschování">
                 <font>
-                    <Font  size="50.0" />
+                    <Font size="50.0" />
                 </font>
             </Button>
             <Button onMouseClicked="#zrusitKlik" mnemonicParsing="false" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand" text="Zrušit">
