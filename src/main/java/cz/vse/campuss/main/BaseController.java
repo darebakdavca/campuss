@@ -1,6 +1,7 @@
 package cz.vse.campuss.main;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -43,5 +44,29 @@ public abstract class BaseController {
         ft.setToValue(1.0);
         ft.play();
         node.setVisible(true);
+    }
+
+    protected void hideAfterSeconds(Node node) {
+        // Create a FadeTransition for the fade-in effect
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), node);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        fadeIn.play();
+
+        // Create a PauseTransition to keep the error message visible for a few seconds
+        PauseTransition visiblePause = new PauseTransition(Duration.seconds(4));
+
+        // When the fade-in effect is over, start the PauseTransition
+        fadeIn.setOnFinished(event -> visiblePause.play());
+
+        // Create a FadeTransition for the fade-out effect
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), node);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        // When the PauseTransition is over, play the fade-out effect
+        visiblePause.setOnFinished(event ->
+            fadeOut.play()
+        );
     }
 }
