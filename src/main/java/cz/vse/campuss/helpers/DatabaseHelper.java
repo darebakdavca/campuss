@@ -1,4 +1,4 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss.helpers;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.Umisteni;
 

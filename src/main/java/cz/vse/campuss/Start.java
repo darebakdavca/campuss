@@ -1,4 +1,4 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

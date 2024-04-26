@@ -13,7 +13,7 @@
 <?import javafx.scene.control.Button?>
 
 
-<AnchorPane fx:controller="cz.vse.campuss.main.PotrvzeniController" maxHeight="-Infinity" maxWidth="-Infinity"
+<AnchorPane fx:controller="cz.vse.campuss.controllers.PotrvzeniController" maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <ImageView fitHeight="150.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Image url="@pictures/campuss.png" />

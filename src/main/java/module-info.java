@@ -8,6 +8,10 @@ module cz.vse.campuss {
     requires java.desktop;
 
 
-    opens cz.vse.campuss.main to javafx.fxml;
-    exports cz.vse.campuss.main;
+    exports cz.vse.campuss.controllers;
+    opens cz.vse.campuss.controllers to javafx.fxml;
+    exports cz.vse.campuss.helpers;
+    opens cz.vse.campuss.helpers to javafx.fxml;
+    exports cz.vse.campuss;
+    opens cz.vse.campuss to javafx.fxml;
 }

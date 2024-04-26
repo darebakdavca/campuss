@@ -1,4 +1,4 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -7,6 +7,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
 public class VyzvednoutController extends BaseController {
 

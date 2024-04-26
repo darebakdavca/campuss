@@ -1,5 +1,7 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss.controllers;
 
+import cz.vse.campuss.helpers.DatabaseHelper;
+import cz.vse.campuss.helpers.NodeHelper;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -20,7 +22,7 @@ public class HomeController extends BaseController {
     private void initialize() {
         String username = DatabaseHelper.fetchUserNameSatnarka(1);
         uvitani.setText("Vítáme uživatele " + username + "!");
-        fadeIn(volbyCinnosti);
+        NodeHelper.fadeIn(volbyCinnosti);
     }
 
     @FXML

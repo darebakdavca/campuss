@@ -1,4 +1,4 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,6 +10,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
 
 public class PrihlasovaniController extends BaseController {
 

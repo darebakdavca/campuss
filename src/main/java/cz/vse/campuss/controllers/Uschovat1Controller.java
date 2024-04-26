@@ -1,5 +1,9 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss.controllers;
 
+import cz.vse.campuss.helpers.CheckBoxState;
+import cz.vse.campuss.helpers.DatabaseHelper;
+import cz.vse.campuss.helpers.StudentState;
+import cz.vse.campuss.helpers.UserDataContainer;
 import cz.vse.campuss.model.Student;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,6 +21,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
+import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
+import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
+
+
+/**
+ * Kontrolér pro obrazovku uschovat1.fxml
+ */
 public class Uschovat1Controller extends BaseController {
     private Stage stage;
     private UserDataContainer userDataContainer;
@@ -31,7 +42,9 @@ public class Uschovat1Controller extends BaseController {
     public HBox zadavaniISIC;
     public Button tlacitkoZobrazit;
 
-
+    /**
+     * Inicializace kontroléru
+     */
     @FXML
     private void initialize() {
         // nastavení akce při stisku enter klávesy
@@ -40,7 +53,7 @@ public class Uschovat1Controller extends BaseController {
         fadeIn(hlavniPrvky);
         fadeIn(zadavaniISIC);
         Platform.runLater(() -> stage = (Stage) hlavniPrvky.getScene().getWindow());
-        this.userDataContainer = new UserDataContainer(null, null);
+        userDataContainer = new UserDataContainer(null, null);
     }
 
     /**

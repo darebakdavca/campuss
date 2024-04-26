@@ -1,5 +1,9 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss.controllers;
 
+import cz.vse.campuss.helpers.CheckBoxState;
+import cz.vse.campuss.helpers.DatabaseHelper;
+import cz.vse.campuss.helpers.StudentState;
+import cz.vse.campuss.helpers.UserDataContainer;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.Umisteni;
 import javafx.application.Platform;
@@ -12,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
 /**
  * Kontrolér pro obrazovku uschovat2.fxml
@@ -47,7 +53,7 @@ public class Uschovat2Controller extends BaseController {
         // získání stage a stavu studenta
         Platform.runLater(() -> {
             stage = (Stage) ovladaciPrvky.getScene().getWindow();
-            this.userDataContainer = (UserDataContainer) stage.getUserData();
+            userDataContainer = (UserDataContainer) stage.getUserData();
         });
     }
 

@@ -1,4 +1,5 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss.helpers;
+
 /**
  * Třída pro uchování dat o stavu checkboxů a studenta
  */

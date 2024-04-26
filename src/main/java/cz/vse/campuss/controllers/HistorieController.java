@@ -1,4 +1,4 @@
-package cz.vse.campuss.main;
+package cz.vse.campuss.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;

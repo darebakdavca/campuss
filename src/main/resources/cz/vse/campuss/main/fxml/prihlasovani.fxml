@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.RadioButton?>
-<AnchorPane fx:id="rootPane" fx:controller="cz.vse.campuss.main.PrihlasovaniController" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" fx:controller="cz.vse.campuss.controllers.PrihlasovaniController" xmlns:fx="http://javafx.com/fxml/1">
     <HBox  alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <VBox alignment="CENTER" spacing="20.0">
             <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
