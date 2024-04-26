@@ -3,11 +3,12 @@ package cz.vse.campuss.model;
 public class Umisteni {
     private final int id;
     private final int cislo;
-    private final String typUmisteni;
+    private final TypUmisteni typUmisteni;
     private final String student;
     private final int satna;
 
-    public Umisteni(int id, int cislo, String typUmisteni, String student, int satna) {
+
+    public Umisteni(int id, int cislo, TypUmisteni typUmisteni, String student, int satna) {
         this.id = id;
         this.cislo = cislo;
         this.typUmisteni = typUmisteni;
@@ -24,7 +25,7 @@ public class Umisteni {
     }
 
     public String getTypUmisteni() {
-        return typUmisteni;
+        return typUmisteni.getText();
     }
 
     public String getStudent() {

@@ -1,9 +1,8 @@
 package cz.vse.campuss.controllers;
 
-import cz.vse.campuss.helpers.CheckBoxState;
-import cz.vse.campuss.helpers.DatabaseHelper;
-import cz.vse.campuss.helpers.StudentState;
-import cz.vse.campuss.helpers.UserDataContainer;
+import java.io.IOException;
+import java.net.URL;
+
 import cz.vse.campuss.model.Student;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -18,11 +17,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
-
-import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
-import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
+import cz.vse.campuss.helpers.StageManager;
+import cz.vse.campuss.helpers.UserDataContainer;
+import cz.vse.campuss.helpers.NodeHelper;
+import cz.vse.campuss.helpers.FXMLView;
+import cz.vse.campuss.helpers.DatabaseHelper;
 
 
 /**
@@ -50,25 +49,20 @@ public class Uschovat1Controller extends BaseController {
         // nastavení akce při stisku enter klávesy
         vstupISIC.setOnAction(this::odeslatISIC);
         // plynulé zobrazení ovládacích prvků
-        fadeIn(hlavniPrvky);
-        fadeIn(zadavaniISIC);
-        Platform.runLater(() -> stage = (Stage) hlavniPrvky.getScene().getWindow());
-        userDataContainer = new UserDataContainer(null, null);
+        NodeHelper.fadeIn(hlavniPrvky);
+        NodeHelper.fadeIn(zadavaniISIC);
+        userDataContainer = new UserDataContainer(false, false, null);
+        Platform.runLater(() -> {
+            stage = (Stage) hlavniPrvky.getScene().getWindow();
+        });
     }
 
     /**
      * Metoda pro zobrazení domovské obrazovky
      */
     @FXML
-    public void domuKlik() {
-        // Get the stage of the current scene
-        try {
-            // Load the home.fxml file
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/home.fxml");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void domuKlik() throws IOException {
+        StageManager.switchScene(FXMLView.HOME);
     }
 
     /**
@@ -78,14 +72,14 @@ public class Uschovat1Controller extends BaseController {
     public void zobrazitPoziceKlik() {
         // kontrola zda je zaškrtnutý alespoň jeden z obou checkboxů
         if (!checkBoxZavazadlo.isSelected() && !checkBoxObleceni.isSelected()) {
-            hideAfterSeconds(textKontrolaZaskrtnuti);
+            NodeHelper.hideAfterSeconds(textKontrolaZaskrtnuti);
         }
         // pokud je nějaký checkbox zaškrtnutý, zobrazí se další obrazovka dle zaškrtnutých políček
         else {
             // uložení stavu checkboxů
-            CheckBoxState checkBoxState = new CheckBoxState(checkBoxObleceni.isSelected(), checkBoxZavazadlo.isSelected());
+            userDataContainer.setPodlahaChecked(checkBoxZavazadlo.isSelected());
+            userDataContainer.setVesakChecked(checkBoxObleceni.isSelected());
             // uložení stavu checkboxů do aktuální scény
-            userDataContainer.setCheckBoxState(checkBoxState);
             stage.getScene().setUserData(userDataContainer);
             // zobrazení nové scény
             try {
@@ -104,6 +98,7 @@ public class Uschovat1Controller extends BaseController {
                 controller.initData(userDataContainer);
                 // zobrazení stage
                 stage.show();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -118,9 +113,11 @@ public class Uschovat1Controller extends BaseController {
     public void odeslatISIC(ActionEvent actionEvent) {
         // získání studenta podle ISIC karty
         Student student = DatabaseHelper.fetchStudentByISIC(vstupISIC.getText());
-        StudentState studentState = new StudentState(student);
-        userDataContainer.setStudentState(studentState);
+
+        // uložení studenta do aktuální scény
+        userDataContainer.setStudent(student);
         stage.getScene().setUserData(userDataContainer);
+
         // pokud student nebyl nalezen, zobrazí se chybová hláška
         if (student == null) {
             vstupISIC.styleProperty().setValue("-fx-border-color: #FF6347; -fx-border-width: 4px;");

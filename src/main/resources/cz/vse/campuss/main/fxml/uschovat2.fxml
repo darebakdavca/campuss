@@ -32,7 +32,7 @@
                             <Font size="72.0" />
                         </font>
                     </Text>
-                <TextField fx:id="vystupCisloObleceni" alignment="CENTER" editable="false" prefHeight="370.0" prefWidth="370.0" style="-fx-background-color: D9D9D9;">
+                <TextField fx:id="vystupCisloVesaku" alignment="CENTER" editable="false" prefHeight="370.0" prefWidth="370.0" style="-fx-background-color: D9D9D9;">
                     <font>
                         <Font name="System Bold" size="140.0" />
                     </font>
@@ -45,7 +45,7 @@
                             <Font size="72.0" />
                         </font>
                     </Text>
-                <TextField fx:id="vystupCisloZavazadlo" alignment="CENTER" editable="false" prefHeight="370.0" prefWidth="370.0" style="-fx-background-color: D9D9D9; -fx-border-width: 0">
+                <TextField fx:id="vystupCisloPodlaha" alignment="CENTER" editable="false" prefHeight="370.0" prefWidth="370.0" style="-fx-background-color: D9D9D9; -fx-border-width: 0">
                     <font>
                         <Font name="System Bold" size="140.0" />
                     </font>

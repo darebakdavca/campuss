@@ -24,7 +24,7 @@
               preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <Image url="@pictures/home.png"/>
    </ImageView>
-   <Text  strokeType="OUTSIDE" strokeWidth="0.0" text="Uschovat" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Uschovat" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
       <font>
          <Font name="System Bold" size="64.0" />
       </font>

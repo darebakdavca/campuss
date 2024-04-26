@@ -1,12 +1,10 @@
 package cz.vse.campuss.helpers;
+import cz.vse.campuss.model.Satnarka;
 import cz.vse.campuss.model.Student;
+import cz.vse.campuss.model.TypUmisteni;
 import cz.vse.campuss.model.Umisteni;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.*;
 
 /**
  * Třída pro práci s databází
@@ -18,130 +16,99 @@ public class DatabaseHelper {
     /**
      * Metoda pro získání připojení k databázi
      * @return Připojení k databázi
-     * @throws Exception Pokud se nepodaří připojit k databázi
+     * @throws SQLException Pokud se nepodaří připojit k databázi
      */
-    public static Connection getConnection() throws Exception {
+    public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL);
     }
 
     /**
-     * Metoda pro získání jména šatnářky na základě jejího ID
+     * Metoda pro získání šatnářky na základě jejího ID
      * @param userId ID šatnářky
-     * @return Jméno šatnářky
+     * @return Šatnářka
      */
-    public static String fetchUserNameSatnarka(int userId) {
-        String name = "";
+    public static Satnarka fetchSatnarka(int userId) {
+        Satnarka satnarka = null;
+        String sql = "SELECT * FROM Satnarka WHERE id_satnarky = ?";
         try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT jmeno FROM Satnarka WHERE id_satnarky = " + userId)) {
-            if (rs.next()) {
-                name = rs.getString("jmeno");
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    satnarka = new Satnarka(rs.getInt("id_satnarky"), rs.getString("jmeno"), rs.getString("prijmeni"), rs.getInt("id_satny_fk"));
+                }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
-        return name;
+        return satnarka;
     }
+
     /**
-     * Metoda pro získání jména studenta na základě jeho ISIC
-     * @param isic ISIC studenta
-     * @return Jméno studenta
+     * Metoda pro získání studenta na základě jeho ISIC karty
+     * @param isic ISIC karta studenta
+     * @return Student
      */
     public static Student fetchStudentByISIC(String isic) {
         Student student = null;
+        String sql = "SELECT * FROM Student WHERE isic = ?";
         try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM Student WHERE isic = '" + isic + "'")) {
-            if (rs.next()) {
-                student = new Student(rs.getInt("id_studenta"), rs.getString("jmeno"), rs.getString("prijmeni"), rs.getString("isic"));
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, isic);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    student = new Student(rs.getInt("id_studenta"), rs.getString("jmeno"), rs.getString("prijmeni"), rs.getString("ISIC"),rs.getString("email"));
+                }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
         return student;
     }
 
-
     /**
-     * Metoda pro získání všech umístění
-     * @param Zavazadlo Zda se jedná o zavazadlo
-     * @param Vesak Zda se jedná o věšák
-     * @return Seznam umístění
+     * Metoda pro získání volného umístění v závsáku na typu umístění
+     * @param typUmisteni Typ umístění
+     * @return Umístění
      */
-    public static ArrayList<Umisteni> fetchAllUmisteni(boolean Zavazadlo, boolean Vesak) {
-        ArrayList<Umisteni> umisteniList = new ArrayList<>();
+    public static Umisteni fetchUnusedUmisteni(TypUmisteni typUmisteni) {
+        Umisteni umisteni = null;
+        String sql = "SELECT * FROM Umisteni WHERE typ_umisteni = ? AND id_satny_fk = '1' AND   student IS NULL LIMIT 1";
         try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement()) {
-            String query;
-            // Pokud je zaškrtnutý pouze checkbox zavazadlo
-            if (Zavazadlo && !Vesak) {
-                query = "SELECT * FROM Umisteni WHERE (typ_umisteni = 'podlaha' AND id_satny_fk = '1')";
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, typUmisteni.getText());
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    umisteni = new Umisteni(rs.getInt("id_umisteni"), rs.getInt("cislo"), TypUmisteni.fromString(rs.getString("typ_umisteni")), rs.getString("student"), rs.getInt("id_satny_fk"));
+                }
             }
-            // Pokud je zaškrtnutý pouze checkbox věšák
-            else if (Vesak && !Zavazadlo) {
-                query = "SELECT * FROM Umisteni WHERE typ_umisteni = 'věšák' AND id_satny_fk = '1'";
-            }
-            // Pokud jsou zaškrtnuty oba checkboxy
-            else {
-                query = "SELECT * FROM Umisteni WHERE id_satny_fk = '1'";
-            }
-
-            System.out.println("Executing query: " + query);
-            ResultSet rs = stmt.executeQuery(query);
-            // Přidání umístění do seznamu umístění
-            while (rs.next()) {
-                Umisteni umisteni = new Umisteni(rs.getInt("id_umisteni"), rs.getInt("cislo"), rs.getString("typ_umisteni"), rs.getString("student"), rs.getInt("id_satny_fk"));
-                umisteniList.add(umisteni);
-            }
-            System.out.println("Found " + umisteniList.size() + " records");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
-        return umisteniList;
+        return umisteni;
     }
+
+
 
     /**
      * Metoda pro aktualizaci obsazenosti umístění
-     * @param ISIC ISIC studenta
+     * @param isic isic studenta
      * @param cislo Číslo umístění
-     * @param Zavazadlo Zda se jedná o zavazadlo
-     * @param Vesak Zda se jedná o věšák
+     * @param typUmisteni Typ umístění
      */
-    public static void updateUmisteni(String ISIC, int cislo, boolean Zavazadlo, boolean Vesak) {
+    public static void updateUmisteni(String isic, int cislo, TypUmisteni typUmisteni) {
+        String sql = "UPDATE Umisteni SET student = ? WHERE typ_umisteni = ? AND cislo = ?";
         try (Connection conn = getConnection();
-            Statement stmt = conn.createStatement()) {
-            String queryVesak = "";
-            String queryZavazadlo = "";
-            // Pokud je zaškrtnutý pouze checkbox zavazadlo
-            if (Vesak && !Zavazadlo) {
-                queryVesak = "UPDATE Umisteni SET student = '" + ISIC +"' WHERE typ_umisteni = 'věšák' AND cislo = " + cislo;
-                System.out.println("Executing query: " + queryVesak);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, isic);
+            pstmt.setInt(3, cislo);
+            if (typUmisteni == TypUmisteni.VESAK) {
+                pstmt.setString(2, "věšák");
+            } else if (typUmisteni == TypUmisteni.PODLAHA) {
+                pstmt.setString(2, "podlaha");
             }
-            // Pokud je zaškrtnutý pouze checkbox věšák
-            else if (Zavazadlo && !Vesak) {
-                queryZavazadlo = "UPDATE Umisteni SET student = '" + ISIC + "' WHERE typ_umisteni = 'podlaha' AND cislo =" + cislo;
-                System.out.println("Executing query: " + queryZavazadlo);
-            }
-            // Pokud jsou zaškrtnuty oba checkboxy
-            else {
-                queryVesak = "UPDATE Umisteni SET student = '" + ISIC +"' WHERE typ_umisteni = 'věšák' AND cislo = " + cislo;
-                queryZavazadlo = "UPDATE Umisteni SET student = '" + ISIC + "' WHERE typ_umisteni = 'podlaha' AND cislo = " + cislo;
-                System.out.println("Executing query: " + queryVesak);
-                System.out.println("Executing query: " + queryZavazadlo);
-            }
-
-            // Aktualizace umístění pro věšák
-            if (!queryVesak.isEmpty()) {
-                int rowsAffected = stmt.executeUpdate(queryVesak);
-                System.out.println("Updated " + rowsAffected + " rows");
-            }
-
-            // Aktualizace umístění pro zavazadlo
-            if (!queryZavazadlo.isEmpty()) {
-                int rowsAffected = stmt.executeUpdate(queryZavazadlo);
-                System.out.println("Updated " + rowsAffected + " rows");
-            }
-        } catch (Exception e) {
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
     }

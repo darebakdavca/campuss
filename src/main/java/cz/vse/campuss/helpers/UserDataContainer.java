@@ -1,53 +1,50 @@
 package cz.vse.campuss.helpers;
 
+import cz.vse.campuss.model.Student;
+
 /**
  * Třída pro uchování dat o stavu checkboxů a studenta
  */
 public class UserDataContainer {
     // Stav checkboxů a studenta
-    private CheckBoxState checkBoxState;
-    private StudentState studentState;
+    private boolean vesakChecked;
+    private boolean podlahaChecked;
+    private Student student;
 
     /**
      * Konstruktor třídy
-     * @param checkBoxState Stav checkboxů
-     * @param studentState Stav studenta
+     * @param vesakChecked Stav checkboxu vesak
+     * @param podlahaChecked Stav checkboxu podlaha
+     * @param student Student
      */
-    public UserDataContainer(CheckBoxState checkBoxState, StudentState studentState) {
-        this.checkBoxState = checkBoxState;
-        this.studentState = studentState;
+    public UserDataContainer(boolean vesakChecked, boolean podlahaChecked, Student student) {
+        this.vesakChecked = vesakChecked;
+        this.podlahaChecked = podlahaChecked;
+        this.student = student;
     }
 
-    /**
-     * Metoda pro získání stavu checkboxů
-     * @return Stav checkboxů
-     */
-    public CheckBoxState getCheckBoxState() {
-        return checkBoxState;
+    public boolean isVesakChecked() {
+        return vesakChecked;
     }
 
-    /**
-     * Metoda pro získání stavu studenta
-     * @return Stav studenta
-     */
-    public StudentState getStudentState() {
-        return studentState;
+    public boolean isPodlahaChecked() {
+        return podlahaChecked;
     }
 
-    /**
-     * Metoda pro nastavení stavu checkboxů
-     * @param checkBoxState Stav checkboxů
-     */
-    public void setCheckBoxState(CheckBoxState checkBoxState) {
-        this.checkBoxState = checkBoxState;
+    public Student getStudent() {
+        return student;
     }
 
-    /**
-     * Metoda pro nastavení stavu studenta
-     * @param studentState Stav studenta
-     */
-    public void setStudentState(StudentState studentState) {
-        this.studentState = studentState;
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public void setVesakChecked(boolean vesakChecked) {
+        this.vesakChecked = vesakChecked;
+    }
+
+    public void setPodlahaChecked(boolean podlahaChecked) {
+        this.podlahaChecked = podlahaChecked;
     }
 
     /**
@@ -57,8 +54,9 @@ public class UserDataContainer {
     @Override
     public String toString() {
         return "UserDataContainer{" +
-                "checkBoxState=" + checkBoxState +
-                ", stageState=" + studentState +
+                "vesakChecked=" + vesakChecked +
+                ", podlahaChecked=" + podlahaChecked +
+                ", student=" + student +
                 '}';
     }
 }

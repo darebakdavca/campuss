@@ -1,11 +1,10 @@
 package cz.vse.campuss.controllers;
 
-import cz.vse.campuss.helpers.CheckBoxState;
-import cz.vse.campuss.helpers.DatabaseHelper;
-import cz.vse.campuss.helpers.StudentState;
-import cz.vse.campuss.helpers.UserDataContainer;
+import java.io.IOException;
+
+import cz.vse.campuss.helpers.*;
 import cz.vse.campuss.model.Student;
-import cz.vse.campuss.model.Umisteni;
+import cz.vse.campuss.model.TypUmisteni;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -14,9 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
+import cz.vse.campuss.model.Umisteni;
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
 /**
@@ -25,12 +22,8 @@ import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 public class Uschovat2Controller extends BaseController {
     // Stage a stavy studenta
     private Stage stage;
-    private StudentState studentState;
     // Stav checkboxů
-    private CheckBoxState checkBoxState;
     private UserDataContainer userDataContainer;
-    // List umístění
-    private ArrayList<Umisteni> umisteni = new ArrayList<>();
 
     // FXML elementy
     public VBox boxZavazadlo;
@@ -38,8 +31,8 @@ public class Uschovat2Controller extends BaseController {
     public HBox oblastBoxy;
     public Line deliciCara;
     public HBox ovladaciPrvky;
-    public TextField vystupCisloZavazadlo;
-    public TextField vystupCisloObleceni;
+    public TextField vystupCisloPodlaha;
+    public TextField vystupCisloVesaku;
 
     /**
      * Inicializace kontroléru
@@ -51,10 +44,7 @@ public class Uschovat2Controller extends BaseController {
         deliciCara.setVisible(false);
         fadeIn(ovladaciPrvky);
         // získání stage a stavu studenta
-        Platform.runLater(() -> {
-            stage = (Stage) ovladaciPrvky.getScene().getWindow();
-            userDataContainer = (UserDataContainer) stage.getUserData();
-        });
+        Platform.runLater(() -> stage = (Stage) ovladaciPrvky.getScene().getWindow());
     }
 
     /**
@@ -62,30 +52,30 @@ public class Uschovat2Controller extends BaseController {
      * @param userDataContainer Data z předchozí obrazovky
      */
     public void initData(UserDataContainer userDataContainer) {
-        // získání stavu checkboxů a studenta
-        this.checkBoxState = userDataContainer.getCheckBoxState();
-        this.studentState = userDataContainer.getStudentState();
-        // získání umístění
-        getUmisteni();
+        this.userDataContainer = userDataContainer;
+        // získání volného vesaku a podlahy
+        Umisteni umisteniVesak = DatabaseHelper.fetchUnusedUmisteni(TypUmisteni.VESAK);
+        Umisteni umisteniPodlaha = DatabaseHelper.fetchUnusedUmisteni(TypUmisteni.PODLAHA);
+
         // zobrazení boxů na základě stavu checkboxů
         // pokud jsou oba checkboxy zaškrtnuty, zobrazí se oba boxy
-        if (checkBoxState.obleceniChecked && checkBoxState.zavazadloChecked) {
-            vystupCisloObleceni.setText(String.valueOf(getVolnyVesak()));
-            vystupCisloZavazadlo.setText(String.valueOf(getVolnyPodlaha()));
+        if (userDataContainer.isPodlahaChecked() && userDataContainer.isVesakChecked()) {
+            vystupCisloVesaku.setText(String.valueOf(umisteniVesak.getCislo()));
+            vystupCisloPodlaha.setText(String.valueOf(umisteniPodlaha.getCislo()));
             fadeIn(deliciCara);
             fadeIn(boxZavazadlo);
             fadeIn(boxVesak);
         }
         // pokud je zaškrtnutý pouze checkbox oblečení, zobrazí se pouze box pro oblečení
-        else if (checkBoxState.obleceniChecked) {
-            vystupCisloObleceni.setText(String.valueOf(getVolnyVesak()));
+        else if (userDataContainer.isVesakChecked()) {
+            vystupCisloVesaku.setText(String.valueOf(umisteniVesak.getCislo()));
             oblastBoxy.getChildren().remove(boxZavazadlo);
             oblastBoxy.getChildren().remove(deliciCara);
             fadeIn(boxVesak);
         }
         // pokud je zaškrtnutý pouze checkbox zavazadlo, zobrazí se pouze box pro zavazadlo
-        else if (checkBoxState.zavazadloChecked){
-            vystupCisloZavazadlo.setText(String.valueOf(getVolnyPodlaha()));
+        else if (userDataContainer.isPodlahaChecked()) {
+            vystupCisloPodlaha.setText(String.valueOf(umisteniPodlaha.getCislo()));
             oblastBoxy.getChildren().remove(boxVesak);
             oblastBoxy.getChildren().remove(deliciCara);
             fadeIn(boxZavazadlo);
@@ -96,45 +86,27 @@ public class Uschovat2Controller extends BaseController {
      * Metoda pro zobrazení obrazovky potvrzení.fxml o uložení věcí do databáze
      */
     @FXML
-    public void potvrditUschovaniKlik() {
-        Student student = studentState.student;
-        // Uložení věcí do databáze když jsou zaškrtnuty oba checkboxy
-        if (checkBoxState.obleceniChecked && checkBoxState.zavazadloChecked) {
-            if (student == null) {
-                // handle the case where the student is null
-                System.out.println("No student found");
-                return;
-            }
-            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloObleceni.getText()), false, true);
-            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloZavazadlo.getText()), true, false);
-
-        }
+    public void potvrditUschovaniKlik() throws IOException {
+        Student student = userDataContainer.getStudent();
         // Uložení věcí do databáze když je zaškrtnutý pouze checkbox oblečení
-        else if (checkBoxState.obleceniChecked) {
+        if (userDataContainer.isVesakChecked()) {
             if (student == null) {
                 // handle the case where the student is null
                 System.out.println("No student found");
                 return;
             }
-            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloObleceni.getText()), false, true);
-
+            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloVesaku.getText()), TypUmisteni.VESAK);
         }
         // Uložení věcí do databáze když je zaškrtnutý pouze checkbox zavazadlo
-        else if (checkBoxState.zavazadloChecked) {
+        if (userDataContainer.isPodlahaChecked()) {
             if (student == null) {
                 // handle the case where the student is null
                 System.out.println("No student found");
                 return;
             }
-            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloZavazadlo.getText()), true, false);
+            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloPodlaha.getText()), TypUmisteni.PODLAHA);
         }
-        try {
-            // Load the potvrzeni.fxml file
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/potvrzeni.fxml");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        StageManager.switchScene(FXMLView.POTVRZENI);
     }
 
     /**
@@ -142,13 +114,8 @@ public class Uschovat2Controller extends BaseController {
      * Vrátí na obrazovku uschovat1.fxml
      */
     @FXML
-    public void zrusitKlik() {
-        try {
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/uschovat1.fxml");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void zrusitKlik() throws IOException {
+        StageManager.switchScene(FXMLView.USCHOVAT1);
     }
 
     /**
@@ -156,53 +123,7 @@ public class Uschovat2Controller extends BaseController {
      * Vrátí na obrazovku home.fxml
      */
     @FXML
-    public void domuKlik() {
-        try {
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/home.fxml");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    /**
-     * Metoda pro získání umístění věcí
-     */
-    private void getUmisteni() {
-        umisteni = DatabaseHelper.fetchAllUmisteni(checkBoxState.zavazadloChecked, checkBoxState.obleceniChecked);
-    }
-
-    /**
-     * Metoda pro získání volného vesaku
-     * @return Číslo volného vesaku
-     */
-    private int getVolnyVesak() {
-        int vesakCislo = 0;
-
-        for (Umisteni misto : umisteni) {
-            if (misto.getTypUmisteni().equals("věšák") && misto.getStudent() == null) {
-                vesakCislo = misto.getCislo();
-                break;
-            }
-        }
-        return vesakCislo;
-    }
-
-    /**
-     * Metoda pro získání volného místa na podlaze
-     * @return Číslo volného místa na podlaze
-     */
-    private int getVolnyPodlaha() {
-        int podlahaCislo = 0;
-
-        for (Umisteni misto : umisteni) {
-            if (misto.getTypUmisteni().equals("podlaha") && misto.getStudent() == null) {
-                podlahaCislo = misto.getCislo();
-                break;
-            }
-        }
-        return podlahaCislo;
+    public void domuKlik() throws IOException {
+        StageManager.switchScene(FXMLView.HOME);
     }
 }

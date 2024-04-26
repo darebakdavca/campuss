@@ -5,6 +5,9 @@ import javafx.animation.PauseTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
+/**
+ * Třída pro práci s Node
+ */
 public class NodeHelper {
 
     /**
@@ -19,6 +22,10 @@ public class NodeHelper {
         node.setVisible(true);
     }
 
+    /**
+     * metoda pro zobrazení animace fadeOut pro vybraný node
+     * @param node Node, který se má skrýt
+     */
     static public void hideAfterSeconds(Node node) {
         // Create a FadeTransition for the fade-in effect
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), node);
