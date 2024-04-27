@@ -96,6 +96,7 @@ public class Uschovat2Controller extends BaseController {
                 return;
             }
             DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloVesaku.getText()), TypUmisteni.VESAK);
+            DatabaseHelper.novaPolozkaHistorie(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.VESAK, Integer.parseInt(vystupCisloVesaku.getText()));
         }
         // Uložení věcí do databáze když je zaškrtnutý pouze checkbox zavazadlo
         if (userDataContainer.isPodlahaChecked()) {
@@ -105,6 +106,7 @@ public class Uschovat2Controller extends BaseController {
                 return;
             }
             DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloPodlaha.getText()), TypUmisteni.PODLAHA);
+            DatabaseHelper.novaPolozkaHistorie(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()));
         }
         StageManager.switchScene(FXMLView.POTVRZENI);
     }

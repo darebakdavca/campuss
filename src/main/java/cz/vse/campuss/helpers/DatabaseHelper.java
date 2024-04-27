@@ -88,8 +88,6 @@ public class DatabaseHelper {
         return umisteni;
     }
 
-
-
     /**
      * Metoda pro aktualizaci obsazenosti umístění
      * @param isic isic studenta
@@ -108,6 +106,48 @@ public class DatabaseHelper {
                 pstmt.setString(2, "podlaha");
             }
             pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Vytvoří nový záznam v tabulce Historie v databázi
+     *
+     */
+    public static void novaPolozkaHistorie(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni) {
+        String sql = "INSERT INTO Historie (jmeno_studenta, prijmeni_studenta, isic_studenta, satna_nazev, umisteni_typ, umisteni_cislo, stav, cas_zmeny_stavu, satnarka_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, jmenoStudenta); //jméno studenta
+
+            pstmt.setString(2, prijmeniStudenta); //příjmení studenta
+
+            pstmt.setString(3, isic); //isic studenta
+
+            pstmt.setString(4,"Italská budova"); //název šatny - ještě není automatické
+
+            if (typUmisteni == TypUmisteni.VESAK) { //typ umístění
+                pstmt.setString(5, "věšák");
+            } else if (typUmisteni == TypUmisteni.PODLAHA) {
+                pstmt.setString(5, "podlaha");
+            }
+
+            pstmt.setInt(6, cisloUmisteni); //číslo umístění
+
+            pstmt.setString(7,"uschováno");
+
+            java.util.Date date = new java.util.Date(System.currentTimeMillis());
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(date);
+            pstmt.setString(8, currentTime); //čas změny stavu
+
+            pstmt.setInt(9, 1); // id šatnářky - ještě není automatické
+
+
+            pstmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }

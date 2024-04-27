@@ -14,4 +14,5 @@ module cz.vse.campuss {
     opens cz.vse.campuss.helpers to javafx.fxml;
     exports cz.vse.campuss;
     opens cz.vse.campuss to javafx.fxml;
+    opens cz.vse.campuss.model to javafx.base;
 }

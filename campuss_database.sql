@@ -48,4 +48,38 @@ CREATE TABLE IF NOT EXISTS "Satnarka"
     jmeno       TEXT    not null,
     prijmeni    TEXT    not null
 );
+
+create table if not exists "Historie"
+(
+    id                integer  not null
+        constraint Historie_pk
+            primary key autoincrement,
+    jmeno_studenta    TEXT     not null
+        constraint Historie_jmeno_studenta_fk
+            references Student (jmeno),
+    prijmeni_studenta TEXT     not null
+        constraint Historie_prijmeni_studenta_fk
+            references Student (prijmeni),
+    isic_studenta     TEXT     not null
+        constraint Historie_isic_studenta_fk
+            references Student (ISIC),
+    satna_nazev       TEXT     not null
+        constraint Historie_satna_nazev_fk
+            references Satna (nazev),
+    umisteni_typ      TEXT     not null
+        constraint Historie_umisteni_typ_fk
+            references Umisteni (typ_umisteni),
+    umisteni_cislo    integer  not null
+        constraint Historie_umisteni_cislo_fk
+            references Umisteni (cislo),
+    stav              TEXT     not null,
+    cas_zmeny_stavu   DATETIME not null,
+    satnarka_id       integer  not null
+        constraint Historie_satnarka_id_fk
+            references Satnarka,
+    constraint check_stav
+        check (Historie.stav = 'uschováno' OR Historie.stav = 'vyzvednuto'),
+    constraint check_umisteni_typ
+        check (Historie.umisteni_typ = 'věšák' OR Historie.umisteni_typ = 'podlaha')
+);
 COMMIT;

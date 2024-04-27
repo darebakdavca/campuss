@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.geometry.Insets?>
-<AnchorPane fx:controller="cz.vse.campuss.controllers.HistorieController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.HistorieController">
       <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Image url="@pictures/campuss.png" />
       </ImageView>
-      <ImageView onMouseClicked="#domuKlik" fitWidth="150.0" style="-fx-cursor: hand"  pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitWidth="150.0" onMouseClicked="#domuKlik" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Image url="@pictures/home.png" />
       </ImageView>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Historie uložení" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
@@ -23,24 +18,26 @@
             <Font name="System Bold" size="64.0" />
          </font>
       </Text>
-      <Button layoutX="827.0" layoutY="195.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+      <Button fx:id="searchSubmitButton" layoutX="827.0" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#searchSubmitButtonKlik" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <TextField layoutX="24.0" layoutY="195.0" prefHeight="60.0" prefWidth="761.0" promptText="Vyhledat..." style="-fx-border-color: D9D9D9; -fx-border-width: 2;"
-                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="179.0" AnchorPane.topAnchor="210.0">
+      <TextField fx:id="searchField" layoutX="24.0" layoutY="195.0" prefHeight="60.0" prefWidth="761.0" promptText="Vyhledat ISIC..." style="-fx-border-color: D9D9D9; -fx-border-width: 2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="179.0" AnchorPane.topAnchor="210.0">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <TableView layoutX="25.0" layoutY="265.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="290.0">
+      <TableView fx:id="historieTable" layoutX="25.0" layoutY="265.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="290.0">
         <columns>
-            <TableColumn maxWidth="560.0" minWidth="300.0" prefWidth="-1.0" text="Jméno" style="-fx-font-size: 20px" />
-            <TableColumn minWidth="200.0" prefWidth="215.0" text="ISIC ID"  style="-fx-font-size: 20px"/>
-            <TableColumn minWidth="120.0" prefWidth="-1.0" text="Číslo věšáku"  style="-fx-font-size: 20px"/>
-            <TableColumn minWidth="120.0" prefWidth="-1.0" text="Čas uložení"  style="-fx-font-size: 20px"/>
-            <TableColumn minWidth="120.0" prefWidth="-1.0" text="Čas vyzvednutí"  style="-fx-font-size: 20px"/>
+            <TableColumn fx:id="jmenoColumn" maxWidth="560.0" minWidth="90.0" prefWidth="90.0" style="-fx-font-size: 20px" text="Jméno" />
+         <TableColumn fx:id="prijmeniColumn" maxWidth="560.0" minWidth="90.0" prefWidth="90.0" style="-fx-font-size: 20px" text="Příjmení" />
+            <TableColumn fx:id="isicColumn" minWidth="100.0" prefWidth="175.0" style="-fx-font-size: 20px" text="ISIC" />
+         <TableColumn fx:id="satnaColumn" minWidth="100.0" prefWidth="150.0" style="-fx-font-size: 20px" text="Šatna" />
+            <TableColumn fx:id="typColumn" minWidth="100.0" prefWidth="100.0" style="-fx-font-size: 20px" text="Typ" />
+         <TableColumn fx:id="cisloColumn" minWidth="40.0" prefWidth="40.0" style="-fx-font-size: 20px" text="Číslo" />
+            <TableColumn fx:id="stavColumn" minWidth="120.0" prefWidth="140.0" style="-fx-font-size: 20px" text="Stav" />
+            <TableColumn fx:id="casZmenyColumn" minWidth="120.0" prefWidth="225.0" style="-fx-font-size: 20px" text="Čas změny" />
 
         </columns>
          <columnResizePolicy>
@@ -48,6 +45,6 @@
          </columnResizePolicy>
       </TableView>
     <padding>
-        <Insets top="20.0" left="20.0" right="20.0" bottom="20.0" />
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 </AnchorPane>
