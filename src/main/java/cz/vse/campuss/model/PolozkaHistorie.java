@@ -1,16 +1,16 @@
 package cz.vse.campuss.model;
 
 public class PolozkaHistorie {
-    private int id;
-    private String jmenoStudenta;
-    private String prijmeniStudenta;
-    private String isicStudenta;
-    private String satnaNazev;
-    private TypUmisteni umisteniTyp;
-    private int umisteniCislo;
-    private StavUlozeni stav;
-    private String casZmenyStavu;
-    private int satnarkaID;
+    private final int id;
+    private final String jmenoStudenta;
+    private final String prijmeniStudenta;
+    private final String isicStudenta;
+    private final String satnaNazev;
+    private final TypUmisteni umisteniTyp;
+    private final int umisteniCislo;
+    private final StavUlozeni stav;
+    private final String casZmenyStavu;
+    private final int satnarkaID;
 
     public PolozkaHistorie(int id, String jmenoStudenta, String prijmeniStudenta, String isicStudenta, String satnaNazev, TypUmisteni umisteniTyp, int umisteniCislo, StavUlozeni stav, String casZmenyStavu, int satnarkaID) {
         this.id = id;

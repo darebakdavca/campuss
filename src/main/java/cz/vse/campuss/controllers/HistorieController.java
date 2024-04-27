@@ -1,36 +1,35 @@
 package cz.vse.campuss.controllers;
 
+import java.sql.*;
+
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+
 import cz.vse.campuss.helpers.DatabaseHelper;
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.StageManager;
 import cz.vse.campuss.model.PolozkaHistorie;
 import cz.vse.campuss.model.StavUlozeni;
 import cz.vse.campuss.model.TypUmisteni;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.sql.*;
-
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Kontroler pro obrazovku historie1.fxml
  */
 public class HistorieController extends BaseController {
-
     @FXML
-    private TextField searchField;
+    private TextField vstupISIC;
     @FXML
-    private Button searchSubmitButton;
+    private Button tlacitkoOdeslat;
     @FXML
     private TableView historieTable;
     @FXML
@@ -50,12 +49,12 @@ public class HistorieController extends BaseController {
     @FXML
     private TableColumn casZmenyColumn;
 
-
     /**
      * Po přepnutí na obrazovku historie se nastaví továrny a aktualizuje se tabulka
      */
     @FXML
     private void initialize() {
+        vstupISIC.setOnAction(this::searchSubmitButtonKlik);
         nastavitTovarny();
         aktualizujHistorii();
     }
@@ -87,7 +86,7 @@ public class HistorieController extends BaseController {
                 historieTable.setItems(data);
             }
         } catch (SQLException e) {
-            System.out.println("Database error: " + e.getMessage());;
+            System.out.println("Database error: " + e.getMessage());
         }
     }
 
@@ -95,11 +94,11 @@ public class HistorieController extends BaseController {
      * Po kliknutí na "Odeslat" se vyfiltreují záznamy v tabulce podle zadaného ISICU,
      * pokud je pole prázdné, zobrazí se všechny záznamy
      *
-     * @param mouseEvent The MouseEvent triggering the searchSubmitButtonKlik method.
+     * @param actionEvent The MouseEvent triggering the searchSubmitButtonKlik method.
      */
     @FXML
-    private void searchSubmitButtonKlik (MouseEvent mouseEvent){
-        String searchText = searchField.getText();
+    private void searchSubmitButtonKlik (ActionEvent actionEvent){
+        String searchText = vstupISIC.getText();
         try {
             Connection conn = DatabaseHelper.getConnection();
             String query = searchText.isEmpty() ? "SELECT * FROM Historie" :

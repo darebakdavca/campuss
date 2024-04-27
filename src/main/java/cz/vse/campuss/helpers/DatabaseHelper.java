@@ -5,6 +5,8 @@ import cz.vse.campuss.model.TypUmisteni;
 import cz.vse.campuss.model.Umisteni;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Třída pro práci s databází
@@ -115,17 +117,13 @@ public class DatabaseHelper {
      * Vytvoří nový záznam v tabulce Historie v databázi
      *
      */
-    public static void novaPolozkaHistorie(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni) {
+    public static void createHistorieEntry(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni) {
         String sql = "INSERT INTO Historie (jmeno_studenta, prijmeni_studenta, isic_studenta, satna_nazev, umisteni_typ, umisteni_cislo, stav, cas_zmeny_stavu, satnarka_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             pstmt.setString(1, jmenoStudenta); //jméno studenta
-
             pstmt.setString(2, prijmeniStudenta); //příjmení studenta
-
             pstmt.setString(3, isic); //isic studenta
-
             pstmt.setString(4,"Italská budova"); //název šatny - ještě není automatické
 
             if (typUmisteni == TypUmisteni.VESAK) { //typ umístění
@@ -135,16 +133,14 @@ public class DatabaseHelper {
             }
 
             pstmt.setInt(6, cisloUmisteni); //číslo umístění
-
             pstmt.setString(7,"uschováno");
 
-            java.util.Date date = new java.util.Date(System.currentTimeMillis());
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date(System.currentTimeMillis());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String currentTime = sdf.format(date);
             pstmt.setString(8, currentTime); //čas změny stavu
 
             pstmt.setInt(9, 1); // id šatnářky - ještě není automatické
-
 
             pstmt.executeUpdate();
 
