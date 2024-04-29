@@ -43,6 +43,7 @@ public class VyzvednoutController extends BaseController {
         fadeIn(ovladaciPrvky);
         fadeIn(blokInformaci);
         tlacitkoPotvrdit.setDisable(true);
+        studentJmeno.setText("");
         userDataContainer = new UserDataContainer(false, false, null);
         Platform.runLater(() -> {
             stage = (Stage) ovladaciPrvky.getScene().getWindow();
@@ -50,6 +51,11 @@ public class VyzvednoutController extends BaseController {
     }
     @FXML
     public void odeslatISIC() {
+        studentJmeno.setText("");
+        studentFoto.setImage(null);
+        cisloVesak.setText("");
+        cisloPodlaha.setText("");
+
         // získání studenta podle ISIC karty
         Student student = DatabaseHelper.fetchStudentByISIC(isicVstup.getText());
 
@@ -62,6 +68,7 @@ public class VyzvednoutController extends BaseController {
             isicVstup.styleProperty().setValue("-fx-border-color: #FF6347; -fx-border-width: 4px;");
             textPotvrzeni.styleProperty().setValue("-fx-fill: #FF6347;");
             textPotvrzeni.setText("Student s tímto ISIC nebyl nalezen.");
+            tlacitkoPotvrdit.setDisable(true);
         }
         // pokud student byl nalezen, zobrazí se jeho jméno a příjmení a vizuálně se upraví pole pro ISIC
         else {
