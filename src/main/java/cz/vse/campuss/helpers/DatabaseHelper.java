@@ -148,4 +148,61 @@ public class DatabaseHelper {
             System.out.println("Database error: " + e.getMessage());
         }
     }
+    /**
+     * Method to fetch the location of the student's clothing
+     * @param isic ISIC card of the student
+     * @return location of the clothing
+     */
+    public static int fetchVesakLocationByISIC(String isic) {
+        int vesakLocation = -1;
+        String sql = "SELECT cislo FROM Umisteni WHERE student = ? AND typ_umisteni = 'věšák'";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, isic);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    vesakLocation = rs.getInt("cislo");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+        return vesakLocation;
+    }
+
+    /**
+     * Method to fetch the location of the student's luggage
+     * @param isic ISIC card of the student
+     * @return location of the luggage
+     */
+    public static int fetchPodlahaLocationByISIC(String isic) {
+        int podlahaLocation = -1;
+        String sql = "SELECT cislo FROM Umisteni WHERE student = ? AND typ_umisteni = 'podlaha'";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, isic);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    podlahaLocation = rs.getInt("cislo");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+        return podlahaLocation;
+    }
+
+    public static void removeLocationByISIC(String isic) {
+        String sql = "DELETE FROM Umisteni WHERE student = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, isic);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+    }
 }

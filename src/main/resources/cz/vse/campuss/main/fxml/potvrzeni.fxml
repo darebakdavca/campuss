@@ -30,7 +30,7 @@
             </Text>
         </StackPane>
         <HBox alignment="CENTER" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <Button onMouseClicked="#uschovatKlik" mnemonicParsing="false" prefWidth="800.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-cursor: hand;" text="Uschovat další věc">
+            <Button fx:id="button" onMouseClicked="#uschovatKlik" mnemonicParsing="false" prefWidth="800.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-cursor: hand;" text="Uschovat další věc">
                 <font>
                     <Font  size="50.0" />
                 </font>

@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.geometry.Insets?>
-<AnchorPane fx:controller="cz.vse.campuss.controllers.VyzvednoutController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.VyzvednoutController">
     <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Image url="@pictures/campuss.png" />
     </ImageView>
-    <ImageView style="-fx-cursor: hand" onMouseClicked="#domuKlik" fitHeight="150.0" fitWidth="150.0" layoutX="846.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="846.0" layoutY="14.0" onMouseClicked="#domuKlik" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Image url="@pictures/home.png" />
     </ImageView>
-    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vezvednutí" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
+    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vyzvednutí" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="120.0">
         <font>
             <Font name="System Bold" size="64.0" />
         </font>
     </Text>
-    <HBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="210.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <HBox alignment="CENTER" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
         <Pane layoutX="50.0" layoutY="208.0" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #D3D3D3;" AnchorPane.leftAnchor="0.0">
             <Text layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISIC ID">
                 <font>
@@ -32,63 +26,74 @@
                 </font>
             </Text>
         </Pane>
-        <TextField HBox.hgrow="ALWAYS" prefHeight="60.0">
+        <TextField fx:id="isicVstup" prefHeight="60.0" HBox.hgrow="ALWAYS">
             <font>
                 <Font size="22.0" />
             </font>
         </TextField>
-        <Button  mnemonicParsing="false" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+        <Button fx:id="tlacitkoOdeslat" mnemonicParsing="false" onAction="#odeslatISIC" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
             <font>
                 <Font name="System Bold" size="24.0" />
             </font>
         </Button>
     </HBox>
-    <VBox alignment="CENTER" spacing="30.0" AnchorPane.topAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
-    <HBox fx:id="blokInformaci" alignment="CENTER" spacing="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0" AnchorPane.bottomAnchor="0.0">
-              <VBox spacing="20.0"  alignment="CENTER" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+
+    <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+        <Pane>
+            <Text fx:id="textPotvrzeni" style="-fx-fill: #90EE90">
+                <font>
+                    <Font size="25.0" />
+                </font>
+            </Text>
+        </Pane>
+    </HBox>
+
+    <VBox alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+    <HBox fx:id="blokInformaci" alignment="CENTER" spacing="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+              <VBox fx:id="boxVesak" alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Oblečení">
                       <font>
                           <Font size="72.0" />
                       </font>
                   </Text>
-                  <TextField alignment="CENTER" editable="false" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: D9D9D9;">
+                  <TextField fx:id="cisloVesak" alignment="CENTER" editable="false" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: D9D9D9;">
                       <font>
                           <Font name="System Bold" size="96.0" />
                       </font>
                   </TextField>
               </VBox>
-              <VBox spacing="20.0" alignment="CENTER">
+              <VBox fx:id="boxZavazadlo" alignment="CENTER" spacing="20.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zavazadlo">
                       <font>
                           <Font size="72.0" />
                       </font>
                   </Text>
-                  <TextField alignment="CENTER" editable="false" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: D9D9D9;">
+                  <TextField fx:id="cisloPodlaha" alignment="CENTER" editable="false" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: D9D9D9;">
                       <font>
                           <Font name="System Bold" size="96.0" />
                       </font>
                   </TextField>
               </VBox>
-              <VBox  spacing="10.0" alignment="CENTER">
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Šimon Šubík" style="-fx-background-color: D9D9D9;">
+              <VBox alignment="CENTER" spacing="10.0">
+                  <Text fx:id="studentJmeno" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: D9D9D9;" text="Šimon Šubík">
 
                       <font>
-                          <Font size="40.0" />
+                          <Font size="60.0" />
                       </font>
                   </Text>
-                  <ImageView fitHeight="310.0" fitWidth="300.0" pickOnBounds="true">
-                      <Image url="@pictures/foto.png" />
+                  <ImageView fx:id="studentFoto" fitHeight="310.0" fitWidth="300.0" pickOnBounds="true">
+
                   </ImageView>
 
               </VBox>
       </HBox>
-        <HBox fx:id="ovladaciPrvky"  spacing="60.0" alignment="CENTER" AnchorPane.bottomAnchor="30.0">
-            <Button HBox.hgrow="ALWAYS" onMouseClicked="#potvrditVyzvednutiKlik" mnemonicParsing="false" prefWidth="800.0"  style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2; -fx-cursor: hand;" text="Potvrdit uschování">
+        <HBox fx:id="ovladaciPrvky" alignment="CENTER" spacing="60.0" AnchorPane.bottomAnchor="30.0">
+            <Button fx:id="tlacitkoPotvrdit" mnemonicParsing="false" onMouseClicked="#potvrditVyzvednutiKlik" prefWidth="800.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2; -fx-cursor: hand;" text="Potvrdit vyzvednutí" HBox.hgrow="ALWAYS">
                 <font>
                     <Font size="50.0" />
                 </font>
             </Button>
-            <Button onMouseClicked="#zrusitKlik" mnemonicParsing="false" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand" text="Zrušit">
+            <Button mnemonicParsing="false" onMouseClicked="#zrusitKlik" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand" text="Zrušit">
                 <font>
                     <Font size="50.0" />
                 </font>
@@ -98,6 +103,6 @@
 
 
     <padding>
-         <Insets top="20.0" left="20.0" right="20.0" bottom="20.0"/>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 </AnchorPane>
