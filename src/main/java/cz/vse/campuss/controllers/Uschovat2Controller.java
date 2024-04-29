@@ -108,6 +108,8 @@ public class Uschovat2Controller extends BaseController {
             DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloPodlaha.getText()), TypUmisteni.PODLAHA);
             DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()));
         }
+        PotrvzeniController.text = "Uschování proběhlo úspěšně";
+        PotrvzeniController.textButton = "Uschovat další věc";
         StageManager.switchScene(FXMLView.POTVRZENI);
     }
 

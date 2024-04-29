@@ -21,8 +21,8 @@ public class PotrvzeniController extends BaseController {
     public Text potrvzeniText;
     public Button button;
 
-    public static String text = "Uschování proběhlo úspěšně!";
-    public static String textButton = "Uschovat další věc";
+    public static String text;
+    public static String textButton;
     /**
      * Inicializace kontroléru
      */
