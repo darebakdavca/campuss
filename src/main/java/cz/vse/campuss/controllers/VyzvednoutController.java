@@ -1,8 +1,11 @@
 package cz.vse.campuss.controllers;
 
 import cz.vse.campuss.helpers.DatabaseHelper;
+import cz.vse.campuss.helpers.FXMLView;
+import cz.vse.campuss.helpers.StageManager;
 import cz.vse.campuss.helpers.UserDataContainer;
 import cz.vse.campuss.model.Student;
+import cz.vse.campuss.model.TypUmisteni;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -17,7 +20,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
@@ -81,8 +83,8 @@ public class VyzvednoutController extends BaseController {
             Image studentImage = new Image("file:src/main/resources/cz/vse/campuss/main/fxml/fotky/" + student.getIsic() + ".png");
             studentFoto.setImage(studentImage);
 
-            int vesakLocation = DatabaseHelper.fetchVesakLocationByISIC(student.getIsic());
-            int podlahaLocation = DatabaseHelper.fetchPodlahaLocationByISIC(student.getIsic());
+            int vesakLocation = DatabaseHelper.fetchLocationByISIC(student.getIsic(),TypUmisteni.VESAK);
+            int podlahaLocation = DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.PODLAHA);
 
             if (vesakLocation == -1 && podlahaLocation == -1) {
                 isicVstup.styleProperty().setValue("-fx-border-color: #FF6347; -fx-border-width: 4px;");
@@ -110,21 +112,15 @@ public class VyzvednoutController extends BaseController {
     }
 
     @FXML
-    public void domuKlik(MouseEvent mouseEvent) {
+    public void domuKlik(MouseEvent mouseEvent) throws IOException {
         // Get the stage of the current scene
         Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
 
-        try {
-            // Load the home.fxml file
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/home.fxml");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        StageManager.switchScene(FXMLView.HOME);
     }
 
     @FXML
-    public void potvrditVyzvednutiKlik(MouseEvent mouseEvent) {
+    public void potvrditVyzvednutiKlik(MouseEvent mouseEvent) throws IOException {
         String isic = userDataContainer.getStudent().getIsic();
 
         DatabaseHelper.removeLocationByISIC(isic);
@@ -132,23 +128,11 @@ public class VyzvednoutController extends BaseController {
         PotrvzeniController.text = "Vyzvednutí proběhlo úspěšně";
         PotrvzeniController.textButton = "Vyzvednout další věc";
 
-        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        try {
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/potvrzeni.fxml");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        StageManager.switchScene(FXMLView.POTVRZENI);
     }
 
     @FXML
-    public void zrusitKlik(MouseEvent mouseEvent) {
-        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        try {
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/home.fxml");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void zrusitKlik(MouseEvent mouseEvent) throws IOException {
+        StageManager.switchScene(FXMLView.HOME);
     }
 }

@@ -153,12 +153,17 @@ public class DatabaseHelper {
      * @param isic ISIC card of the student
      * @return location of the clothing
      */
-    public static int fetchVesakLocationByISIC(String isic) {
+    public static int fetchLocationByISIC(String isic, TypUmisteni typUmisteni) {
         int vesakLocation = -1;
-        String sql = "SELECT cislo FROM Umisteni WHERE student = ? AND typ_umisteni = 'věšák'";
+        String sql = "SELECT cislo FROM Umisteni WHERE student = ? AND typ_umisteni = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isic);
+            if (typUmisteni == TypUmisteni.VESAK) { //typ umístění
+                pstmt.setString(2, "věšák");
+            } else if (typUmisteni == TypUmisteni.PODLAHA) {
+                pstmt.setString(2, "podlaha");
+            }
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     vesakLocation = rs.getInt("cislo");
@@ -170,30 +175,8 @@ public class DatabaseHelper {
         return vesakLocation;
     }
 
-    /**
-     * Method to fetch the location of the student's luggage
-     * @param isic ISIC card of the student
-     * @return location of the luggage
-     */
-    public static int fetchPodlahaLocationByISIC(String isic) {
-        int podlahaLocation = -1;
-        String sql = "SELECT cislo FROM Umisteni WHERE student = ? AND typ_umisteni = 'podlaha'";
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, isic);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    podlahaLocation = rs.getInt("cislo");
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("Database error: " + e.getMessage());
-        }
-        return podlahaLocation;
-    }
-
     public static void removeLocationByISIC(String isic) {
-        String sql = "DELETE FROM Umisteni WHERE student = ?";
+        String sql = "UPDATE Umisteni SET student = NULL WHERE student = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

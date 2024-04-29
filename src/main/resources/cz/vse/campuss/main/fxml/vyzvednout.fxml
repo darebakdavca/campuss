@@ -75,7 +75,7 @@
                   </TextField>
               </VBox>
               <VBox alignment="CENTER" spacing="10.0">
-                  <Text fx:id="studentJmeno" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: D9D9D9;" text="Šimon Šubík">
+                  <Text fx:id="studentJmeno" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: D9D9D9;">
 
                       <font>
                           <Font size="60.0" />
