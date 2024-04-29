@@ -40,6 +40,9 @@ public class VyzvednoutController extends BaseController {
     public Text textPotvrzeni;
     public Button tlacitkoPotvrdit;
 
+    /**
+     * Inicializace kontroléru
+     */
     @FXML
     private void initialize() {
         fadeIn(ovladaciPrvky);
@@ -47,10 +50,12 @@ public class VyzvednoutController extends BaseController {
         tlacitkoPotvrdit.setDisable(true);
         studentJmeno.setText("");
         userDataContainer = new UserDataContainer(false, false, null);
-        Platform.runLater(() -> {
-            stage = (Stage) ovladaciPrvky.getScene().getWindow();
-        });
+        Platform.runLater(() -> stage = (Stage) ovladaciPrvky.getScene().getWindow());
     }
+
+    /**
+     * Odešle ISIC karty a na základě toho upraví UI
+     */
     @FXML
     public void odeslatISIC() {
         studentJmeno.setText("");
@@ -111,19 +116,22 @@ public class VyzvednoutController extends BaseController {
         }
     }
 
+    /**
+     * Přejde na domovskou obrazovku
+     */
     @FXML
     public void domuKlik(MouseEvent mouseEvent) throws IOException {
-        // Get the stage of the current scene
-        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-
         StageManager.switchScene(FXMLView.HOME);
     }
 
+    /**
+     * Potvrdí vyzvednutí věcí
+     */
     @FXML
     public void potvrditVyzvednutiKlik(MouseEvent mouseEvent) throws IOException {
         String isic = userDataContainer.getStudent().getIsic();
 
-        DatabaseHelper.removeLocationByISIC(isic);
+        DatabaseHelper.removeLocationFromUmisteniByISIC(isic);
 
         PotrvzeniController.text = "Vyzvednutí proběhlo úspěšně";
         PotrvzeniController.textButton = "Vyzvednout další věc";
@@ -131,6 +139,9 @@ public class VyzvednoutController extends BaseController {
         StageManager.switchScene(FXMLView.POTVRZENI);
     }
 
+    /**
+     * Zruší vyzvednutí věcí
+     */
     @FXML
     public void zrusitKlik(MouseEvent mouseEvent) throws IOException {
         StageManager.switchScene(FXMLView.HOME);

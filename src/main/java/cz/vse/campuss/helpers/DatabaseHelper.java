@@ -69,7 +69,7 @@ public class DatabaseHelper {
     }
 
     /**
-     * Metoda pro získání volného umístění v závsáku na typu umístění
+     * Metoda pro získání volného umístění v závislosti na typu umístění
      * @param typUmisteni Typ umístění
      * @return Umístění
      */
@@ -114,8 +114,12 @@ public class DatabaseHelper {
     }
 
     /**
-     * Vytvoří nový záznam v tabulce Historie v databázi
-     *
+     * Metoda pro vytvoření záznamu v historii
+     * @param jmenoStudenta Jméno studenta
+     * @param prijmeniStudenta Příjmení studenta
+     * @param isic ISIC karta studenta
+     * @param typUmisteni Typ umístění
+     * @param cisloUmisteni Číslo umístění
      */
     public static void createHistorieEntry(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni) {
         String sql = "INSERT INTO Historie (jmeno_studenta, prijmeni_studenta, isic_studenta, satna_nazev, umisteni_typ, umisteni_cislo, stav, cas_zmeny_stavu, satnarka_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -148,10 +152,12 @@ public class DatabaseHelper {
             System.out.println("Database error: " + e.getMessage());
         }
     }
+
     /**
-     * Method to fetch the location of the student's clothing
-     * @param isic ISIC card of the student
-     * @return location of the clothing
+     * Metoda pro získání umístění studenta na základě jeho ISIC karty a typu umístění
+     * @param isic ISIC karta studenta
+     * @param typUmisteni Typ umístění
+     * @return Číslo umístění
      */
     public static int fetchLocationByISIC(String isic, TypUmisteni typUmisteni) {
         int vesakLocation = -1;
@@ -175,7 +181,11 @@ public class DatabaseHelper {
         return vesakLocation;
     }
 
-    public static void removeLocationByISIC(String isic) {
+    /**
+     * Metoda pro odstranění isic studenta u umístění na základě jeho ISIC karty
+     * @param isic ISIC karta studenta
+     */
+    public static void removeLocationFromUmisteniByISIC(String isic) {
         String sql = "UPDATE Umisteni SET student = NULL WHERE student = ?";
 
         try (Connection conn = getConnection();
