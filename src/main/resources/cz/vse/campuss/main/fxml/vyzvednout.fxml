@@ -19,13 +19,6 @@
         </font>
     </Text>
     <HBox fx:id="zadavaniInformaci" alignment="CENTER" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
-        <Pane layoutX="50.0" layoutY="208.0" prefHeight="60.0" prefWidth="120.0" style="-fx-background-color: #D3D3D3;" AnchorPane.leftAnchor="0.0">
-            <Text layoutX="10.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISIC ID">
-                <font>
-                    <Font name="System Bold" size="32.0" />
-                </font>
-            </Text>
-        </Pane>
         <TextField fx:id="isicVstup" prefHeight="60.0" HBox.hgrow="ALWAYS" text="S420300843379J" promptText="Vyhledat ISIC...">
             <font>
                 <Font size="22.0" />
@@ -49,11 +42,11 @@
     </HBox>
 
     <VBox alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
-    <HBox fx:id="blokInformaci" alignment="CENTER" spacing="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
-              <VBox fx:id="boxVesak" alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <HBox fx:id="blokInformaci" alignment="CENTER" spacing="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0">
+              <VBox fx:id="boxVesak" alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Oblečení">
                       <font>
-                          <Font size="72.0" />
+                          <Font size="60.0" />
                       </font>
                   </Text>
                   <TextField fx:id="cisloVesak" alignment="CENTER" editable="false" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: D9D9D9;">
@@ -62,10 +55,10 @@
                       </font>
                   </TextField>
               </VBox>
-              <VBox fx:id="boxZavazadlo" alignment="CENTER" spacing="20.0">
+              <VBox fx:id="boxZavazadlo" alignment="CENTER" spacing="10.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Zavazadlo">
                       <font>
-                          <Font size="72.0" />
+                          <Font size="60.0" />
                       </font>
                   </Text>
                   <TextField fx:id="cisloPodlaha" alignment="CENTER" editable="false" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: D9D9D9;">
@@ -76,15 +69,11 @@
               </VBox>
               <VBox alignment="CENTER" spacing="10.0">
                   <Text fx:id="studentJmeno" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-background-color: D9D9D9;">
-
                       <font>
                           <Font size="60.0" />
                       </font>
                   </Text>
-                  <ImageView fx:id="studentFoto" fitHeight="310.0" fitWidth="300.0" pickOnBounds="true">
-
-                  </ImageView>
-
+                  <ImageView fx:id="studentFoto" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true"/>
               </VBox>
       </HBox>
         <HBox fx:id="ovladaciPrvky" alignment="CENTER" spacing="60.0" AnchorPane.bottomAnchor="30.0">
@@ -100,8 +89,6 @@
             </Button>
         </HBox>
     </VBox>
-
-
     <padding>
          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
