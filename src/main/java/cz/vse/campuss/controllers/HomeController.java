@@ -7,6 +7,7 @@ import cz.vse.campuss.helpers.StageManager;
 import cz.vse.campuss.model.Satnarka;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -18,6 +19,7 @@ import java.io.IOException;
 public class HomeController extends BaseController {
 
     public HBox volbyCinnosti;
+    public AnchorPane rootPane;
     @FXML
     private Text uvitani;
 
@@ -38,7 +40,7 @@ public class HomeController extends BaseController {
      */
     @FXML
     public void historieKlik(MouseEvent mouseEvent) throws IOException {
-        StageManager.switchScene(FXMLView.HISTORIE);
+        StageManager.switchFXML(rootPane, FXMLView.HISTORIE);
     }
 
     /**
@@ -48,7 +50,7 @@ public class HomeController extends BaseController {
      */
     @FXML
     public void uschovatKlik(MouseEvent mouseEvent) throws IOException {
-        StageManager.switchScene(FXMLView.USCHOVAT1);
+        StageManager.switchFXML(rootPane, FXMLView.USCHOVAT1);
     }
 
     /**
@@ -58,6 +60,6 @@ public class HomeController extends BaseController {
      */
     @FXML
     public void vyzvednoutKlik(MouseEvent mouseEvent) throws IOException {
-        StageManager.switchScene(FXMLView.VYZVEDNOUT);
+        StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT);
     }
 }

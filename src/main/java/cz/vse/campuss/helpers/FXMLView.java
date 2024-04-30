@@ -8,6 +8,11 @@ public enum FXMLView {
         }
 
         @Override
+        String getFXML() {
+            return getFXMLShort("home.fxml");
+        }
+
+        @Override
         String getTitle() {
             return "Campuss - Domů";
         }
@@ -16,6 +21,11 @@ public enum FXMLView {
         @Override
         String getFXMLResource() {
             return getFXMLPath("prihlasovani.fxml");
+        }
+
+        @Override
+        String getFXML() {
+            return getFXMLShort("prihlasovani.fxml");
         }
 
         @Override
@@ -30,6 +40,11 @@ public enum FXMLView {
         }
 
         @Override
+        String getFXML() {
+            return getFXMLShort("historie.fxml");
+        }
+
+        @Override
         String getTitle() {
             return "Campuss - Historie";
         }
@@ -38,6 +53,11 @@ public enum FXMLView {
         @Override
         String getFXMLResource() {
             return getFXMLPath("potvrzeni.fxml");
+        }
+
+        @Override
+        String getFXML() {
+            return getFXMLShort("potvrzeni.fxml");
         }
 
         @Override
@@ -52,6 +72,11 @@ public enum FXMLView {
         }
 
         @Override
+        String getFXML() {
+            return getFXMLShort("student.fxml");
+        }
+
+        @Override
         String getTitle() {
             return "Campuss - Student";
         }
@@ -60,6 +85,11 @@ public enum FXMLView {
         @Override
         String getFXMLResource() {
             return getFXMLPath("uschovat1.fxml");
+        }
+
+        @Override
+        String getFXML() {
+            return getFXMLShort("uschovat1.fxml");
         }
 
         @Override
@@ -74,6 +104,11 @@ public enum FXMLView {
         }
 
         @Override
+        String getFXML() {
+            return getFXMLShort("uschovat2.fxml");
+        }
+
+        @Override
         String getTitle() {
             return "Campuss - Uchování";
         }
@@ -85,15 +120,25 @@ public enum FXMLView {
         }
 
         @Override
+        String getFXML() {
+            return getFXMLShort("vyzvednout.fxml");
+        }
+
+        @Override
         String getTitle() {
             return "Campuss - Vyzvednutí";
         }
     };
 
     abstract String getFXMLResource();
+    abstract String getFXML();
     abstract String getTitle();
 
     private static String getFXMLPath(String resource) {
         return String.format("file:src/main/resources/cz/vse/campuss/main/fxml/%s", resource) ;
+    }
+
+    private static String getFXMLShort(String resource) {
+        return String.format("/cz/vse/campuss/main/fxml/%s", resource) ;
     }
 }

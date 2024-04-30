@@ -3,6 +3,7 @@ package cz.vse.campuss.controllers;
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.StageManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
@@ -33,10 +34,11 @@ public class PrihlasovaniController extends BaseController {
 
     @FXML
     public void prihlaseniKlik(MouseEvent mouseEvent) throws IOException {
+
         if (rButtonRole2.isSelected()) {
-            StageManager.switchScene(FXMLView.STUDENT);
+            StageManager.switchFXML(rootPane, FXMLView.STUDENT);
         } else if (rButtonRole1.isSelected()) {
-            StageManager.switchScene(FXMLView.HOME);
+            StageManager.switchFXML(rootPane, FXMLView.HOME);
         } else {
             errorText.setVisible(true);
             hideAfterSeconds(errorText);

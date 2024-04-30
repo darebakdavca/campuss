@@ -4,9 +4,9 @@ import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.StageManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -23,6 +23,8 @@ public class PotrvzeniController extends BaseController {
 
     public static String text;
     public static String textButton;
+    public AnchorPane rootPane;
+
     /**
      * Inicializace kontroléru
      */
@@ -38,7 +40,7 @@ public class PotrvzeniController extends BaseController {
      */
     @FXML
     public void domuKlik() throws IOException {
-        StageManager.switchScene(FXMLView.HOME);
+        StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 
     /**

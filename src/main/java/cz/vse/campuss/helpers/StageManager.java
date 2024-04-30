@@ -2,6 +2,7 @@ package cz.vse.campuss.helpers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,12 +19,20 @@ public class StageManager {
      * @param view FXMLView (Obrazovka), která se má zobrazit
      */
     public static void switchScene(final FXMLView view) throws IOException {
-        String title = view.getTitle();
         Scene scene = getScene(view.getFXMLResource());
-        primaryStage.setTitle(title);
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.show();
+    }
+
+
+    /**
+     * Zobrazí FXML soubor v primárním stage
+     * @param rootPane AnchorPane, do kterého se má zobrazit FXML soubor
+     * @param fxmlView FXMLView (Obrazovka), která se má zobrazit
+     */
+    public static void switchFXML(AnchorPane rootPane, final FXMLView fxmlView) throws IOException {
+        AnchorPane view = getAnchorPane(fxmlView.getFXMLResource());
+        rootPane.getChildren().setAll(view);
     }
 
     /**
@@ -38,6 +47,15 @@ public class StageManager {
     }
 
     /**
+     * Vrátí AnchorPane z FXML souboru
+     * @param fxmlFile Cesta k FXML souboru
+     * @return AnchorPane
+     */
+    public static AnchorPane getAnchorPane(String fxmlFile) throws IOException {
+        return FXMLLoader.load(new URL(fxmlFile));
+    }
+
+    /**
      * Nastaví primární stage
      * @param primaryStage Stage, který se má nastavit jako primární
      */
@@ -45,4 +63,8 @@ public class StageManager {
         StageManager.primaryStage = primaryStage;
         StageManager.primaryStage.setScene(primaryStage.getScene());
     }
+
+
+//    AnchorPane view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cz/vse/campuss/main/fxml/uschovat1.fxml")));
+//    rootPane.getChildren().setAll(view);
 }
