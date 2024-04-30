@@ -52,7 +52,7 @@
                 </TextField>
             </VBox>
         </HBox>
-        <HBox fx:id="ovladaciPrvky" spacing="60.0" alignment="CENTER" AnchorPane.bottomAnchor="60.0">
+        <HBox fx:id="ovladaciPrvky" spacing="60.0" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0">
             <Button onMouseClicked="#potvrditUschovaniKlik" mnemonicParsing="false" prefWidth="800.0"  style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2; -fx-cursor: hand;" text="Potvrdit uschování">
                 <font>
                     <Font size="50.0" />

@@ -34,6 +34,7 @@ import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
  */
 public class Uschovat1Controller extends BaseController {
 
+    public HBox ovladaciPrvky;
     private Stage stage;
     private UserDataContainer userDataContainer;
 
@@ -45,7 +46,7 @@ public class Uschovat1Controller extends BaseController {
     public Text textKontrolaZaskrtnuti;
     public VBox hlavniPrvky;
     public HBox zadavaniISIC;
-    public Button tlacitkoZobrazit;
+    public Button tlacitkoPotvrdit;
     public AnchorPane rootPane;
     public Line checkBoxLine;
 

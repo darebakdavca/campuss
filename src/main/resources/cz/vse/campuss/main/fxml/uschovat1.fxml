@@ -52,7 +52,7 @@
       </Pane>
    </HBox>
 
-   <VBox fx:id="hlavniPrvky" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
+   <VBox fx:id="hlavniPrvky" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="50.0" alignment="CENTER">
       <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0">
          <VBox spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
            <Pane onMouseClicked="#checkBoxObleceniKlik">
@@ -81,15 +81,19 @@
             </Text>
          </StackPane>
       </HBox>
-      <HBox alignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <Button fx:id="tlacitkoZobrazit" onMouseClicked="#zobrazitPoziceKlik" HBox.hgrow="ALWAYS" mnemonicParsing="false" style="-fx-background-color: #CCCC#D3D3D3CC; -fx-background-radius: 30; -fx-cursor: hand" text="Zobrazit pozice pro uschování" AnchorPane.bottomAnchor="31.0">
-            <font>
-               <Font size="64.0" />
-            </font>
-         </Button>
-      </HBox>
    </VBox>
-
+   <HBox fx:id="ovladaciPrvky" alignment="CENTER" spacing="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0" >
+      <Button fx:id="tlacitkoPotvrdit" mnemonicParsing="false" onMouseClicked="#zobrazitPoziceKlik" prefWidth="800.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2; -fx-cursor: hand;" text="Zobrazit pozice pro uložení" HBox.hgrow="ALWAYS">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" onMouseClicked="#domuKlik" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand" text="Zrušit">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Button>
+   </HBox>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
