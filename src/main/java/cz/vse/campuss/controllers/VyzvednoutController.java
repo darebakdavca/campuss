@@ -1,17 +1,14 @@
 package cz.vse.campuss.controllers;
 
-import cz.vse.campuss.helpers.DatabaseHelper;
-import cz.vse.campuss.helpers.FXMLView;
-import cz.vse.campuss.helpers.StageManager;
-import cz.vse.campuss.helpers.UserDataContainer;
+import cz.vse.campuss.helpers.*;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -25,9 +22,11 @@ import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
 public class VyzvednoutController extends BaseController {
 
-    private Stage stage;
-    private UserDataContainer userDataContainer;
 
+    private UserDataContainer userDataContainer;
+    private Stage stage;
+
+    public AnchorPane rootPane;
     public VBox boxZavazadlo;
     public VBox boxVesak;
     public HBox ovladaciPrvky;
@@ -39,6 +38,8 @@ public class VyzvednoutController extends BaseController {
     public ImageView studentFoto;
     public Text textPotvrzeni;
     public Button tlacitkoPotvrdit;
+    public HBox zadavaniInformaci;
+    public Button tlacitkoOdeslat;
 
     /**
      * Inicializace kontroléru
@@ -49,6 +50,9 @@ public class VyzvednoutController extends BaseController {
         fadeIn(blokInformaci);
         tlacitkoPotvrdit.setDisable(true);
         studentJmeno.setText("");
+        NodeHelper.fadeIn(ovladaciPrvky);
+        NodeHelper.fadeIn(blokInformaci);
+        NodeHelper.fadeIn(zadavaniInformaci);
         userDataContainer = new UserDataContainer(false, false, null);
         Platform.runLater(() -> stage = (Stage) ovladaciPrvky.getScene().getWindow());
     }
@@ -121,7 +125,7 @@ public class VyzvednoutController extends BaseController {
      */
     @FXML
     public void domuKlik(MouseEvent mouseEvent) throws IOException {
-        StageManager.switchScene(FXMLView.HOME);
+        StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 
     /**
@@ -136,14 +140,6 @@ public class VyzvednoutController extends BaseController {
         PotrvzeniController.text = "Vyzvednutí proběhlo úspěšně";
         PotrvzeniController.textButton = "Vyzvednout další věc";
 
-        StageManager.switchScene(FXMLView.POTVRZENI);
-    }
-
-    /**
-     * Zruší vyzvednutí věcí
-     */
-    @FXML
-    public void zrusitKlik(MouseEvent mouseEvent) throws IOException {
-        StageManager.switchScene(FXMLView.HOME);
+        StageManager.switchFXML(rootPane, FXMLView.POTVRZENI);
     }
 }

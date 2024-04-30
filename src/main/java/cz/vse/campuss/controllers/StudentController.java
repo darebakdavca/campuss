@@ -1,21 +1,27 @@
 package cz.vse.campuss.controllers;
 
+import cz.vse.campuss.helpers.FXMLView;
+import cz.vse.campuss.helpers.StageManager;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class StudentController extends BaseController {
-
-
+    @FXML
     public TextField satnaOut;
+    @FXML
     public TextField obleceniOut;
+    @FXML
     public TextField zavazadlaOut;
+    @FXML
     public TextField timeOut;
+    @FXML
     public TextField closingOut;
+    @FXML
+    public AnchorPane rootPane;
 
     @FXML
     private void initialize() {
@@ -26,16 +32,7 @@ public class StudentController extends BaseController {
         closingOut.setText("loremclosing");
     }
 
-    public void domuKlik(MouseEvent mouseEvent) {
-        // Get the stage of the current scene
-        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-
-        try {
-            // Load the home.fxml file
-            showScene(stage, "file:src/main/resources/cz/vse/campuss/main/fxml/home.fxml");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void domuKlik(MouseEvent mouseEvent) throws IOException {
+        StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 }

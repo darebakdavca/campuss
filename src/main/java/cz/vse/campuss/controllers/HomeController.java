@@ -18,7 +18,9 @@ import java.io.IOException;
  */
 public class HomeController extends BaseController {
 
+    @FXML
     public HBox volbyCinnosti;
+    @FXML
     public AnchorPane rootPane;
     @FXML
     private Text uvitani;
@@ -31,6 +33,7 @@ public class HomeController extends BaseController {
         Satnarka satnarka = DatabaseHelper.fetchSatnarka(1);
         uvitani.setText("Vítáme uživatele " + satnarka.getJmeno() + "!");
         NodeHelper.fadeIn(volbyCinnosti);
+        NodeHelper.fadeIn(uvitani);
     }
 
     /**

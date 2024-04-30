@@ -49,9 +49,10 @@ public class PotrvzeniController extends BaseController {
     @FXML
     public void uschovatKlik() throws IOException {
         if(potrvzeniText.getText().equals("Uschování proběhlo úspěšně!")) {
-        StageManager.switchScene(FXMLView.USCHOVAT1);}
+            StageManager.switchFXML(rootPane, FXMLView.USCHOVAT1);
+        }
         else {
-            StageManager.switchScene(FXMLView.VYZVEDNOUT);
+            StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT);
         }
     }
 }

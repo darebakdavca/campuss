@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.layout.StackPane?>
-<AnchorPane  prefWidth="1440.0" prefHeight="850.0" fx:controller="cz.vse.campuss.controllers.Uschovat1Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" prefWidth="1440.0" prefHeight="850.0" fx:controller="cz.vse.campuss.controllers.Uschovat1Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0"
               AnchorPane.topAnchor="0.0">
       <Image url="@pictures/campuss.png"/>

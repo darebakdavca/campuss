@@ -21,6 +21,7 @@ public class StageManager {
     public static void switchScene(final FXMLView view) throws IOException {
         Scene scene = getScene(view.getFXMLResource());
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Campuss");
         primaryStage.show();
     }
 
@@ -63,8 +64,4 @@ public class StageManager {
         StageManager.primaryStage = primaryStage;
         StageManager.primaryStage.setScene(primaryStage.getScene());
     }
-
-
-//    AnchorPane view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cz/vse/campuss/main/fxml/uschovat1.fxml")));
-//    rootPane.getChildren().setAll(view);
 }

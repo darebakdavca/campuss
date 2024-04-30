@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import cz.vse.campuss.helpers.DatabaseHelper;
 import cz.vse.campuss.helpers.FXMLView;
+import cz.vse.campuss.helpers.NodeHelper;
 import cz.vse.campuss.helpers.StageManager;
 
 import javafx.event.ActionEvent;
@@ -13,11 +14,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Kontroler pro obrazovku historie1.fxml
  */
 public class HistorieController extends BaseController {
+    @FXML
+    public AnchorPane rootPane;
+    @FXML
+    public AnchorPane hlavniPrvky;
     @FXML
     private TextField vstupISIC;
     @FXML
@@ -47,6 +53,7 @@ public class HistorieController extends BaseController {
     @FXML
     private void initialize() {
         vstupISIC.setOnAction(this::searchSubmitButtonKlik);
+        NodeHelper.fadeIn(hlavniPrvky);
         nastavitTovarny();
         historieTable.setItems(DatabaseHelper.fetchHistorie(null));
     }
@@ -82,6 +89,6 @@ public class HistorieController extends BaseController {
      */
     @FXML
     public void domuKlik() throws IOException {
-        StageManager.switchScene(FXMLView.HOME);
+        StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 }

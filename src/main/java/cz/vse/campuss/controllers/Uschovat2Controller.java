@@ -8,6 +8,7 @@ import cz.vse.campuss.model.TypUmisteni;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
@@ -20,6 +21,7 @@ import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
  * Kontrolér pro obrazovku uschovat2.fxml
  */
 public class Uschovat2Controller extends BaseController {
+
     // Stage a stavy studenta
     private Stage stage;
     // Stav checkboxů
@@ -33,6 +35,7 @@ public class Uschovat2Controller extends BaseController {
     public HBox ovladaciPrvky;
     public TextField vystupCisloPodlaha;
     public TextField vystupCisloVesaku;
+    public AnchorPane rootPane;
 
     /**
      * Inicializace kontroléru
@@ -110,7 +113,7 @@ public class Uschovat2Controller extends BaseController {
         }
         PotrvzeniController.text = "Uschování proběhlo úspěšně";
         PotrvzeniController.textButton = "Uschovat další věc";
-        StageManager.switchScene(FXMLView.POTVRZENI);
+        StageManager.switchFXML(rootPane, FXMLView.POTVRZENI);
     }
 
     /**
@@ -119,7 +122,7 @@ public class Uschovat2Controller extends BaseController {
      */
     @FXML
     public void zrusitKlik() throws IOException {
-        StageManager.switchScene(FXMLView.USCHOVAT1);
+        StageManager.switchFXML(rootPane, FXMLView.USCHOVAT1);
     }
 
     /**
@@ -128,6 +131,6 @@ public class Uschovat2Controller extends BaseController {
      */
     @FXML
     public void domuKlik() throws IOException {
-        StageManager.switchScene(FXMLView.HOME);
+        StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 }

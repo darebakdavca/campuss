@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -28,6 +29,7 @@ import cz.vse.campuss.helpers.DatabaseHelper;
  * Kontrolér pro obrazovku uschovat1.fxml
  */
 public class Uschovat1Controller extends BaseController {
+
     private Stage stage;
     private UserDataContainer userDataContainer;
 
@@ -40,6 +42,7 @@ public class Uschovat1Controller extends BaseController {
     public VBox hlavniPrvky;
     public HBox zadavaniISIC;
     public Button tlacitkoZobrazit;
+    public AnchorPane rootPane;
 
     /**
      * Inicializace kontroléru
@@ -52,9 +55,7 @@ public class Uschovat1Controller extends BaseController {
         NodeHelper.fadeIn(hlavniPrvky);
         NodeHelper.fadeIn(zadavaniISIC);
         userDataContainer = new UserDataContainer(false, false, null);
-        Platform.runLater(() -> {
-            stage = (Stage) hlavniPrvky.getScene().getWindow();
-        });
+        Platform.runLater(() -> stage = (Stage) hlavniPrvky.getScene().getWindow());
     }
 
     /**
@@ -62,7 +63,7 @@ public class Uschovat1Controller extends BaseController {
      */
     @FXML
     public void domuKlik() throws IOException {
-        StageManager.switchScene(FXMLView.HOME);
+        StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 
     /**
@@ -90,7 +91,6 @@ public class Uschovat1Controller extends BaseController {
                 Scene scene = new Scene(loader.load());
                 // nastavení scény do stage
                 stage.setScene(scene);
-                stage.setMaximized(true);
                 stage.setTitle("Campuss");
                 // získání controlleru nové scény
                 Uschovat2Controller controller = loader.getController();
