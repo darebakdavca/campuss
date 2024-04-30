@@ -34,7 +34,7 @@ public class NodeHelper {
         fadeIn.play();
 
         // Create a PauseTransition to keep the error message visible for a few seconds
-        PauseTransition visiblePause = new PauseTransition(Duration.seconds(4));
+        PauseTransition visiblePause = new PauseTransition(Duration.seconds(1));
 
         // When the fade-in effect is over, start the PauseTransition
         fadeIn.setOnFinished(event -> visiblePause.play());

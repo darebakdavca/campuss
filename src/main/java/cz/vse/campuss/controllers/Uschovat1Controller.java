@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -24,6 +25,8 @@ import cz.vse.campuss.helpers.UserDataContainer;
 import cz.vse.campuss.helpers.NodeHelper;
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.DatabaseHelper;
+
+import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
 
 
 /**
@@ -44,6 +47,7 @@ public class Uschovat1Controller extends BaseController {
     public HBox zadavaniISIC;
     public Button tlacitkoZobrazit;
     public AnchorPane rootPane;
+    public Line checkBoxLine;
 
     /**
      * Inicializace kontroléru
@@ -74,7 +78,8 @@ public class Uschovat1Controller extends BaseController {
     public void zobrazitPoziceKlik() {
         // kontrola zda je zaškrtnutý alespoň jeden z obou checkboxů
         if (!checkBoxZavazadlo.isSelected() && !checkBoxObleceni.isSelected()) {
-            NodeHelper.hideAfterSeconds(textKontrolaZaskrtnuti);
+            textKontrolaZaskrtnuti.setText("Pro zobrazení čísel umístění musíte zaškrtnout alespoň jedno pole.");
+            hideAfterSeconds(textKontrolaZaskrtnuti);
         }
         // pokud je nějaký checkbox zaškrtnutý, zobrazí se další obrazovka dle zaškrtnutých políček
         else {
@@ -135,17 +140,20 @@ public class Uschovat1Controller extends BaseController {
             vstupISIC.styleProperty().setValue("-fx-border-color: #90EE90; -fx-border-width: 4px;");
             textPotvrzeni.styleProperty().setValue("-fx-fill: #90EE90;");
             textPotvrzeni.setText("Student nalezen: " + student.getJmeno() + " " + student.getPrijmeni() + " (" + student.getIsic() + ")");
+            checkBoxObleceni.setDisable(false);
+            checkBoxZavazadlo.setDisable(false);
 
-            if (DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.VESAK) == -1) {
-                checkBoxObleceni.setDisable(false);
+            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK) != -1) && (DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA) != -1)) {
+                checkBoxObleceni.setDisable(true);
+                checkBoxZavazadlo.setDisable(true);
             }
 
-            if (DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.PODLAHA) == -1) {
-                checkBoxZavazadlo.setDisable(false);
+            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK) != -1)) {
+                checkBoxObleceni.setDisable(true);
             }
 
-            if (!(DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.VESAK) == -1) && !(DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.PODLAHA) == -1)) {
-                textKontrolaZaskrtnuti.setText("Student již má oblečení i zavazadlo uložené");
+            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA) != -1)) {
+                checkBoxZavazadlo.setDisable(true);
             }
         }
     }
@@ -153,10 +161,30 @@ public class Uschovat1Controller extends BaseController {
     /**
      * Metoda pro pro zobrazení varování při kliknutí na checkbox který není možné zaškrtnout
      */
-    public void checkboxKlik() {
-        if (checkBoxObleceni.isDisabled() && checkBoxZavazadlo.isDisabled()) {
+    public void checkboxZavazadloKlik() {
+        if (checkBoxObleceni.isDisabled() && checkBoxZavazadlo.isDisabled() && userDataContainer.getStudent() == null) {
             textPotvrzeni.styleProperty().setValue("-fx-fill: #FF6347;");
             textPotvrzeni.setText("Nejdříve zadejte platnou ISIC kartu.");
+        }
+
+        else if (checkBoxZavazadlo.isDisabled()) {
+            textKontrolaZaskrtnuti.setText("Student již má zavazadlo uložené.");
+            hideAfterSeconds(textKontrolaZaskrtnuti);
+        }
+    }
+
+    /**
+     * Metoda pro pro zobrazení varování při kliknutí na checkbox oblečení, který není možné zaškrtnout
+     */
+    public void checkBoxObleceniKlik() {
+        if (checkBoxObleceni.isDisabled() && checkBoxZavazadlo.isDisabled() && userDataContainer.getStudent() == null) {
+            textPotvrzeni.styleProperty().setValue("-fx-fill: #FF6347;");
+            textPotvrzeni.setText("Nejdříve zadejte platnou ISIC kartu.");
+        }
+
+        else if (checkBoxObleceni.isDisabled()) {
+            textKontrolaZaskrtnuti.setText("Student již má oblečení uložené.");
+            hideAfterSeconds(textKontrolaZaskrtnuti);
         }
     }
 }

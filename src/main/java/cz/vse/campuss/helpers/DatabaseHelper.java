@@ -189,8 +189,8 @@ public class DatabaseHelper {
      * @param typUmisteni Typ umístění
      * @return Číslo umístění
      */
-    public static int fetchLocationByISIC(String isic, TypUmisteni typUmisteni) {
-        int vesakLocation = -1;
+    public static int fetchLocationNumberByISIC(String isic, TypUmisteni typUmisteni) {
+        int locationNumber = -1;
         String sql = "SELECT cislo FROM Umisteni WHERE student = ? AND typ_umisteni = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -202,13 +202,13 @@ public class DatabaseHelper {
             }
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    vesakLocation = rs.getInt("cislo");
+                    locationNumber = rs.getInt("cislo");
                 }
             }
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
-        return vesakLocation;
+        return locationNumber;
     }
 
     /**

@@ -53,19 +53,25 @@
    </HBox>
 
    <VBox fx:id="hlavniPrvky" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
-     <VBox onMouseClicked="#checkboxKlik" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
-         <CheckBox fx:id="checkBoxObleceni"  disable="true"  mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
-            <font>
-               <Font size="80.0" />
-            </font>
-         </CheckBox>
-         <Line style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="500.0" />
-         <CheckBox fx:id="checkBoxZavazadlo"  disable="true" mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
-            <font>
-               <Font size="80.0" />
-            </font>
-         </CheckBox>
-      </VBox>
+      <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0">
+         <VBox spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
+           <Pane onMouseClicked="#checkBoxObleceniKlik">
+              <CheckBox fx:id="checkBoxObleceni"   disable="true"  mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
+                 <font>
+                    <Font size="80.0" />
+                 </font>
+              </CheckBox>
+           </Pane>
+           <Line fx:id="checkBoxLine" style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="500.0" />
+           <Pane onMouseClicked="#checkboxZavazadloKlik">
+              <CheckBox fx:id="checkBoxZavazadlo"   disable="true" mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
+                 <font>
+                    <Font size="80.0" />
+                 </font>
+              </CheckBox>
+           </Pane>
+         </VBox>
+      </HBox>
       <HBox alignment="CENTER" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <StackPane>
             <Text fx:id="textKontrolaZaskrtnuti" opacity="0.0" style="-fx-fill: #FF6347;" text="Musíte zaškrtnout alespoň jednu možnost.">

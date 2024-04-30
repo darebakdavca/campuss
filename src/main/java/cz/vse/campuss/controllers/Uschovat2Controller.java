@@ -21,9 +21,6 @@ import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
  * Kontrolér pro obrazovku uschovat2.fxml
  */
 public class Uschovat2Controller extends BaseController {
-
-    // Stage a stavy studenta
-    private Stage stage;
     // Stav checkboxů
     private UserDataContainer userDataContainer;
 
@@ -111,7 +108,7 @@ public class Uschovat2Controller extends BaseController {
             DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloPodlaha.getText()), TypUmisteni.PODLAHA);
             DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()));
         }
-        PotrvzeniController.text = "Uschování proběhlo úspěšně";
+        PotrvzeniController.text = "Uschování proběhlo úspěšně!";
         PotrvzeniController.textButton = "Uschovat další věc";
         StageManager.switchFXML(rootPane, FXMLView.POTVRZENI);
     }
