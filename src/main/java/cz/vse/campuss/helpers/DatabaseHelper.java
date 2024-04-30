@@ -1,11 +1,11 @@
 package cz.vse.campuss.helpers;
-import cz.vse.campuss.model.Satnarka;
-import cz.vse.campuss.model.Student;
-import cz.vse.campuss.model.TypUmisteni;
-import cz.vse.campuss.model.Umisteni;
+import cz.vse.campuss.model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -151,6 +151,36 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
+    }
+
+    /**
+     * Vrátí data z Historie podle zadaného isicu.
+     * Pokud není isic specifikován, vrátí všechna data z Historie.
+     *
+     * @param isic podle kterého se mají data Historie filtrovat
+     * @return data Historie
+     */
+    public static ObservableList<PolozkaHistorie> fetchHistorie(String isic) {
+        ObservableList<PolozkaHistorie> data = FXCollections.observableArrayList();
+        try {
+            Connection conn = DatabaseHelper.getConnection();
+            String query = (isic == null || isic.isEmpty()) ? "SELECT * FROM Historie" :
+                    "SELECT * FROM Historie WHERE isic_studenta = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            if (!(isic == null || isic.isEmpty())) {
+                pstmt.setString(1, isic);
+            }
+            try (ResultSet rs = pstmt.executeQuery()) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                while (rs.next()) {
+                    data.add(new PolozkaHistorie(rs.getInt("id"), rs.getString("jmeno_studenta"), rs.getString("prijmeni_studenta"), rs.getString("isic_studenta"), rs.getString("satna_nazev"), TypUmisteni.fromString(rs.getString("umisteni_typ")), rs.getInt("umisteni_cislo"), StavUlozeni.fromString(rs.getString("stav")), rs.getTimestamp("cas_zmeny_stavu").toLocalDateTime().format(formatter), rs.getInt("satnarka_id")));
+                }
+                return data;
+            }
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+        return data;
     }
 
     /**
