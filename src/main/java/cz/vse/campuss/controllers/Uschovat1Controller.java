@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import cz.vse.campuss.model.Student;
+import cz.vse.campuss.model.TypUmisteni;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -129,12 +130,23 @@ public class Uschovat1Controller extends BaseController {
             checkBoxObleceni.setSelected(false);
         }
         // pokud student byl nalezen, zobrazí se jeho jméno a příjmení a vizuálně se upraví pole pro ISIC
+        // pokud student již má uloženo zavazadlo, nebude si moci uložit další - to samé platí pro oblečení
         else {
             vstupISIC.styleProperty().setValue("-fx-border-color: #90EE90; -fx-border-width: 4px;");
             textPotvrzeni.styleProperty().setValue("-fx-fill: #90EE90;");
             textPotvrzeni.setText("Student nalezen: " + student.getJmeno() + " " + student.getPrijmeni() + " (" + student.getIsic() + ")");
-            checkBoxZavazadlo.setDisable(false);
-            checkBoxObleceni.setDisable(false);
+
+            if (DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.VESAK) == -1) {
+                checkBoxObleceni.setDisable(false);
+            }
+
+            if (DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.PODLAHA) == -1) {
+                checkBoxZavazadlo.setDisable(false);
+            }
+
+            if (!(DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.VESAK) == -1) && !(DatabaseHelper.fetchLocationByISIC(student.getIsic(), TypUmisteni.PODLAHA) == -1)) {
+                textKontrolaZaskrtnuti.setText("Student již má oblečení i zavazadlo uložené");
+            }
         }
     }
 
