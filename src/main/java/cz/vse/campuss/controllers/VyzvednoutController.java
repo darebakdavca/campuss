@@ -20,8 +20,9 @@ import java.io.IOException;
 
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
-public class VyzvednoutController extends BaseController {
+public class VyzvednoutController {
 
+    private Stage stage;
     public AnchorPane rootPane;
     public VBox boxZavazadlo;
     public VBox boxVesak;

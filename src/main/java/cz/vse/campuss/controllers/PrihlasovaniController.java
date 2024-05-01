@@ -14,7 +14,7 @@ import java.io.IOException;
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
 
-public class PrihlasovaniController extends BaseController {
+public class PrihlasovaniController {
 
     @FXML
     public Text errorText;

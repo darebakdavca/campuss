@@ -20,9 +20,10 @@ import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 /**
  * Kontrolér pro obrazovku uschovat2.fxml
  */
-public class Uschovat2Controller extends BaseController {
+public class Uschovat2Controller {
     // Stav checkboxů
     private UserDataContainer userDataContainer;
+    private Stage stage;
 
     // FXML elementy
     public VBox boxZavazadlo;

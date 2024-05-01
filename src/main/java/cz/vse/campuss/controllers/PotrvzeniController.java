@@ -15,7 +15,7 @@ import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 /**
  * Kontrolér pro obrazovku potrvzeni.fxml
  */
-public class PotrvzeniController extends BaseController {
+public class PotrvzeniController {
     // FXML elementy
     public VBox hlavniPrvky;
     public Text potrvzeniText;

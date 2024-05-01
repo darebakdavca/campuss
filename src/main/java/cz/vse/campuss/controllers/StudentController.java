@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class StudentController extends BaseController {
+public class StudentController {
     @FXML
     public TextField satnaOut;
     @FXML

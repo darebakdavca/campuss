@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 /**
  * Kontroler pro obrazovku historie1.fxml
  */
-public class HistorieController extends BaseController {
+public class HistorieController {
     @FXML
     public AnchorPane rootPane;
     @FXML

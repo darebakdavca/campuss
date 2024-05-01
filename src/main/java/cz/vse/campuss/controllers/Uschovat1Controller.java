@@ -32,7 +32,7 @@ import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
 /**
  * Kontrolér pro obrazovku uschovat1.fxml
  */
-public class Uschovat1Controller extends BaseController {
+public class Uschovat1Controller {
 
     public HBox ovladaciPrvky;
     private Stage stage;

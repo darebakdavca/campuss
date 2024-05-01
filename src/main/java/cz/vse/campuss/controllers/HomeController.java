@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Třída reprezentující controller pro home.fxml
  */
-public class HomeController extends BaseController {
+public class HomeController {
 
     @FXML
     public HBox volbyCinnosti;
