@@ -3,7 +3,6 @@ package cz.vse.campuss.controllers;
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.StageManager;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
@@ -12,6 +11,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
+import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
 
 public class PrihlasovaniController extends BaseController {
@@ -30,6 +30,7 @@ public class PrihlasovaniController extends BaseController {
         ToggleGroup group = new ToggleGroup();
         rButtonRole1.setToggleGroup(group);
         rButtonRole2.setToggleGroup(group);
+        fadeIn(rootPane);
     }
 
     @FXML
@@ -38,7 +39,7 @@ public class PrihlasovaniController extends BaseController {
         if (rButtonRole2.isSelected()) {
             StageManager.switchFXML(rootPane, FXMLView.STUDENT);
         } else if (rButtonRole1.isSelected()) {
-            StageManager.switchFXML(rootPane, FXMLView.HOME);
+            StageManager.switchFXML(rootPane, FXMLView.VOLBA_SATNY);
         } else {
             errorText.setVisible(true);
             hideAfterSeconds(errorText);

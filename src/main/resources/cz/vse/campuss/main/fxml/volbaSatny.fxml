@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="cz.vse.campuss.controllers.VolbaSatnyController" fx:id="rootPane" prefWidth="1440.0" prefHeight="850.0">
+    <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <VBox fx:id="ovladaciPrvky" alignment="CENTER" spacing="20.0">
+            <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@pictures/campuss.png"/>
+            </ImageView>
+            <Text style="-fx-font-size: 50px; -fx-font-weight: bold;" text="Zvolte šatnu:"/>
+                <RadioButton prefWidth="250.0"  fx:id="italskaButton" text="Italská budova">
+                    <font>
+                        <Font size="30.0"/>
+                    </font>
+                </RadioButton>
+                <RadioButton prefWidth="250.0" fx:id="novaButton" text="Nová budova">
+                    <font>
+                        <Font size="30.0"/>
+                    </font>
+                </RadioButton>
+            <Text fx:id="errorText" visible="false" text="Zaškrtněte šatnu!" style="-fx-font-size: 25; -fx-fill: red"/>
+            <Button onMouseClicked="#pokracovatKlik" text="Pokračovat" prefWidth="300.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-cursor: hand;">
+                <font>
+                    <Font size="30.0"/>
+                </font>
+            </Button>
+        </VBox>
+    </HBox>
+</AnchorPane>

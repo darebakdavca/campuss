@@ -48,7 +48,14 @@ public enum FXMLView {
         String getFXMLResource() {
             return getFXMLPath("vyzvednout.fxml");
         }
-    };
+    },
+    VOLBA_SATNY {
+        @Override
+        String getFXMLResource() {
+            return getFXMLPath("volbaSatny.fxml");
+        }
+    }
+    ;
 
     abstract String getFXMLResource();
 

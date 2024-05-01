@@ -21,7 +21,7 @@ public abstract class BaseController {
      * @throws IOException Pokud se nepodaří načíst FXML soubor
      */
     protected void showScene(Stage stage, String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(); // TODO: zkontrolovat, zda je potřeba vytvářet nový loader pro každou scénu
+        FXMLLoader loader = new FXMLLoader();
         loader.setLocation(new URL(fxmlPath));
 
         Scene scene = new Scene(loader.load());
