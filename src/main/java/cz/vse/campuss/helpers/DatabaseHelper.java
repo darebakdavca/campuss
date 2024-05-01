@@ -121,7 +121,7 @@ public class DatabaseHelper {
      * @param typUmisteni Typ umístění
      * @param cisloUmisteni Číslo umístění
      */
-    public static void createHistorieEntry(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni) {
+    public static void createHistorieEntry(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni, StavUlozeni stavUlozeni) {
         String sql = "INSERT INTO Historie (jmeno_studenta, prijmeni_studenta, isic_studenta, satna_nazev, umisteni_typ, umisteni_cislo, stav, cas_zmeny_stavu, satnarka_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -137,7 +137,12 @@ public class DatabaseHelper {
             }
 
             pstmt.setInt(6, cisloUmisteni); //číslo umístění
-            pstmt.setString(7,"uschováno");
+
+            if (stavUlozeni == StavUlozeni.USCHOVANO) { // stav uložení
+                pstmt.setString(7,"uschováno");
+            } else if (stavUlozeni == StavUlozeni.VYZVEDNUTO) {
+                pstmt.setString(7,"vyzvednuto");
+            }
 
             Date date = new Date(System.currentTimeMillis());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

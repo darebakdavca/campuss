@@ -48,7 +48,7 @@ public class HistorieController {
     private TableColumn casZmenyColumn;
 
     /**
-     * Po přepnutí na obrazovku historie se nastaví továrny a aktualizuje se tabulka
+     * Po přepnutí na obrazovku historie se nastaví továrny, aktualizuje se tabulka a záznamy se seřadí chronologicky
      */
     @FXML
     private void initialize() {
@@ -56,6 +56,10 @@ public class HistorieController {
         NodeHelper.fadeIn(hlavniPrvky);
         nastavitTovarny();
         historieTable.setItems(DatabaseHelper.fetchHistorie(null));
+
+        casZmenyColumn.setSortType(TableColumn.SortType.ASCENDING);
+        historieTable.getSortOrder().add(casZmenyColumn);
+        historieTable.sort();
     }
 
     /**

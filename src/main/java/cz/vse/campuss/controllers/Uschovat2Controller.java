@@ -3,6 +3,7 @@ package cz.vse.campuss.controllers;
 import java.io.IOException;
 
 import cz.vse.campuss.helpers.*;
+import cz.vse.campuss.model.StavUlozeni;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
 import javafx.application.Platform;
@@ -97,7 +98,7 @@ public class Uschovat2Controller {
                 return;
             }
             DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloVesaku.getText()), TypUmisteni.VESAK);
-            DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.VESAK, Integer.parseInt(vystupCisloVesaku.getText()));
+            DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.VESAK, Integer.parseInt(vystupCisloVesaku.getText()), StavUlozeni.USCHOVANO);
         }
         // Uložení věcí do databáze když je zaškrtnutý pouze checkbox zavazadlo
         if (userDataContainer.isPodlahaChecked()) {
@@ -107,7 +108,7 @@ public class Uschovat2Controller {
                 return;
             }
             DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloPodlaha.getText()), TypUmisteni.PODLAHA);
-            DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()));
+            DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()), StavUlozeni.USCHOVANO);
         }
         PotrvzeniController.text = "Uschování proběhlo úspěšně!";
         PotrvzeniController.textButton = "Uschovat další věc";

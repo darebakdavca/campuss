@@ -1,6 +1,7 @@
 package cz.vse.campuss.controllers;
 
 import cz.vse.campuss.helpers.*;
+import cz.vse.campuss.model.StavUlozeni;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
 import javafx.application.Platform;
@@ -125,10 +126,22 @@ public class VyzvednoutController {
     }
 
     /**
-     * Potvrdí vyzvednutí věcí
+     * Vytvoří záznam o vyzvednutí v historii a potvrdí vyzvednutí věcí
      */
     @FXML
     public void potvrditVyzvednutiKlik(MouseEvent mouseEvent) throws IOException {
+        boolean vesak = blokInformaci.getChildren().contains(boxVesak);
+        boolean zavazdlo = blokInformaci.getChildren().contains(boxZavazadlo);
+
+        if (vesak && zavazdlo) {
+            historieEntryQueryVyzvednuto(TypUmisteni.VESAK);
+            historieEntryQueryVyzvednuto(TypUmisteni.PODLAHA);
+        } else if (vesak) {
+            historieEntryQueryVyzvednuto(TypUmisteni.VESAK);
+        } else if (zavazdlo) {
+            historieEntryQueryVyzvednuto(TypUmisteni.PODLAHA);
+        }
+
         String isic = isicVstup.getText();
 
         DatabaseHelper.removeLocationFromUmisteniByISIC(isic);
@@ -137,5 +150,15 @@ public class VyzvednoutController {
         PotrvzeniController.textButton = "Vyzvednout další věc";
 
         StageManager.switchFXML(rootPane, FXMLView.POTVRZENI);
+    }
+
+    /**
+     * Sestaví a odešle dotaz pro DatabaseHelper o vytvoření nového záznamu o vyzvednutí v historii
+     *
+     * @param typUmisteni
+     */
+    private void historieEntryQueryVyzvednuto(TypUmisteni typUmisteni) {
+        Student student = DatabaseHelper.fetchStudentByISIC(isicVstup.getText());
+        DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), typUmisteni, DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), typUmisteni), StavUlozeni.VYZVEDNUTO);
     }
 }
