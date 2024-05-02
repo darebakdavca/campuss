@@ -128,7 +128,7 @@ public class DatabaseHelper {
             pstmt.setString(1, jmenoStudenta); //jméno studenta
             pstmt.setString(2, prijmeniStudenta); //příjmení studenta
             pstmt.setString(3, isic); //isic studenta
-            pstmt.setString(4,"Italská budova"); //název šatny - ještě není automatické
+            pstmt.setString(4, SatnaSelection.getInstance().getSelectedSatna());  //název šatny
 
             if (typUmisteni == TypUmisteni.VESAK) { //typ umístění
                 pstmt.setString(5, "věšák");

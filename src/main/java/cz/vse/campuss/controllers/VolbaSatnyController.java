@@ -1,8 +1,11 @@
 package cz.vse.campuss.controllers;
 
 import cz.vse.campuss.helpers.FXMLView;
+import cz.vse.campuss.helpers.SatnaSelection;
 import cz.vse.campuss.helpers.StageManager;
+
 import javafx.fxml.FXML;
+
 import javafx.scene.control.RadioButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -36,8 +39,10 @@ public class VolbaSatnyController {
 
     public void pokracovatKlik(MouseEvent mouseEvent) throws IOException {
         if (italskaButton.isSelected()) {
+            SatnaSelection.getInstance().setSelectedSatna("Italská budova");
             StageManager.switchFXML(rootPane, FXMLView.HOME);
         } else if (novaButton.isSelected()) {
+            SatnaSelection.getInstance().setSelectedSatna("Nová budova");
             StageManager.switchFXML(rootPane, FXMLView.HOME);
         } else {
             errorText.setVisible(true);
