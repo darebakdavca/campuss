@@ -44,3 +44,6 @@ build/
 ### sqlite ###
 *.sqlite
 *.sql
+
+### Email credentials ###
+config.properties
