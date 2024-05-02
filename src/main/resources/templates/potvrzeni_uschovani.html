@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Potvrzení uschování</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+            background-color: white;
+
+        }
+
+        .main {
+            margin: 20px;
+        }
+
+        .satna {
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            padding: 5px 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div id="user_message">
+            <div>
+                <p>Vážený uživateli,<br><br> vaše věci byly uloženy na umístění s těmito čísly:</p>
+            </div>
+            <div class="satna">
+                <p>{{nazevSatny}}</p>
+                <ul>
+                    <li>Věšák: {{cisloVesak}}</li>
+                    <li>Podlaha: {{cisloPodlaha}}</li>
+                </ul>
+            </div>
+            <div>
+                <p>Děkujeme za využití našich služeb.<br><br>Tým Campuss</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

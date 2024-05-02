@@ -55,9 +55,9 @@ public class HistorieController {
         vstupISIC.setOnAction(this::searchSubmitButtonKlik);
         NodeHelper.fadeIn(hlavniPrvky);
         nastavitTovarny();
-        historieTable.setItems(DatabaseHelper.fetchHistorie(null));
+        historieTable.setItems(DatabaseHelper.fetchHistorieAll(null));
 
-        casZmenyColumn.setSortType(TableColumn.SortType.ASCENDING);
+        casZmenyColumn.setSortType(TableColumn.SortType.DESCENDING);
         historieTable.getSortOrder().add(casZmenyColumn);
         historieTable.sort();
     }
@@ -85,7 +85,7 @@ public class HistorieController {
     @FXML
     private void searchSubmitButtonKlik (ActionEvent actionEvent){
         String searchText = vstupISIC.getText();
-        historieTable.setItems(DatabaseHelper.fetchHistorie(searchText));
+        historieTable.setItems(DatabaseHelper.fetchHistorieAll(searchText));
     }
 
     /**

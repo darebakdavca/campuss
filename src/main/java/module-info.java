@@ -6,6 +6,7 @@ module cz.vse.campuss {
     requires javafx.web;
     requires java.sql;
     requires java.desktop;
+    requires java.mail;
 
 
     exports cz.vse.campuss.controllers;

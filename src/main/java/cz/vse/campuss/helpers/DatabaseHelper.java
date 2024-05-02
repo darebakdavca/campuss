@@ -121,10 +121,13 @@ public class DatabaseHelper {
      * @param typUmisteni Typ umístění
      * @param cisloUmisteni Číslo umístění
      */
-    public static void createHistorieEntry(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni, StavUlozeni stavUlozeni) {
+    public static int createHistorieEntry(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni, StavUlozeni stavUlozeni) {
+        int id = -1;
+
         String sql = "INSERT INTO Historie (jmeno_studenta, prijmeni_studenta, isic_studenta, satna_nazev, umisteni_typ, umisteni_cislo, stav, cas_zmeny_stavu, satnarka_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, jmenoStudenta); //jméno studenta
             pstmt.setString(2, prijmeniStudenta); //příjmení studenta
             pstmt.setString(3, isic); //isic studenta
@@ -144,18 +147,27 @@ public class DatabaseHelper {
                 pstmt.setString(7,"vyzvednuto");
             }
 
+            // získání aktuálního času
             Date date = new Date(System.currentTimeMillis());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String currentTime = sdf.format(date);
+
             pstmt.setString(8, currentTime); //čas změny stavu
 
             pstmt.setInt(9, 1); // id šatnářky - ještě není automatické
 
             pstmt.executeUpdate();
 
+            // získání id nového záznamu
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    id = generatedKeys.getInt(1);
+                }
+            }
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
+        return id;
     }
 
     /**
@@ -165,7 +177,7 @@ public class DatabaseHelper {
      * @param isic podle kterého se mají data Historie filtrovat
      * @return data Historie
      */
-    public static ObservableList<PolozkaHistorie> fetchHistorie(String isic) {
+    public static ObservableList<PolozkaHistorie> fetchHistorieAll(String isic) {
         ObservableList<PolozkaHistorie> data = FXCollections.observableArrayList();
         try {
             Connection conn = DatabaseHelper.getConnection();
@@ -186,6 +198,25 @@ public class DatabaseHelper {
             System.out.println("Database error: " + e.getMessage());
         }
         return data;
+    }
+
+
+
+    public static PolozkaHistorie fetchActiveUschovani(int id) {
+        PolozkaHistorie polozkaHistorie = null;
+        String sql = "SELECT * FROM Historie WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    polozkaHistorie = new PolozkaHistorie(rs.getInt("id"), rs.getString("jmeno_studenta"), rs.getString("prijmeni_studenta"), rs.getString("isic_studenta"), rs.getString("satna_nazev"), TypUmisteni.fromString(rs.getString("umisteni_typ")), rs.getInt("umisteni_cislo"), StavUlozeni.fromString(rs.getString("stav")), rs.getTimestamp("cas_zmeny_stavu").toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), rs.getInt("satnarka_id"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+        return polozkaHistorie;
     }
 
     /**
