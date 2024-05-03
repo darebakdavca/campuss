@@ -96,7 +96,8 @@ public class DatabaseHelper {
      * @param cislo Číslo umístění
      * @param typUmisteni Typ umístění
      */
-    public static void updateUmisteni(String isic, int cislo, TypUmisteni typUmisteni) {
+    public static Umisteni updateUmisteni(String isic, int cislo, TypUmisteni typUmisteni) {
+        Umisteni umisteni = null;
         String sql = "UPDATE Umisteni SET student = ? WHERE typ_umisteni = ? AND cislo = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -111,6 +112,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
+        return umisteni;
     }
 
     /**

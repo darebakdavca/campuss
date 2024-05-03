@@ -25,7 +25,7 @@ public class MailHelper {
      * @param htmlFilePath Cesta k HTML šabloně
      * @param polozkaHistorieList Záznamy v historii z jednoho potvrzení
      */
-    public static void sendEmail(String to, String subject, String htmlFilePath, List<PolozkaHistorie> polozkaHistorieList) {
+    public static void sendEmail(String to, String subject, String htmlFilePath, List<PolozkaHistorie> polozkaHistorieList) throws IOException {
 
         // získání kompletního HTML obsahu
         String htmlBody = getCompleteHtmlBody(htmlFilePath, polozkaHistorieList);
@@ -34,9 +34,6 @@ public class MailHelper {
         Properties config = new Properties();
         try (InputStream input = new FileInputStream("config.properties")) {
             config.load(input);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return;
         }
 
         // přiřazení autentizačních údajů
@@ -89,7 +86,7 @@ public class MailHelper {
      * @param polozkaHistorieList Záznam v historii
      * @return HTML obsah s doplněnými údaji
      */
-    private static String getCompleteHtmlBody(String htmlFilePath, List<PolozkaHistorie> polozkaHistorieList ) {
+    private static String getCompleteHtmlBody(String htmlFilePath, List<PolozkaHistorie> polozkaHistorieList) {
         // nastavení základních hodnot pro případ, že není záznam v historii
         String cisloVesak = "Oblečení neuloženo.";
         String cisloPodlaha = "Zavazadlo neuloženo.";

@@ -23,7 +23,6 @@ public class HtmlTemplateReader {
             }
             return content;
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
     }
