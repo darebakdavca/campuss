@@ -11,8 +11,9 @@ public class PolozkaHistorie {
     private final StavUlozeni stav;
     private final String casZmenyStavu;
     private final int satnarkaID;
+    private final int umisteniID;
 
-    public PolozkaHistorie(int id, String jmenoStudenta, String prijmeniStudenta, String isicStudenta, String satnaNazev, TypUmisteni umisteniTyp, int umisteniCislo, StavUlozeni stav, String casZmenyStavu, int satnarkaID) {
+    public PolozkaHistorie(int id, String jmenoStudenta, String prijmeniStudenta, String isicStudenta, String satnaNazev, TypUmisteni umisteniTyp, int umisteniCislo, StavUlozeni stav, String casZmenyStavu, int satnarkaID, int umisteniID) {
         this.id = id;
         this.jmenoStudenta = jmenoStudenta;
         this.prijmeniStudenta = prijmeniStudenta;
@@ -23,6 +24,7 @@ public class PolozkaHistorie {
         this.stav = stav;
         this.casZmenyStavu = casZmenyStavu;
         this.satnarkaID = satnarkaID;
+        this.umisteniID = umisteniID;
     }
 
     public int getId() {

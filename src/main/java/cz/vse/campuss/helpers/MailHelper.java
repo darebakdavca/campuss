@@ -91,6 +91,7 @@ public class MailHelper {
         String cisloVesak = "Oblečení neuloženo.";
         String cisloPodlaha = "Zavazadlo neuloženo.";
         String nazevSatny = null;
+
         // získání položek historie
         PolozkaHistorie polozkaHistorieVesak = polozkaHistorieList.getFirst();
         PolozkaHistorie polozkaHistoriePodlaha = polozkaHistorieList.get(1);
