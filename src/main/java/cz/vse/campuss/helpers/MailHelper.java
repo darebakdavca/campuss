@@ -1,11 +1,12 @@
 package cz.vse.campuss.helpers;
 
 import cz.vse.campuss.model.PolozkaHistorie;
-import cz.vse.campuss.model.TypUmisteni;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.internet.*;
 import javax.mail.*;
@@ -22,39 +23,12 @@ public class MailHelper {
      * @param to Adresa příjemce
      * @param subject Předmět emailu
      * @param htmlFilePath Cesta k HTML šabloně
-     * @param useSSL Použití SSL
-     * @param polozkaHistorie Záznam v historii
+     * @param polozkaHistorieList Záznamy v historii z jednoho potvrzení
      */
-    public static void sendEmail(String to, String subject, String htmlFilePath, boolean useSSL, PolozkaHistorie polozkaHistorie) {
+    public static void sendEmail(String to, String subject, String htmlFilePath, List<PolozkaHistorie> polozkaHistorieList) {
 
-        // nastavení základních hodnot pro případ, že není záznam v historii
-        String cisloVesak = "Oblečení neuloženo.";
-        String cisloPodlaha = "Zavazadlo neuloženo.";
-
-        // pokud se jedná o věšák
-        if (polozkaHistorie.getUmisteniTyp() == TypUmisteni.VESAK) {
-            cisloVesak = String.valueOf(polozkaHistorie.getUmisteniCislo());
-        }
-
-        // pokud se jedná o podlahu
-        if (polozkaHistorie.getUmisteniTyp() == TypUmisteni.PODLAHA){
-            cisloPodlaha = String.valueOf(polozkaHistorie.getUmisteniCislo());
-        }
-
-        // nastavení názvu šatny
-        String nazevSatny = polozkaHistorie.getSatnaNazev();
-
-
-        // nastavení mapování údajů
-        Map<String, String> replacements = Map.of(
-                "cisloVesak", cisloVesak,
-                "cisloPodlaha", cisloPodlaha,
-                "nazevSatny", nazevSatny
-        );
-
-        // načtení html obsahu i s doplněnými údaji
-        String htmlBody = HtmlTemplateReader.readHtmlTemplate(htmlFilePath, replacements);
-
+        // získání kompletního HTML obsahu
+        String htmlBody = getCompleteHtmlBody(htmlFilePath, polozkaHistorieList);
 
         // Načtení autentizačních údajů z konfiguračního souboru
         Properties config = new Properties();
@@ -72,23 +46,18 @@ public class MailHelper {
 
         // SMTP host a port
         String host = "smtp.seznam.cz";
-        int port = useSSL ? 465 : 587; // Use port 465 for SSL/TLS or 587 for STARTTL
-
+        int port = 465;
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", port);
 
-        if (useSSL) {
-            // SSL/TLS configurace
-            properties.put("mail.smtp.socketFactory.port", port);
-            properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            properties.put("mail.smtp.socketFactory.fallback", "false");
-        } else {
-            // STARTTLS configurace
-            properties.put("mail.smtp.starttls.enable", "true");
-            properties.put("mail.smtp.ssl.trust", host);
-        }
+
+        // SSL/TLS configurace
+        properties.put("mail.smtp.socketFactory.port", port);
+        properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.put("mail.smtp.socketFactory.fallback", "false");
+
 
         // Vytvoření session s novým autentikátorem
         Session session = Session.getInstance(properties, new Authenticator() {
@@ -112,4 +81,58 @@ public class MailHelper {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * Metoda pro nastavení mapování údajů do HTML šablony
+     * @param htmlFilePath Cesta k HTML šabloně
+     * @param polozkaHistorieList Záznam v historii
+     * @return HTML obsah s doplněnými údaji
+     */
+    private static String getCompleteHtmlBody(String htmlFilePath, List<PolozkaHistorie> polozkaHistorieList ) {
+        // nastavení základních hodnot pro případ, že není záznam v historii
+        String cisloVesak = "Oblečení neuloženo.";
+        String cisloPodlaha = "Zavazadlo neuloženo.";
+
+        // získání položek historie
+        PolozkaHistorie polozkaHistorieVesak = polozkaHistorieList.getFirst();
+        PolozkaHistorie polozkaHistoriePodlaha = polozkaHistorieList.get(1);
+
+        // nastavení čísla věšáku
+        if (polozkaHistorieVesak != null) {
+            cisloVesak = "č." + polozkaHistorieVesak.getUmisteniCislo();
+        }
+
+        // nastavení čísla podlahy
+        if (polozkaHistoriePodlaha != null) {
+            cisloPodlaha = "č." + polozkaHistoriePodlaha.getUmisteniCislo();
+        }
+
+        // nastavení názvu šatny
+        String nazevSatny = polozkaHistorieVesak.getSatnaNazev();
+
+
+        // nastavení mapování údajů
+        Map<String, String> replacements = Map.of(
+                "cisloVesak", cisloVesak,
+                "cisloPodlaha", cisloPodlaha,
+                "nazevSatny", nazevSatny
+        );
+
+        // načtení html obsahu i s doplněnými údaji
+        return HtmlTemplateReader.readHtmlTemplate(htmlFilePath, replacements);
+    }
+
+    /**
+     * Metoda pro získání položek historie pro odeslání emailu
+     * @param idVesak ID záznamu v historii pro uložení do vesaku
+     * @param idPodlaha ID záznamu v historii pro uložení na podlahu
+     * @return List záznamů v historii
+     */
+    public static List<PolozkaHistorie> getUschovaniInfo(int idVesak, int idPodlaha) {
+        PolozkaHistorie polozkaHistorieVesak = DatabaseHelper.fetchActiveUschovani(idVesak);
+        PolozkaHistorie polozkaHistoriePodlaha = DatabaseHelper.fetchActiveUschovani(idPodlaha);
+        return Arrays.asList(polozkaHistorieVesak, polozkaHistoriePodlaha);
+    }
+
 }

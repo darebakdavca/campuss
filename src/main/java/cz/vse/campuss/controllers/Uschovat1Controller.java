@@ -22,10 +22,10 @@ import javafx.stage.Stage;
 
 import cz.vse.campuss.helpers.StageManager;
 import cz.vse.campuss.helpers.UserDataContainer;
-import cz.vse.campuss.helpers.NodeHelper;
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.DatabaseHelper;
 
+import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
 
 
@@ -34,10 +34,10 @@ import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
  */
 public class Uschovat1Controller {
 
-    public HBox ovladaciPrvky;
     private Stage stage;
     private UserDataContainer userDataContainer;
 
+    public HBox ovladaciPrvky;
     public TextField vstupISIC;
     public Button tlacitkoOdeslat;
     public Text textPotvrzeni;
@@ -58,8 +58,9 @@ public class Uschovat1Controller {
         // nastavení akce při stisku enter klávesy
         vstupISIC.setOnAction(this::odeslatISIC);
         // plynulé zobrazení ovládacích prvků
-        NodeHelper.fadeIn(hlavniPrvky);
-        NodeHelper.fadeIn(zadavaniISIC);
+        fadeIn(hlavniPrvky);
+        fadeIn(zadavaniISIC);
+        fadeIn(ovladaciPrvky);
         userDataContainer = new UserDataContainer(false, false, null);
         Platform.runLater(() -> stage = (Stage) hlavniPrvky.getScene().getWindow());
     }

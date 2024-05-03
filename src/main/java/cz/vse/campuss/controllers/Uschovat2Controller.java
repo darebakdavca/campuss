@@ -87,6 +87,8 @@ public class Uschovat2Controller {
     @FXML
     public void potvrditUschovaniKlik() throws IOException {
         Student student = userDataContainer.getStudent();
+        int idVesak = -1;
+        int idPodlaha = -1;
         // Uložení věcí do databáze když je zaškrtnutý pouze checkbox oblečení
         if (userDataContainer.isVesakChecked()) {
             if (student == null) {
@@ -94,10 +96,10 @@ public class Uschovat2Controller {
                 System.out.println("No student found");
                 return;
             }
+            // aktualizace umístění v databázi - přiřazení isic k číslu umístění
             DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloVesaku.getText()), TypUmisteni.VESAK);
-            int idVesak = DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.VESAK, Integer.parseInt(vystupCisloVesaku.getText()), StavUlozeni.USCHOVANO);
-            PolozkaHistorie polozkaHistorie = DatabaseHelper.fetchActiveUschovani(idVesak);
-            MailHelper.sendEmail(student.getEmail(), "Uschování věcí", "src/main/resources/templates/potvrzeni_uschovani.html", true, polozkaHistorie);
+            // vytvoření záznamu v historii a vrácení čísla id
+            idVesak = DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.VESAK, Integer.parseInt(vystupCisloVesaku.getText()), StavUlozeni.USCHOVANO);
         }
         // Uložení věcí do databáze když je zaškrtnutý pouze checkbox zavazadlo
         if (userDataContainer.isPodlahaChecked()) {
@@ -107,10 +109,10 @@ public class Uschovat2Controller {
                 return;
             }
             DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloPodlaha.getText()), TypUmisteni.PODLAHA);
-            int idPodlaha = DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()), StavUlozeni.USCHOVANO);
-            PolozkaHistorie polozkaHistorie = DatabaseHelper.fetchActiveUschovani(idPodlaha);
-            MailHelper.sendEmail(student.getEmail(), "Uschování věcí", "src/main/resources/templates/potvrzeni_uschovani.html", true, polozkaHistorie);
+            idPodlaha = DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()), StavUlozeni.USCHOVANO);
         }
+
+        MailHelper.sendEmail(student.getEmail(), "Uschování věcí", "src/main/resources/templates/potvrzeni_uschovani.html", MailHelper.getUschovaniInfo(idVesak, idPodlaha));
 
         PotrvzeniController.text = "Uschování proběhlo úspěšně!";
         PotrvzeniController.textButton = "Uschovat další věc";
