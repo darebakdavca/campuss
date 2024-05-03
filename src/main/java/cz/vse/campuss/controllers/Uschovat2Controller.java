@@ -114,6 +114,8 @@ public class Uschovat2Controller {
 
         MailHelper.sendEmail(student.getEmail(), "Uschování věcí", "src/main/resources/templates/potvrzeni_uschovani.html", MailHelper.getUschovaniInfo(idVesak, idPodlaha));
 
+        //TODO: přidání načítací obrazovky při odesílání emailu
+
         PotrvzeniController.text = "Uschování proběhlo úspěšně!";
         PotrvzeniController.textButton = "Uschovat další věc";
         StageManager.switchFXML(rootPane, FXMLView.POTVRZENI);

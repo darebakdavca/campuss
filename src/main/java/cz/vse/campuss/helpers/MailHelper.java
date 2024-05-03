@@ -79,6 +79,7 @@ public class MailHelper {
         }
     }
 
+//TODO: načítání informací o umístění z tabulky Umístění, nikoliv z PolozkaHistorie
 
     /**
      * Metoda pro nastavení mapování údajů do HTML šablony

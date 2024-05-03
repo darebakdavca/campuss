@@ -35,8 +35,9 @@ public class VolbaSatnyController {
         fadeIn(ovladaciPrvky);
     }
 
-//TODO: umožnit předávání informace o výběru budovy šatny do dalších obrazovek
-
+    /**
+     * Metoda pro pokračování na domovskou obrazovku dle a uložení aktivní šatny dle výběru
+     */
     public void pokracovatKlik(MouseEvent mouseEvent) throws IOException {
         if (italskaButton.isSelected()) {
             SatnaSelection.getInstance().setSelectedSatna("Italská budova");

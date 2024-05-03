@@ -132,17 +132,22 @@ public class VyzvednoutController {
     public void potvrditVyzvednutiKlik(MouseEvent mouseEvent) throws IOException {
         boolean vesak = blokInformaci.getChildren().contains(boxVesak);
         boolean zavazdlo = blokInformaci.getChildren().contains(boxZavazadlo);
+        Student student = DatabaseHelper.fetchStudentByISIC(isicVstup.getText());
 
-        if (vesak && zavazdlo) {
-            historieEntryQueryVyzvednuto(TypUmisteni.VESAK);
-            historieEntryQueryVyzvednuto(TypUmisteni.PODLAHA);
-        } else if (vesak) {
-            historieEntryQueryVyzvednuto(TypUmisteni.VESAK);
-        } else if (zavazdlo) {
-            historieEntryQueryVyzvednuto(TypUmisteni.PODLAHA);
+        int idVesak = -1;
+        int idPodlaha = -1;
+
+        if (vesak) {
+            idVesak = historieEntryQueryVyzvednuto(student, TypUmisteni.VESAK);
+        }
+
+        if (zavazdlo) {
+            idPodlaha = historieEntryQueryVyzvednuto(student, TypUmisteni.PODLAHA);
         }
 
         String isic = isicVstup.getText();
+
+        MailHelper.sendEmail(student.getEmail(), "Vyzvednutí věcí", "src/main/resources/templates/potvrzeni_vyzvednuti.html", MailHelper.getUschovaniInfo(idVesak, idPodlaha));
 
         DatabaseHelper.removeLocationFromUmisteniByISIC(isic);
 
@@ -155,10 +160,10 @@ public class VyzvednoutController {
     /**
      * Sestaví a odešle dotaz pro DatabaseHelper o vytvoření nového záznamu o vyzvednutí v historii
      *
-     * @param typUmisteni
+     * @param student Student, který vyzvedl věc
+     * @param typUmisteni Typ umístění, ze kterého se věc vyzvedla
      */
-    private void historieEntryQueryVyzvednuto(TypUmisteni typUmisteni) {
-        Student student = DatabaseHelper.fetchStudentByISIC(isicVstup.getText());
-        DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), typUmisteni, DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), typUmisteni), StavUlozeni.VYZVEDNUTO);
+    private int historieEntryQueryVyzvednuto(Student student, TypUmisteni typUmisteni) {
+        return DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), typUmisteni, DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), typUmisteni), StavUlozeni.VYZVEDNUTO);
     }
 }
