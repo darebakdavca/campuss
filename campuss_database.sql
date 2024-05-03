@@ -77,9 +77,16 @@ create table if not exists "Historie"
     satnarka_id       integer  not null
         constraint Historie_satnarka_id_fk
             references Satnarka,
+
+    umisteni_id       integer  not null
+        constraint Historie_umisteni_id_fk
+            references Umisteni,
     constraint check_stav
         check (Historie.stav = 'uschováno' OR Historie.stav = 'vyzvednuto'),
     constraint check_umisteni_typ
         check (Historie.umisteni_typ = 'věšák' OR Historie.umisteni_typ = 'podlaha')
+
+
+
 );
 COMMIT;

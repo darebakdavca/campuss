@@ -90,7 +90,7 @@ public class MailHelper {
         // nastavení základních hodnot pro případ, že není záznam v historii
         String cisloVesak = "Oblečení neuloženo.";
         String cisloPodlaha = "Zavazadlo neuloženo.";
-
+        String nazevSatny = null;
         // získání položek historie
         PolozkaHistorie polozkaHistorieVesak = polozkaHistorieList.getFirst();
         PolozkaHistorie polozkaHistoriePodlaha = polozkaHistorieList.get(1);
@@ -98,15 +98,15 @@ public class MailHelper {
         // nastavení čísla věšáku
         if (polozkaHistorieVesak != null) {
             cisloVesak = "č." + polozkaHistorieVesak.getUmisteniCislo();
+            nazevSatny = polozkaHistorieVesak.getSatnaNazev();
         }
 
         // nastavení čísla podlahy
         if (polozkaHistoriePodlaha != null) {
             cisloPodlaha = "č." + polozkaHistoriePodlaha.getUmisteniCislo();
+            nazevSatny = polozkaHistoriePodlaha.getSatnaNazev();
         }
 
-        // nastavení názvu šatny
-        String nazevSatny = polozkaHistorieVesak.getSatnaNazev();
 
 
         // nastavení mapování údajů

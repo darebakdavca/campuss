@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,8 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.geometry.Insets?>
-<AnchorPane fx:id="rootPane" prefWidth="1440.0" prefHeight="850.0" fx:controller="cz.vse.campuss.controllers.StudentController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.StudentController">
       <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Image url="@pictures/campuss.png" />
       </ImageView>
@@ -19,13 +19,13 @@
             <Font name="System Bold" size="64.0" />
          </font>
       </Text>
-   <AnchorPane style="-fx-background-color: #e4e4e4; -fx-background-radius: 10; -fx-border-radius: 10" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="230.0" AnchorPane.bottomAnchor="0.0">
-      <Text layoutX="115.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Věci máš uschované v:"  AnchorPane.topAnchor="0.0">
+   <AnchorPane style="-fx-background-color: #e4e4e4; -fx-background-radius: 10; -fx-border-radius: 10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="230.0">
+      <Text layoutX="115.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Věci máš uschované v:" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="40.0" />
          </font>
       </Text>
-      <VBox layoutX="271.0" layoutY="432.0" spacing="40.0" AnchorPane.topAnchor="90.0" AnchorPane.leftAnchor="300.0">
+      <VBox layoutX="271.0" layoutY="432.0" spacing="40.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="90.0">
          <HBox spacing="20.0">
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Šatna:">
                <font>
@@ -75,7 +75,7 @@
             </TextField>
          </HBox>
          <HBox spacing="20.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas uzavření šatny:">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas do uzavření šatny:">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
