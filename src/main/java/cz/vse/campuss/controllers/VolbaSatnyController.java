@@ -7,6 +7,7 @@ import cz.vse.campuss.helpers.StageManager;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -32,6 +33,9 @@ public class VolbaSatnyController {
 
     @FXML
     private void initialize() {
+        ToggleGroup group = new ToggleGroup();
+        italskaButton.setToggleGroup(group);
+        novaButton.setToggleGroup(group);
         fadeIn(ovladaciPrvky);
     }
 
