@@ -4,10 +4,11 @@ import cz.vse.campuss.helpers.DatabaseHelper;
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.StageManager;
 import cz.vse.campuss.model.PolozkaHistorie;
+import cz.vse.campuss.model.Satna;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
-import cz.vse.campuss.model.Umisteni;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +22,9 @@ import java.awt.event.ActionListener;
 import javafx.application.Platform;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+
+
+
 
 
 
@@ -39,14 +43,13 @@ public class StudentController {
     @FXML
     public AnchorPane rootPane;
 
+    private String isic;
+
     private Timer timer;
 
-    // Get student from database
-    Student student = DatabaseHelper.fetchStudentByISIC("S420300843379J");
     // Initialize method to set default values and initialize database connection
     @FXML
     private void initialize() {
-        fetchData();
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,20 +59,25 @@ public class StudentController {
         timer.start(); // Start the timer
     }
 
+    // Method to start the countdown
     private void startCountdown() {
         LocalTime now = LocalTime.now();
         LocalDate today = LocalDate.now();
 
-        LocalTime closingTime = LocalTime.of(19, 0); // 7 pm
+        LocalTime closingTime = LocalTime.of(19, 0); // closing at 9 pm
+
+        // Check if closing time is before the current time
+        if (now.isAfter(closingTime)) {
+            Platform.runLater(() -> closingOut.setText("zavřeno"));
+            return; // Exit the method
+        }
 
         long millisecondsUntilClosing = now.until(closingTime, ChronoUnit.MILLIS);
-
 
         if (today.getDayOfWeek() == DayOfWeek.SATURDAY || today.getDayOfWeek() == DayOfWeek.SUNDAY) {
             // Adjust closing time to Monday
             today = today.plusDays(1).with(DayOfWeek.MONDAY);
         }
-
 
         String countdownText;
 
@@ -97,23 +105,32 @@ public class StudentController {
     // Method to fetch data from the database
     @FXML
     public void fetchData() {
+        // Get student from database
+        Student student = DatabaseHelper.fetchStudentByISIC(isic);
 
         if (student != null) {
+
             int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK);
             int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA);
-            satnaOut.setText("");
-            obleceniOut.setText(String.valueOf(vesakLocation));
-            zavazadlaOut.setText(String.valueOf(podlahaLocation));
-            timeOut.setText("");
 
+            String satna = DatabaseHelper.getSatnaFromISIC(student.getIsic());
+            if (vesakLocation != -1) {
+                obleceniOut.setText(String.valueOf(vesakLocation));
+            } else {
+                obleceniOut.setText("Neuloženo");
+            }
 
+            if (podlahaLocation != -1) {
+                zavazadlaOut.setText(String.valueOf(podlahaLocation));
+            } else {
+                zavazadlaOut.setText("Neuloženo");
+            }
 
+            satnaOut.setText(satna);
+
+        } else {
+            throw new RuntimeException("Student is null - this err should not occur");
         }
-        else {
-            RuntimeException e;
-            e = new RuntimeException("Student not found");
-        }
-
     }
 
     // Method to navigate back to the home screen
@@ -123,5 +140,14 @@ public class StudentController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setISIC(String isic) {
+        this.isic = isic;
+        fetchData();
+    }
+
+    public void logoutKlik(MouseEvent mouseEvent) throws IOException {
+        StageManager.switchFXML(rootPane, FXMLView.PRIHLASOVANI);
     }
 }

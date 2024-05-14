@@ -224,6 +224,11 @@ public class DatabaseHelper {
         return polozkaHistorie;
     }
 
+
+//
+
+
+
     /**
      * Metoda pro získání umístění studenta na základě jeho ISIC karty a typu umístění
      * @param isic ISIC karta studenta
@@ -252,6 +257,65 @@ public class DatabaseHelper {
         return locationNumber;
     }
 
+
+
+    public static String getSatnaFromISIC(String isic_studenta) {
+        String satnaNazev = null;
+        String sql = "SELECT satna_nazev FROM Historie WHERE isic_studenta = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, isic_studenta);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    satnaNazev = rs.getString("satna_nazev");
+                    return satnaNazev;
+                } else {
+                    System.out.println("No records found for ISIC: " + isic_studenta);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+        return satnaNazev;
+    }
+
+    public static String getISICByEmail(String email) {
+        String isic = null;
+        String sql = "SELECT ISIC FROM Student WHERE email = ?";
+        try (Connection conn = getConnection(); // Use the centralized connection method
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, email);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    isic = rs.getString("ISIC");
+                } else {
+                    System.out.println("No ISIC found for the email: " + email);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+        return isic;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Metoda pro odstranění isic studenta u umístění na základě jeho ISIC karty
      * @param isic ISIC karta studenta
@@ -267,6 +331,8 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
+
+
         }
     }
 }

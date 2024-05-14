@@ -13,6 +13,12 @@ public enum FXMLView {
             return getFXMLPath("prihlasovani.fxml");
         }
     },
+    PRIHLASOVANI2 {
+        @Override
+        String getFXMLResource() {
+            return getFXMLPath("prihlasovani2.fxml");
+        }
+    },
     HISTORIE {
         @Override
         String getFXMLResource() {

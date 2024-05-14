@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" prefHeight="850.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.StudentLoginController">
+
+    <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox alignment="CENTER" spacing="20.0">
+            <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@pictures/campuss.png" />
+            </ImageView>
+            <Text style="-fx-font-size: 50px; -fx-font-weight: bold;" text="Přihlášení do systému" />
+            <HBox alignment="CENTER" spacing="20.0">
+            <children>
+               <TextField fx:id="emailTextField" promptText="Zadejte email" />
+               <Button mnemonicParsing="false" onMouseClicked="#odeslatLogin" text="Odeslat" />
+            </children>
+            </HBox>
+            <Text fx:id="errorText" style="-fx-font-size: 25; -fx-fill: red" />
+        </VBox>
+    </HBox>
+    <ImageView fitWidth="90.0" onMouseClicked="#domuKlik" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <Image url="@pictures/home.png" />
+    </ImageView>
+
+</AnchorPane>

@@ -37,7 +37,7 @@ public class PrihlasovaniController {
     public void prihlaseniKlik(MouseEvent mouseEvent) throws IOException {
 
         if (rButtonRole2.isSelected()) {
-            StageManager.switchFXML(rootPane, FXMLView.STUDENT);
+            StageManager.switchFXML(rootPane, FXMLView.PRIHLASOVANI2);
         } else if (rButtonRole1.isSelected()) {
             StageManager.switchFXML(rootPane, FXMLView.VOLBA_SATNY);
         } else {

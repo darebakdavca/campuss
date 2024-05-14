@@ -75,6 +75,7 @@ public class MailHelper {
             Transport.send(message);
             System.out.println("Email sent successfully!");
         } catch (MessagingException e) {
+            System.err.println("Error sending email!");
             e.printStackTrace();
         }
     }
