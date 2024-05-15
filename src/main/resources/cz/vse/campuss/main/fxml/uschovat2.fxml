@@ -12,6 +12,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.control.ProgressIndicator?>
 <AnchorPane fx:id="rootPane" prefWidth="1440.0" prefHeight="850.0" fx:controller="cz.vse.campuss.controllers.Uschovat2Controller" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
       <ImageView style="-fx-cursor: hand"  fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Image url="@pictures/campuss.png" />
@@ -24,7 +25,7 @@
       <ImageView style="-fx-cursor: hand" onMouseClicked="#domuKlik" fitHeight="150.0" fitWidth="150.0" layoutX="846.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <Image url="@pictures/home.png" />
       </ImageView>
-    <VBox alignment="CENTER" spacing="30.0" AnchorPane.topAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+    <VBox fx:id="hlavniPrvky" alignment="CENTER" spacing="30.0" AnchorPane.topAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
         <HBox fx:id="oblastBoxy" spacing="70.0" alignment="CENTER" prefWidth="1100.0">
             <VBox fx:id="boxVesak" spacing="20.0"  alignment="CENTER">
                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Oblečení">
@@ -65,8 +66,9 @@
             </Button>
         </HBox>
     </VBox>
-
-
+    <HBox fx:id="oblastProgress" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" >
+        <ProgressIndicator fx:id="progressIndicator" minWidth="300.0" minHeight="300.0" style="-fx-progress-color: #b1b1b1;"/>
+    </HBox>
     <padding>
          <Insets top="20.0" left="20.0" right="20.0" bottom="20.0" />
     </padding>

@@ -31,7 +31,7 @@
         </Button>
     </HBox>
 
-    <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+    <HBox fx:id="oblastTextPotvrzeni" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
         <Pane>
             <Text fx:id="textPotvrzeni" style="-fx-fill: #90EE90">
                 <font>
@@ -41,8 +41,8 @@
         </Pane>
     </HBox>
 
-    <VBox alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
-    <HBox fx:id="blokInformaci" alignment="CENTER" spacing="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0">
+    <VBox fx:id="hlavniPrvky" alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+        <HBox fx:id="blokInformaci" alignment="CENTER" spacing="70.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0">
               <VBox fx:id="boxVesak" alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Oblečení">
                       <font>
@@ -75,7 +75,7 @@
                   </Text>
                   <ImageView fx:id="studentFoto" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true"/>
               </VBox>
-      </HBox>
+        </HBox>
         <HBox fx:id="ovladaciPrvky" alignment="CENTER" spacing="60.0" AnchorPane.bottomAnchor="30.0">
             <Button fx:id="tlacitkoPotvrdit" mnemonicParsing="false" onMouseClicked="#potvrditVyzvednutiKlik" prefWidth="800.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2; -fx-cursor: hand;" text="Potvrdit vyzvednutí" HBox.hgrow="ALWAYS">
                 <font>
@@ -89,6 +89,9 @@
             </Button>
         </HBox>
     </VBox>
+    <HBox fx:id="oblastProgress" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ProgressIndicator fx:id="progressIndicator" minWidth="300.0" minHeight="300.0" style="-fx-progress-color: #b1b1b1;"/>
+    </HBox>
     <padding>
          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>

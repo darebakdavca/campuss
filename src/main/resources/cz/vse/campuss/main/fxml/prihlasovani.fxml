@@ -40,5 +40,4 @@
             <Text fx:id="errorText" visible="false" text="Zaškrtněte roli!" style="-fx-font-size: 25; -fx-fill: red"/>
         </VBox>
     </HBox>
-
 </AnchorPane>
