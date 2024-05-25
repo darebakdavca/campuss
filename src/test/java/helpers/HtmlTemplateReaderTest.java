@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import static org.junit.Assert.*;
 
+/**
+ * Testovací třída pro HtmlTemplateReader
+ */
 public class HtmlTemplateReaderTest {
 
     private String testFilePath = Paths.get("src/test/resources/test.html").toString();
@@ -25,12 +28,12 @@ public class HtmlTemplateReaderTest {
         String expectedContent = "<html><head></head><body>Jméno: David, Datum: 25/05/2024</body></html>";
         String content = HtmlTemplateReader.readHtmlTemplate(testFilePath, values);
 
-        assertEquals("The content should match expected with placeholders replaced", expectedContent, content);
+        assertEquals("Obsah by měl být shodný s očekávaným obsahem", expectedContent, content);
     }
 
     @Test
     public void testFileNotFound() {
         String content = HtmlTemplateReader.readHtmlTemplate("nonexistent/path.html", new HashMap<>());
-        assertNull("Content should be null if file is not found", content);
+        assertNull("Obsah by měl být null nebo nenalezen", content);
     }
 }

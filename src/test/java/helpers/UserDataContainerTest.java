@@ -7,6 +7,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
+/**
+ * Testovací třída pro UserDataContainer
+ */
 public class UserDataContainerTest {
 
     private UserDataContainer container;
