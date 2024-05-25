@@ -1,5 +1,9 @@
 package cz.vse.campuss.helpers;
 
+
+/**
+ * Třída pro uchování vybrané šatny
+ */
 public class SatnaSelection {
     private static SatnaSelection instance;
     private String selectedSatna;
