@@ -52,7 +52,7 @@ public class PotrvzeniController {
             StageManager.switchFXML(rootPane, FXMLView.USCHOVAT1);
         }
         else {
-            StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT);
+            StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT1);
         }
     }
 }

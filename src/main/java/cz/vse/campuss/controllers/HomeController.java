@@ -63,7 +63,7 @@ public class HomeController {
      */
     @FXML
     public void vyzvednoutKlik(MouseEvent mouseEvent) throws IOException {
-        StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT);
+        StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT1);
     }
 
     public void logoutKlik(MouseEvent mouseEvent) throws IOException {

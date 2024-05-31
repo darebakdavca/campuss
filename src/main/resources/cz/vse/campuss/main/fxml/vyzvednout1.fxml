@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.shape.Line?>
+<AnchorPane fx:id="rootPane" prefWidth="1440.0" prefHeight="850.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.Vyzvednout1Controller">
+    <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Image url="@pictures/campuss.png" />
+    </ImageView>
+    <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="846.0" layoutY="14.0" onMouseClicked="#domuKlik" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Image url="@pictures/home.png" />
+    </ImageView>
+    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vyzvednutí" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="120.0">
+        <font>
+            <Font name="System Bold" size="64.0" />
+        </font>
+    </Text>
+    <HBox fx:id="zadavaniISIC" alignment="CENTER" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+        <TextField fx:id="vstupISIC" prefHeight="60.0" HBox.hgrow="ALWAYS" text="S420300843379J" promptText="Vyhledat ISIC...">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </TextField>
+        <Button fx:id="tlacitkoOdeslat" mnemonicParsing="false" onAction="#odeslatISIC" prefHeight="60.0" prefWidth="149.0" style="-fx-background-color: #90EE90; -fx-cursor: hand" text="Odeslat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Button>
+    </HBox>
+
+    <HBox fx:id="oblastTextPotvrzeni" alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+        <Pane>
+            <Text fx:id="textPotvrzeni" style="-fx-fill: #90EE90">
+                <font>
+                    <Font size="25.0" />
+                </font>
+            </Text>
+        </Pane>
+    </HBox>
+
+    <VBox fx:id="hlavniPrvky" alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+        <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0">
+            <VBox spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300" AnchorPane.bottomAnchor="0.0" alignment="CENTER">
+                <Pane onMouseClicked="#checkBoxObleceniKlik">
+                    <CheckBox fx:id="checkBoxObleceni"   disable="true"  mnemonicParsing="false" prefWidth="600.0" text="Oblečení">
+                        <font>
+                            <Font size="80.0" />
+                        </font>
+                    </CheckBox>
+                </Pane>
+                <Line fx:id="checkBoxLine" style="-fx-stroke: black; -fx-stroke-width: 1;" startX="-20.0" endX="500.0" />
+                <Pane onMouseClicked="#checkboxZavazadloKlik">
+                    <CheckBox fx:id="checkBoxZavazadlo"   disable="true" mnemonicParsing="false" prefWidth="600.0" text="Zavazadlo">
+                        <font>
+                            <Font size="80.0" />
+                        </font>
+                    </CheckBox>
+                </Pane>
+            </VBox>
+        </HBox>
+        <HBox alignment="CENTER" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0">
+            <StackPane>
+                <Text fx:id="textKontrolaZaskrtnuti" opacity="0.0" style="-fx-fill: #FF6347;" text="Musíte zaškrtnout alespoň jednu možnost.">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Text>
+            </StackPane>
+        </HBox>
+    </VBox>
+    <HBox fx:id="ovladaciPrvky" alignment="CENTER" spacing="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.leftAnchor="0.0" >
+        <Button fx:id="tlacitkoPotvrdit" mnemonicParsing="false" onMouseClicked="#zobrazitPoziceKlik" prefWidth="800.0" style="-fx-background-color: D9D9D9; -fx-background-radius: 30; -fx-border-color: #90EE90; -fx-border-radius: 30; -fx-border-width: 2; -fx-cursor: hand;" text="Zobrazit pozice pro vyzvednutí" HBox.hgrow="ALWAYS">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Button>
+        <Button mnemonicParsing="false" onMouseClicked="#domuKlik" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand" text="Zrušit">
+            <font>
+                <Font size="50.0" />
+            </font>
+        </Button>
+    </HBox>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</AnchorPane>

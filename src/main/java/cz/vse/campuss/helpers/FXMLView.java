@@ -49,10 +49,15 @@ public enum FXMLView {
             return getFXMLPath("uschovat2.fxml");
         }
     },
-    VYZVEDNOUT {
+
+    VYZVEDNOUT1 {
+        @Override
+        public String getFXMLResource() { return getFXMLPath("vyzvednout1.fxml"); }
+    },
+    VYZVEDNOUT2 {
         @Override
         public String getFXMLResource() {
-            return getFXMLPath("vyzvednout.fxml");
+            return getFXMLPath("vyzvednout2.fxml");
         }
     },
     VOLBA_SATNY {
