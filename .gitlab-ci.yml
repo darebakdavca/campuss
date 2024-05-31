@@ -1,14 +1,23 @@
+variables:
+  JAVAFX_PLATFORM: "linux"  # Default, assuming most CI runners are Linux-based
+
 image: maven:3.9-eclipse-temurin-21
 
+stages:
+  - build
+  - test
+
 testovani:
+  stage: test
   script:
-    - "mvn test"
+    - "mvn test -Djavafx.platform=$JAVAFX_PLATFORM"
   only:
     - develop
 
 sestaveni:
+  stage: build
   script:
-    - "mvn javafx:jlink -B"
+    - "mvn javafx:jlink -Djavafx.platform=$JAVAFX_PLATFORM -B"
   artifacts:
     paths:
       - "target/*.zip"
