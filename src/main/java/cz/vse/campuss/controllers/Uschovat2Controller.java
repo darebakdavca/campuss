@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import cz.vse.campuss.helpers.*;
 import cz.vse.campuss.model.*;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressIndicator;
@@ -24,7 +23,6 @@ public class Uschovat2Controller {
 
     // Stav checkboxů
     private UserDataContainer userDataContainer;
-    private Stage stage;
 
     // FXML elementy
     public VBox boxZavazadlo;
@@ -44,13 +42,16 @@ public class Uschovat2Controller {
      */
     @FXML
     private void initialize() {
+        // skrytí nepotřebných prvků
         boxZavazadlo.setVisible(false);
         boxVesak.setVisible(false);
         deliciCara.setVisible(false);
+        // zobrazení ovládacích prvků
         fadeIn(ovladaciPrvky);
-        // získání stage a stavu studenta
-        Platform.runLater(() -> stage = (Stage) ovladaciPrvky.getScene().getWindow());
+        // skrytí progress baru
         rootPane.getChildren().remove(oblastProgress);
+        // získání dat z předchozí obrazovky
+        initData(UserDataContainer.getInstance()) ;
     }
 
     /**

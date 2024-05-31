@@ -4,7 +4,6 @@ import cz.vse.campuss.helpers.*;
 import cz.vse.campuss.model.StavUlozeni;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,7 +15,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -24,12 +22,15 @@ import java.io.IOException;
 
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
+
+/**
+ * Kontrolér pro obrazovku vyzvednout2.fxml
+ */
 public class Vyzvednout2Controller {
-
-
+    // Student, který vyzvedává věci
     private Student student;
-    private Stage stage;
 
+    // FXML elementy
     public AnchorPane rootPane;
     public VBox boxZavazadlo;
     public VBox boxVesak;
@@ -52,13 +53,18 @@ public class Vyzvednout2Controller {
      */
     @FXML
     private void initialize() {
+        // skrytí nepotřebných prvků
         boxZavazadlo.setVisible(false);
         boxVesak.setVisible(false);
+        // nastavení prázdného obrázku
         studentFoto.setImage(null);
+        // zobrazení ovládacích prvků a bloku informací
         fadeIn(ovladaciPrvky);
         fadeIn(blokInformaci);
-        Platform.runLater(() -> stage = (Stage) ovladaciPrvky.getScene().getWindow());
+        // skrytí progress baru
         rootPane.getChildren().remove(oblastProgress);
+        // získání dat z předchozí obrazovky
+        initData(UserDataContainer.getInstance());
     }
 
     /**

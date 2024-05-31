@@ -6,14 +6,10 @@ import cz.vse.campuss.helpers.StageManager;
 import cz.vse.campuss.helpers.UserDataContainer;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,19 +17,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
 
+/**
+ * Kontrolér pro obrazovku vyzvednout1.fxml
+ */
 public class Vyzvednout1Controller {
     private UserDataContainer userDataContainer;
 
     public HBox zadavaniISIC;
-    private Stage stage;
 
     public AnchorPane rootPane;
     public HBox ovladaciPrvky;
@@ -57,15 +53,16 @@ public class Vyzvednout1Controller {
      */
     @FXML
     private void initialize() {
-        rootPane.getChildren().remove(oblastProgress);
         // nastavení akce při stisku enter klávesy
         vstupISIC.setOnAction(this::odeslatISIC);
         // plynulé zobrazení ovládacích prvků
         fadeIn(hlavniPrvky);
         fadeIn(zadavaniISIC);
         fadeIn(ovladaciPrvky);
-        userDataContainer = new UserDataContainer(false, false, null);
-        Platform.runLater(() -> stage = (Stage) hlavniPrvky.getScene().getWindow());
+        // schování progress bar
+        rootPane.getChildren().remove(oblastProgress);
+        // získání dat z předchozí obrazovky
+        userDataContainer = UserDataContainer.getInstance();
     }
 
 
@@ -80,7 +77,6 @@ public class Vyzvednout1Controller {
 
         // uložení studenta do aktuální scény
         userDataContainer.setStudent(student);
-        stage.getScene().setUserData(userDataContainer);
 
         // pokud student nebyl nalezen, zobrazí se chybová hláška
         if (student == null) {
@@ -119,7 +115,7 @@ public class Vyzvednout1Controller {
      * Metoda pro zobrazení obrazovky pro ukázání pozic
      */
     @FXML
-    public void zobrazitPoziceKlik() {
+    public void zobrazitPoziceKlik() throws IOException {
         // kontrola zda je zaškrtnutý alespoň jeden z obou checkboxů
         if (!checkBoxZavazadlo.isSelected() && !checkBoxObleceni.isSelected()) {
             textKontrolaZaskrtnuti.setText("Pro zobrazení čísel umístění musíte zaškrtnout alespoň jedno pole.");
@@ -130,29 +126,8 @@ public class Vyzvednout1Controller {
             // uložení stavu checkboxů
             userDataContainer.setPodlahaChecked(checkBoxZavazadlo.isSelected());
             userDataContainer.setVesakChecked(checkBoxObleceni.isSelected());
-            // uložení stavu checkboxů do aktuální scény
-            stage.getScene().setUserData(userDataContainer);
-            // zobrazení nové scény
-            try {
-                // načtení FXML souboru
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(new URL("file:src/main/resources/cz/vse/campuss/main/fxml/vyzvednout2.fxml"));
-                // načtení nové scény
-                Scene scene = new Scene(loader.load());
 
-                // nastavení scény do stage
-                stage.setScene(scene);
-                stage.setTitle("Campuss");
-                // získání controlleru nové scény
-                Vyzvednout2Controller controller = loader.getController();
-                // inicializace dat nové scény
-                controller.initData(userDataContainer);
-                // zobrazení stage
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT2);
         }
     }
 

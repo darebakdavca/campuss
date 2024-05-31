@@ -1,15 +1,11 @@
 package cz.vse.campuss.controllers;
 
 import java.io.IOException;
-import java.net.URL;
 
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -18,7 +14,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import cz.vse.campuss.helpers.StageManager;
 import cz.vse.campuss.helpers.UserDataContainer;
@@ -33,10 +28,10 @@ import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
  * Kontrolér pro obrazovku uschovat1.fxml
  */
 public class Uschovat1Controller {
-
-    private Stage stage;
+    // userDataContainer pro ukládání dat
     private UserDataContainer userDataContainer;
 
+    // FXML elementy
     public HBox ovladaciPrvky;
     public TextField vstupISIC;
     public Button tlacitkoOdeslat;
@@ -61,8 +56,8 @@ public class Uschovat1Controller {
         fadeIn(hlavniPrvky);
         fadeIn(zadavaniISIC);
         fadeIn(ovladaciPrvky);
-        userDataContainer = new UserDataContainer(false, false, null);
-        Platform.runLater(() -> stage = (Stage) hlavniPrvky.getScene().getWindow());
+        // získání instance userDataContaineru
+        userDataContainer = UserDataContainer.getInstance();
     }
 
     /**
@@ -77,7 +72,7 @@ public class Uschovat1Controller {
      * Metoda pro zobrazení obrazovky pro ukázání pozic
      */
     @FXML
-    public void zobrazitPoziceKlik() {
+    public void zobrazitPoziceKlik() throws IOException {
         // kontrola zda je zaškrtnutý alespoň jeden z obou checkboxů
         if (!checkBoxZavazadlo.isSelected() && !checkBoxObleceni.isSelected()) {
             textKontrolaZaskrtnuti.setText("Pro zobrazení čísel umístění musíte zaškrtnout alespoň jedno pole.");
@@ -88,28 +83,9 @@ public class Uschovat1Controller {
             // uložení stavu checkboxů
             userDataContainer.setPodlahaChecked(checkBoxZavazadlo.isSelected());
             userDataContainer.setVesakChecked(checkBoxObleceni.isSelected());
-            // uložení stavu checkboxů do aktuální scény
-            stage.getScene().setUserData(userDataContainer);
-            // zobrazení nové scény
-            try {
-                // načtení FXML souboru
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(new URL("file:src/main/resources/cz/vse/campuss/main/fxml/uschovat2.fxml"));
-                // načtení nové scény
-                Scene scene = new Scene(loader.load());
-                // nastavení scény do stage
-                stage.setScene(scene);
-                stage.setTitle("Campuss");
-                // získání controlleru nové scény
-                Uschovat2Controller controller = loader.getController();
-                // inicializace dat nové scény
-                controller.initData(userDataContainer);
-                // zobrazení stage
-                stage.show();
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            // přepnutí na další scénu
+            StageManager.switchFXML(rootPane, FXMLView.USCHOVAT2);
         }
     }
 
@@ -124,7 +100,6 @@ public class Uschovat1Controller {
 
         // uložení studenta do aktuální scény
         userDataContainer.setStudent(student);
-        stage.getScene().setUserData(userDataContainer);
 
         // pokud student nebyl nalezen, zobrazí se chybová hláška
         if (student == null) {
