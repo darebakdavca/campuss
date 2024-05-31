@@ -59,9 +59,15 @@ public class FXMLViewTest {
     }
 
     @Test
-    public void testVyzvednoutFXMLResource() {
-        String expected = "file:src/main/resources/cz/vse/campuss/main/fxml/vyzvednout.fxml";
-        assertEquals(expected, FXMLView.VYZVEDNOUT.getFXMLResource());
+    public void testVyzvednout1FXMLResource() {
+        String expected = "file:src/main/resources/cz/vse/campuss/main/fxml/vyzvednout1.fxml";
+        assertEquals(expected, FXMLView.VYZVEDNOUT1.getFXMLResource());
+    }
+
+    @Test
+    public void testVyzvednout2FXMLResource() {
+        String expected = "file:src/main/resources/cz/vse/campuss/main/fxml/vyzvednout2.fxml";
+        assertEquals(expected, FXMLView.VYZVEDNOUT2.getFXMLResource());
     }
 
     @Test

@@ -299,23 +299,6 @@ public class DatabaseHelper {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Metoda pro odstranění isic studenta u umístění na základě jeho ISIC karty
      * @param isic ISIC karta studenta
@@ -331,8 +314,6 @@ public class DatabaseHelper {
 
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
-
-
         }
     }
 }

@@ -59,7 +59,7 @@
                     <Font size="50.0" />
                 </font>
             </Button>
-            <Button onMouseClicked="#zrusitKlik" mnemonicParsing="false" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand" text="Zrušit">
+            <Button onMouseClicked="#zrusitKlik" mnemonicParsing="false" style="-fx-background-color: D9D9D9; -fx-border-color: #ff0000; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand" text="Zpět">
                 <font>
                     <Font size="50.0" />
                 </font>

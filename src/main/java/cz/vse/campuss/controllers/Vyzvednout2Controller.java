@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -23,8 +24,10 @@ import java.io.IOException;
 
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
-public class VyzvednoutController {
+public class Vyzvednout2Controller {
 
+
+    private Student student;
     private Stage stage;
 
     public AnchorPane rootPane;
@@ -34,17 +37,15 @@ public class VyzvednoutController {
     public HBox blokInformaci;
     public TextField cisloVesak;
     public TextField cisloPodlaha;
-    public TextField isicVstup;
     public Text studentJmeno;
     public ImageView studentFoto;
-    public Text textPotvrzeni;
     public Button tlacitkoPotvrdit;
     public HBox zadavaniInformaci;
-    public Button tlacitkoOdeslat;
     public VBox hlavniPrvky;
     public HBox oblastProgress;
     public ProgressIndicator progressIndicator;
     public HBox oblastTextPotvrzeni;
+    public Line deliciCara;
 
     /**
      * Inicializace kontroléru
@@ -56,80 +57,46 @@ public class VyzvednoutController {
         studentFoto.setImage(null);
         fadeIn(ovladaciPrvky);
         fadeIn(blokInformaci);
-        fadeIn(zadavaniInformaci);
-        tlacitkoPotvrdit.setDisable(true);
         Platform.runLater(() -> stage = (Stage) ovladaciPrvky.getScene().getWindow());
         rootPane.getChildren().remove(oblastProgress);
     }
 
     /**
-     * Odešle ISIC karty a na základě toho upraví UI
+     * Metoda pro zobrazení obrazovky pro ukázání pozic na základě dat z předchozí obrazovky
+     * @param userDataContainer Data z předchozí obrazovky
      */
-    @FXML
-    public void odeslatISIC() {
-        // získání studenta podle ISIC karty
-        Student student = DatabaseHelper.fetchStudentByISIC(isicVstup.getText());
+    public void initData(UserDataContainer userDataContainer) {
+        student = userDataContainer.getStudent();
+        // získání volného vesaku a podlahy
+        int umisteniVesak = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK);
+        int umisteniPodlaha = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA);
 
-        // pokud student nebyl nalezen, zobrazí se chybová hláška
-        if (student == null) {
-            isicVstup.styleProperty().setValue("-fx-border-color: #FF6347; -fx-border-width: 4px;");
-            textPotvrzeni.styleProperty().setValue("-fx-fill: #FF6347;");
-            textPotvrzeni.setText("Student s tímto ISIC nebyl nalezen.");
-            studentJmeno.setText("");
-            studentFoto.setImage(null);
-            cisloVesak.setText("");
-            cisloPodlaha.setText("");
-            tlacitkoPotvrdit.setDisable(true);
+        // zobrazení informací o studentovi
+        studentJmeno.setText(student.getJmeno() + " " + student.getPrijmeni());
+        Image studentImage = new Image("file:src/main/resources/cz/vse/campuss/main/fxml/fotky/" + student.getIsic() + ".png");
+        studentFoto.setImage(studentImage);
+        fadeIn(studentFoto);
+        fadeIn(deliciCara);
+
+        // zobrazení boxů na základě stavu checkboxů
+        // pokud jsou oba checkboxy zaškrtnuty, zobrazí se oba boxy
+        if (userDataContainer.isPodlahaChecked() && userDataContainer.isVesakChecked()) {
+            cisloVesak.setText(String.valueOf(umisteniVesak));
+            cisloPodlaha.setText(String.valueOf(umisteniPodlaha));
+            fadeIn(boxZavazadlo);
+            fadeIn(boxVesak);
         }
-
-        // pokud je student nalezen
-        else {
-            // získání umístění věcí studenta
-            int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK);
-            int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA);
-
-            // pokud student byl nalezen, zobrazí se jeho jméno a příjmení a vizuálně se upraví pole pro ISIC
-            if (vesakLocation != -1 || podlahaLocation != -1) {
-                isicVstup.styleProperty().setValue("-fx-border-color: #90EE90; -fx-border-width: 4px;");
-                textPotvrzeni.styleProperty().setValue("-fx-fill: #90EE90;");
-                textPotvrzeni.setText("Student nalezen: " + student.getJmeno() + " " + student.getPrijmeni() + " (" + student.getIsic() + ")");
-                tlacitkoPotvrdit.setDisable(false);
-
-                studentJmeno.setText(student.getJmeno() + " " + student.getPrijmeni());
-                Image studentImage = new Image("file:src/main/resources/cz/vse/campuss/main/fxml/fotky/" + student.getIsic() + ".png");
-                studentFoto.setImage(studentImage);
-                fadeIn(studentFoto);
-
-                // zobrazení boxů na základě umístění věcí studenta
-                // pokud má student věci na obou místech, zobrazí se oba boxy
-                if (vesakLocation != -1 && podlahaLocation != -1) {
-                    fadeIn(boxVesak);
-                    fadeIn(boxZavazadlo);
-                    cisloVesak.setText(String.valueOf(vesakLocation));
-                    cisloPodlaha.setText(String.valueOf(podlahaLocation));
-                }
-
-                // pokud má student věci pouze na vesaku, zobrazí se pouze box pro vesak
-                else if (vesakLocation != -1) {
-                    fadeIn(boxVesak);
-                    cisloVesak.setText(String.valueOf(vesakLocation));
-                    blokInformaci.getChildren().remove(boxZavazadlo);
-                }
-
-                // pokud má student věci pouze na podlaze, zobrazí se pouze box pro zavazadlo
-                else {
-                    fadeIn(boxZavazadlo);
-                    cisloPodlaha.setText(String.valueOf(podlahaLocation));
-                    blokInformaci.getChildren().remove(boxVesak);
-                }
-            }
-
-            // pokud student nemá žádné věci uložené, zobrazí se hláška s informací o tom
-            if (vesakLocation == -1 && podlahaLocation == -1) {
-                isicVstup.styleProperty().setValue("-fx-border-color: #FF6347; -fx-border-width: 4px;");
-                textPotvrzeni.styleProperty().setValue("-fx-fill: #FF6347;");
-                textPotvrzeni.setText("Student nemá nic uloženého");
-            }
+        // pokud je zaškrtnutý pouze checkbox oblečení, zobrazí se pouze box pro oblečení
+        else if (userDataContainer.isVesakChecked()) {
+            cisloVesak.setText(String.valueOf(umisteniVesak));
+            blokInformaci.getChildren().remove(boxZavazadlo);
+            fadeIn(boxVesak);
+        }
+        // pokud je zaškrtnutý pouze checkbox zavazadlo, zobrazí se pouze box pro zavazadlo
+        else if (userDataContainer.isPodlahaChecked()) {
+            cisloPodlaha.setText(String.valueOf(umisteniPodlaha));
+            blokInformaci.getChildren().remove(boxVesak);
+            fadeIn(boxZavazadlo);
         }
     }
 
@@ -149,9 +116,6 @@ public class VyzvednoutController {
         // získání informací o věcech
         boolean vesak = blokInformaci.getChildren().contains(boxVesak);
         boolean zavazadlo = blokInformaci.getChildren().contains(boxZavazadlo);
-
-        // získání studenta
-        Student student = DatabaseHelper.fetchStudentByISIC(isicVstup.getText());
 
         // ID vesaku a podlahy
         int idVesak = -1;
@@ -228,6 +192,16 @@ public class VyzvednoutController {
     private int historieEntryQueryVyzvednuto(Student student, TypUmisteni typUmisteni) {
         return DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), typUmisteni, DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), typUmisteni), StavUlozeni.VYZVEDNUTO);
     }
+
+    /**
+     * Metoda pro zrušení uložení věcí
+     * Vrátí na obrazovku uschovat1.fxml
+     */
+    @FXML
+    public void zrusitKlik() throws IOException {
+        StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT1 );
+    }
+
 
     /**
      * Přejde na domovskou obrazovku
