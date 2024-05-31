@@ -19,7 +19,10 @@ public class UserDataContainerTest {
     @Before
     public void setUp() {
         student = new Student( 123456, "Jan", "Novák", "27466136AD", "jan@novak.cz");
-        container = new UserDataContainer(true, false, student);
+        container = UserDataContainer.getInstance();
+        container.setStudent(student);
+        container.setVesakChecked(true);
+        container.setPodlahaChecked(false);
     }
 
     @Test
