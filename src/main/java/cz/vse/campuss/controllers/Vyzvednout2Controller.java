@@ -4,7 +4,6 @@ import cz.vse.campuss.helpers.*;
 import cz.vse.campuss.model.StavUlozeni;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
-import cz.vse.campuss.model.Umisteni;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -69,8 +68,8 @@ public class Vyzvednout2Controller {
     public void initData(UserDataContainer userDataContainer) {
         student = userDataContainer.getStudent();
         // získání volného vesaku a podlahy
-        Umisteni umisteniVesak = DatabaseHelper.fetchUnusedUmisteni(TypUmisteni.VESAK);
-        Umisteni umisteniPodlaha = DatabaseHelper.fetchUnusedUmisteni(TypUmisteni.PODLAHA);
+        int umisteniVesak = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK);
+        int umisteniPodlaha = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA);
 
         // zobrazení informací o studentovi
         studentJmeno.setText(student.getJmeno() + " " + student.getPrijmeni());
@@ -82,20 +81,20 @@ public class Vyzvednout2Controller {
         // zobrazení boxů na základě stavu checkboxů
         // pokud jsou oba checkboxy zaškrtnuty, zobrazí se oba boxy
         if (userDataContainer.isPodlahaChecked() && userDataContainer.isVesakChecked()) {
-            cisloVesak.setText(String.valueOf(umisteniVesak.getCislo()));
-            cisloPodlaha.setText(String.valueOf(umisteniPodlaha.getCislo()));
+            cisloVesak.setText(String.valueOf(umisteniVesak));
+            cisloPodlaha.setText(String.valueOf(umisteniPodlaha));
             fadeIn(boxZavazadlo);
             fadeIn(boxVesak);
         }
         // pokud je zaškrtnutý pouze checkbox oblečení, zobrazí se pouze box pro oblečení
         else if (userDataContainer.isVesakChecked()) {
-            cisloVesak.setText(String.valueOf(umisteniVesak.getCislo()));
+            cisloVesak.setText(String.valueOf(umisteniVesak));
             blokInformaci.getChildren().remove(boxZavazadlo);
             fadeIn(boxVesak);
         }
         // pokud je zaškrtnutý pouze checkbox zavazadlo, zobrazí se pouze box pro zavazadlo
         else if (userDataContainer.isPodlahaChecked()) {
-            cisloPodlaha.setText(String.valueOf(umisteniPodlaha.getCislo()));
+            cisloPodlaha.setText(String.valueOf(umisteniPodlaha));
             blokInformaci.getChildren().remove(boxVesak);
             fadeIn(boxZavazadlo);
         }
@@ -200,7 +199,7 @@ public class Vyzvednout2Controller {
      */
     @FXML
     public void zrusitKlik() throws IOException {
-        StageManager.switchFXML(rootPane, FXMLView.USCHOVAT1);
+        StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT1 );
     }
 
 

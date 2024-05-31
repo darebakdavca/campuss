@@ -19,7 +19,7 @@ public class UserDataContainer {
      */
     public UserDataContainer(boolean vesakChecked, boolean podlahaChecked, Student student) {
         this.vesakChecked = vesakChecked;
-        this.podlahaChecked = podlahaChecked;
+        this.podlahaChecked = podlahaChecked;           //TODO: udělat singleton návrhový vzor z UserDataContainer
         this.student = student;
     }
 
