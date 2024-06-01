@@ -20,36 +20,31 @@ import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javafx.application.Platform;
+import javafx.scene.text.Text;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-
-
-
-
-
+import static cz.vse.campuss.helpers.StageManager.switchFXML;
 
 public class StudentController {
     @FXML
-    public TextField satnaOut;
-    @FXML
-    public TextField obleceniOut;
-    @FXML
-    public TextField zavazadlaOut;
-    @FXML
-    public TextField timeOut;
-    @FXML
-    public TextField closingOut;
-    @FXML
     public AnchorPane rootPane;
+    public Text closingOut;
+    public Text zavazadlaOut;
+    public Text obleceniOut;
+    public Text satnaOut;
+    public Text osloveniOut;
 
     private String isic;
 
     private Timer timer;
 
-    // Initialize method to set default values and initialize database connection
+    // Inicializační metoda
     @FXML
     private void initialize() {
+
+        // Vytvoření nového timeru, který bude každou sekundu volat metodu startCountdown
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,23 +54,38 @@ public class StudentController {
         timer.start(); // Start the timer
     }
 
-    // Method to start the countdown
+    // Metoda pro zobrazení času do zavření
     private void startCountdown() {
         LocalTime now = LocalTime.now();
         LocalDate today = LocalDate.now();
+        Student student = DatabaseHelper.fetchStudentByISIC(isic);
+        String jmeno = student.getJmeno();
 
-        LocalTime closingTime = LocalTime.of(19, 0); // closing at 9 pm
+        // Nastavení oslovení podle denní doby
+        if (now.isAfter(LocalTime.of(5, 0)) && now.isBefore(LocalTime.of(10, 0))) {
+            osloveniOut.setText("Dobré ráno, " + jmeno);
+        } else if (now.isAfter(LocalTime.of(10, 0)) && now.isBefore(LocalTime.of(12, 0))) {
+            osloveniOut.setText("Dobré dopoledne, " + jmeno);
+        }else if (now.isAfter(LocalTime.of(12, 0)) && now.isBefore(LocalTime.of(13, 0))) {
+            osloveniOut.setText("Dobré poledne, " + jmeno);
+        }else if (now.isAfter(LocalTime.of(13, 0)) && now.isBefore(LocalTime.of(18, 0))) {
+            osloveniOut.setText("Dobré odpoledne, " + jmeno);
+        } else {
+            osloveniOut.setText("Dobrý večer, " + jmeno);
+        }
 
-        // Check if closing time is before the current time
+        LocalTime closingTime = LocalTime.of(19, 0); // Zavírací doba je 19:00
+
+        // Zobrazení zavřeno, pokud je po zavírací době
         if (now.isAfter(closingTime)) {
             Platform.runLater(() -> closingOut.setText("zavřeno"));
-            return; // Exit the method
+            return;
         }
 
         long millisecondsUntilClosing = now.until(closingTime, ChronoUnit.MILLIS);
 
         if (today.getDayOfWeek() == DayOfWeek.SATURDAY || today.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            // Adjust closing time to Monday
+            //
             today = today.plusDays(1).with(DayOfWeek.MONDAY);
         }
 
@@ -85,16 +95,16 @@ public class StudentController {
             long hours = millisecondsUntilClosing / 3600000;
             long minutes = (millisecondsUntilClosing % 3600000) / 60000;
             long seconds = ((millisecondsUntilClosing % 3600000) % 60000) / 1000;
-            countdownText = hours + " hours, " + minutes + " minutes, " + seconds + " seconds until closing";
+            countdownText = hours + " h, " + minutes + " min, " + seconds + " s do zavření";
         } else if (millisecondsUntilClosing >= 60000) { // If more than a minute left
             long minutes = millisecondsUntilClosing / 60000;
             long seconds = (millisecondsUntilClosing % 60000) / 1000;
             long milliseconds = millisecondsUntilClosing % 1000;
-            countdownText = minutes + " minutes, " + seconds + " seconds, " + milliseconds + " milliseconds until closing";
+            countdownText = minutes + " m, " + seconds + " s do zavření";
         } else { // Less than a minute left
             long seconds = millisecondsUntilClosing / 1000;
             long milliseconds = millisecondsUntilClosing % 1000;
-            countdownText = seconds + " seconds, " + milliseconds + " milliseconds until closing";
+            countdownText = seconds + " s do zavření, ";
         }
 
         // Update the closingOut text field on the JavaFX Application Thread
@@ -109,6 +119,7 @@ public class StudentController {
         Student student = DatabaseHelper.fetchStudentByISIC(isic);
 
         if (student != null) {
+
 
             int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK);
             int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA);
@@ -136,7 +147,7 @@ public class StudentController {
     // Method to navigate back to the home screen
     public void domuKlik(MouseEvent mouseEvent) {
         try {
-            StageManager.switchFXML(rootPane, FXMLView.HOME);
+            switchFXML(rootPane, FXMLView.HOME);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -147,7 +158,12 @@ public class StudentController {
         fetchData();
     }
 
+
     public void logoutKlik(MouseEvent mouseEvent) throws IOException {
-        StageManager.switchFXML(rootPane, FXMLView.PRIHLASOVANI);
+        try {
+            switchFXML(rootPane, FXMLView.PRIHLASOVANI2);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

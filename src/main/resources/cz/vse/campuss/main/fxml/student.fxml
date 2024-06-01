@@ -1,98 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.StudentController">
-   <ImageView onMouseClicked="#logoutKlik" style="-fx-cursor: hand;" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0" preserveRatio="true" fitWidth="109.0">
-      <Image url="@pictures/logout.png" />
-   </ImageView>
-
-   <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <Image url="@pictures/campuss.png" />
-      </ImageView>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vítej studente!" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="130.0">
-         <font>
-            <Font name="System Bold" size="64.0" />
-         </font>
-      </Text>
-   <AnchorPane style="-fx-background-color: #e4e4e4; -fx-background-radius: 10; -fx-border-radius: 10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="230.0">
-      <Text layoutX="115.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Věci máš uschované v:" AnchorPane.topAnchor="0.0">
-         <font>
-            <Font size="40.0" />
-         </font>
-      </Text>
-      <VBox layoutX="271.0" layoutY="432.0" spacing="40.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="90.0">
-         <HBox spacing="20.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Šatna:">
+<AnchorPane fx:id="rootPane" nodeOrientation="LEFT_TO_RIGHT" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.StudentController">
+   <children>
+      <GridPane alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1440.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints maxHeight="610.2631225585938" minHeight="10.0" prefHeight="386.9403381347656" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1099.3017883300781" minHeight="10.0" prefHeight="464.5596618652344" vgrow="SOMETIMES" />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+         <children>
+            <GridPane GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="609.0" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="666.9277038574219" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="626.5661010742188" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="626.5661010742188" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="626.5661010742188" minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Šatna:" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění oblečení:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění zavazadla:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Čas do uzavření šatny:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text fx:id="satnaOut" layoutX="631.0" layoutY="56.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="obleceniOut" layoutX="480.0" layoutY="127.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="zavazadlaOut" layoutX="461.0" layoutY="197.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="closingOut" layoutX="429.0" layoutY="267.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+               </children>
+            </GridPane>
+            <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <image>
+                  <Image url="@pictures/campuss.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <GridPane.margin>
+                  <Insets bottom="45.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Text fx:id="osloveniOut" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
-                  <Font name="System Bold" size="30.0" />
+                  <Font name="System Bold" size="64.0" />
                </font>
+               <GridPane.margin>
+                  <Insets bottom="70.0" />
+               </GridPane.margin>
             </Text>
-            <TextField fx:id="satnaOut" alignment="TOP_LEFT" editable="false">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Uschování tvých věcí " textOrigin="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
-                  <Font size="20.0" />
+                  <Font size="40.0" />
                </font>
-            </TextField>
-         </HBox>
-         <HBox spacing="20.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění oblečení:">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
+               <GridPane.margin>
+                  <Insets bottom="20.0" />
+               </GridPane.margin>
             </Text>
-            <TextField fx:id="obleceniOut" alignment="TOP_LEFT" editable="false">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-         </HBox>
-         <HBox spacing="20.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Umístění zavazadla:">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-            <TextField fx:id="zavazadlaOut" alignment="TOP_LEFT" editable="false">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-         </HBox>
-         <HBox spacing="20.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas uložení:">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-            <TextField fx:id="timeOut" alignment="TOP_LEFT" editable="false">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-         </HBox>
-         <HBox spacing="20.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Čas do uzavření šatny:">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-            <TextField fx:id="closingOut" alignment="TOP_LEFT" editable="false">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </TextField>
-         </HBox>
-      </VBox>
-   </AnchorPane>
-   <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
+            <ImageView cache="true" fitWidth="110.0" onMouseClicked="#logoutKlik" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" GridPane.halignment="RIGHT">
+               <image>
+                  <Image url="@pictures/logout.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <GridPane.margin>
+                  <Insets top="-10.0" />
+               </GridPane.margin>
+            </ImageView>
+         </children>
+      </GridPane>
+   </children>
 </AnchorPane>
