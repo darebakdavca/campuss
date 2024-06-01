@@ -11,8 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" nodeOrientation="LEFT_TO_RIGHT" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.StudentController">
-   <children>
+<AnchorPane fx:id="rootPane"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.StudentController">
       <GridPane alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1440.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -24,7 +23,6 @@
             <RowConstraints />
             <RowConstraints />
          </rowConstraints>
-         <children>
             <GridPane GridPane.rowIndex="2">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -37,7 +35,6 @@
                   <RowConstraints maxHeight="626.5661010742188" minHeight="10.0" prefHeight="70.0" vgrow="NEVER" />
                   <RowConstraints maxHeight="626.5661010742188" minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
-               <children>
                   <Text lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Šatna:" GridPane.halignment="RIGHT">
                      <font>
                         <Font name="System Bold" size="30.0" />
@@ -90,12 +87,9 @@
                         <Font size="30.0" />
                      </font>
                   </Text>
-               </children>
             </GridPane>
             <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <image>
                   <Image url="@pictures/campuss.png" />
-               </image>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -103,7 +97,7 @@
                   <Insets bottom="45.0" />
                </GridPane.margin>
             </ImageView>
-            <Text fx:id="osloveniOut" strokeType="OUTSIDE" strokeWidth="0.0" text="" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Text fx:id="osloveniOut" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="64.0" />
                </font>
@@ -111,7 +105,7 @@
                   <Insets bottom="70.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Uschování tvých věcí " textOrigin="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informace o tých uložených věcích:" textOrigin="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
                   <Font size="40.0" />
                </font>
@@ -119,18 +113,8 @@
                   <Insets bottom="20.0" />
                </GridPane.margin>
             </Text>
-            <ImageView cache="true" fitWidth="110.0" onMouseClicked="#logoutKlik" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" GridPane.halignment="RIGHT">
-               <image>
-                  <Image url="@pictures/logout.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-               <GridPane.margin>
-                  <Insets top="-10.0" />
-               </GridPane.margin>
-            </ImageView>
-         </children>
       </GridPane>
-   </children>
+   <ImageView fitWidth="109.0" onMouseClicked="#logoutKlik" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+      <Image url="@pictures/logout.png" />
+   </ImageView>
 </AnchorPane>

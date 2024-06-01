@@ -289,7 +289,7 @@ public class DatabaseHelper {
                 if (rs.next()) {
                     isic = rs.getString("ISIC");
                 } else {
-                    System.out.println("No ISIC found for the email: " + email);
+                    System.out.println("Žádný ISIC nenalezen pro email: " + email);
                 }
             }
         } catch (SQLException e) {

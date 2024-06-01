@@ -24,8 +24,8 @@ public class FXMLViewTest {
 
     @Test
     public void testPrihlasovani2FXMLResource() {
-        String expected = "file:src/main/resources/cz/vse/campuss/main/fxml/prihlasovani2.fxml";
-        assertEquals(expected, FXMLView.PRIHLASOVANI2.getFXMLResource());
+        String expected = "file:src/main/resources/cz/vse/campuss/main/fxml/prihlasovaniStudent.fxml";
+        assertEquals(expected, FXMLView.PRIHLASOVANISTUDENT.getFXMLResource());
     }
 
     @Test

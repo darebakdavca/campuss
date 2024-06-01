@@ -2,14 +2,10 @@ package cz.vse.campuss.controllers;
 
 import cz.vse.campuss.helpers.DatabaseHelper;
 import cz.vse.campuss.helpers.FXMLView;
-import cz.vse.campuss.helpers.StageManager;
-import cz.vse.campuss.model.PolozkaHistorie;
-import cz.vse.campuss.model.Satna;
+import cz.vse.campuss.helpers.UserDataContainer;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import java.time.LocalTime;
@@ -25,8 +21,13 @@ import javafx.scene.text.Text;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
+import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 import static cz.vse.campuss.helpers.StageManager.switchFXML;
 
+/**
+ * Třída StudentController slouží jako controller pro student.fxml
+ * Třída obsahuje metody pro získání dat a odhlášení
+ */
 public class StudentController {
     @FXML
     public AnchorPane rootPane;
@@ -36,42 +37,42 @@ public class StudentController {
     public Text satnaOut;
     public Text osloveniOut;
 
-    private String isic;
+    private Student student;
 
-    private Timer timer;
-
-    // Inicializační metoda
+    /**
+     * Inicializační metoda
+     */
     @FXML
     private void initialize() {
-
+        UserDataContainer userDataContainer = UserDataContainer.getInstance();
+        student = userDataContainer.getStudent();
         // Vytvoření nového timeru, který bude každou sekundu volat metodu startCountdown
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                startCountdown(); // Refresh the countdown
-            }
+        // Refreshuj odpočet
+        Timer timer = new Timer(1000, e -> {
+            startCountdown(); // Refreshuj odpočet
         });
-        timer.start(); // Start the timer
+        timer.start(); // Zahájení odpočtu
+        fetchData(); // Získání dat o studentovi a jeho uložení
+        fadeIn(rootPane); // Plynulé zobrazení scény
     }
 
     // Metoda pro zobrazení času do zavření
     private void startCountdown() {
         LocalTime now = LocalTime.now();
         LocalDate today = LocalDate.now();
-        Student student = DatabaseHelper.fetchStudentByISIC(isic);
         String jmeno = student.getJmeno();
 
         // Nastavení oslovení podle denní doby
         if (now.isAfter(LocalTime.of(5, 0)) && now.isBefore(LocalTime.of(10, 0))) {
-            osloveniOut.setText("Dobré ráno, " + jmeno);
+            osloveniOut.setText("Dobré ráno, " + jmeno + "!");
         } else if (now.isAfter(LocalTime.of(10, 0)) && now.isBefore(LocalTime.of(12, 0))) {
-            osloveniOut.setText("Dobré dopoledne, " + jmeno);
+            osloveniOut.setText("Dobré dopoledne, " + jmeno + "!");
         }else if (now.isAfter(LocalTime.of(12, 0)) && now.isBefore(LocalTime.of(13, 0))) {
-            osloveniOut.setText("Dobré poledne, " + jmeno);
+            osloveniOut.setText("Dobré poledne, " + jmeno + "!");
         }else if (now.isAfter(LocalTime.of(13, 0)) && now.isBefore(LocalTime.of(18, 0))) {
-            osloveniOut.setText("Dobré odpoledne, " + jmeno);
+            osloveniOut.setText("Dobré odpoledne, " + jmeno + "!");
         } else {
-            osloveniOut.setText("Dobrý večer, " + jmeno);
+            osloveniOut.setText("Dobrý večer, " + jmeno + "!");
         }
 
         LocalTime closingTime = LocalTime.of(19, 0); // Zavírací doba je 19:00
@@ -107,16 +108,16 @@ public class StudentController {
             countdownText = seconds + " s do zavření, ";
         }
 
-        // Update the closingOut text field on the JavaFX Application Thread
+        // Aktualizace odpočtu
         Platform.runLater(() -> closingOut.setText(countdownText));
     }
 
 
-    // Method to fetch data from the database
+    /**
+     * Metoda pro získání dat
+     */
     @FXML
     public void fetchData() {
-        // Get student from database
-        Student student = DatabaseHelper.fetchStudentByISIC(isic);
 
         if (student != null) {
 
@@ -153,17 +154,12 @@ public class StudentController {
         }
     }
 
-    public void setISIC(String isic) {
-        this.isic = isic;
-        fetchData();
-    }
-
-
+    /**
+     * Metoda pro odhlášení
+     * @param mouseEvent Event kliknutí myší
+     * @throws IOException Výjimka při chybě při načítání scény
+     */
     public void logoutKlik(MouseEvent mouseEvent) throws IOException {
-        try {
-            switchFXML(rootPane, FXMLView.PRIHLASOVANI2);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        switchFXML(rootPane, FXMLView.PRIHLASOVANI);
     }
 }

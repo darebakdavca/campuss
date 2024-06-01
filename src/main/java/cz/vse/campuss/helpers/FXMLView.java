@@ -13,10 +13,10 @@ public enum FXMLView {
             return getFXMLPath("prihlasovani.fxml");
         }
     },
-    PRIHLASOVANI2 {
+    PRIHLASOVANISTUDENT {
         @Override
         public String getFXMLResource() {
-            return getFXMLPath("prihlasovani2.fxml");
+            return getFXMLPath("prihlasovaniStudent.fxml");
         }
     },
     HISTORIE {
