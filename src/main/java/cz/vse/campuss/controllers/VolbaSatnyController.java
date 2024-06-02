@@ -1,9 +1,11 @@
 package cz.vse.campuss.controllers;
 
+import cz.vse.campuss.helpers.DatabaseHelper;
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.SatnaSelection;
 import cz.vse.campuss.helpers.StageManager;
 
+import cz.vse.campuss.model.Satna;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.RadioButton;
@@ -44,10 +46,12 @@ public class VolbaSatnyController {
      */
     public void pokracovatKlik(MouseEvent mouseEvent) throws IOException {
         if (italskaButton.isSelected()) {
-            SatnaSelection.getInstance().setSelectedSatna("Italská budova");
+            Satna satna = DatabaseHelper.getSatnaFromName("Italská budova");
+            SatnaSelection.getInstance().setSelectedSatna(satna);
             StageManager.switchFXML(rootPane, FXMLView.HOME);
         } else if (novaButton.isSelected()) {
-            SatnaSelection.getInstance().setSelectedSatna("Nová budova");
+            Satna satna = DatabaseHelper.getSatnaFromName("Nová budova");
+            SatnaSelection.getInstance().setSelectedSatna(satna);
             StageManager.switchFXML(rootPane, FXMLView.HOME);
         } else {
             errorText.setVisible(true);

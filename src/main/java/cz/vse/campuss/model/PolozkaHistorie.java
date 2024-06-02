@@ -13,6 +13,20 @@ public class PolozkaHistorie {
     private final int satnarkaID;
     private final int umisteniID;
 
+    /**
+     * Konstruktor třídy PolozkaHistorie
+     * @param id ID záznamu
+     * @param jmenoStudenta Jméno studenta
+     * @param prijmeniStudenta Příjmení studenta
+     * @param isicStudenta ISIC studenta
+     * @param satnaNazev Název šatny
+     * @param umisteniTyp Typ umístění
+     * @param umisteniCislo Číslo umístění
+     * @param stav Stav uložení
+     * @param casZmenyStavu Čas změny stavu
+     * @param satnarkaID ID satnárky
+     * @param umisteniID ID umístění
+     */
     public PolozkaHistorie(int id, String jmenoStudenta, String prijmeniStudenta, String isicStudenta, String satnaNazev, TypUmisteni umisteniTyp, int umisteniCislo, StavUlozeni stav, String casZmenyStavu, int satnarkaID, int umisteniID) {
         this.id = id;
         this.jmenoStudenta = jmenoStudenta;

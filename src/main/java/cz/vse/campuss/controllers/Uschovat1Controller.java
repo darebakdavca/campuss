@@ -2,6 +2,8 @@ package cz.vse.campuss.controllers;
 
 import java.io.IOException;
 
+import cz.vse.campuss.helpers.*;
+import cz.vse.campuss.model.Satna;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
 import javafx.event.ActionEvent;
@@ -14,11 +16,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-
-import cz.vse.campuss.helpers.StageManager;
-import cz.vse.campuss.helpers.UserDataContainer;
-import cz.vse.campuss.helpers.FXMLView;
-import cz.vse.campuss.helpers.DatabaseHelper;
 
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 import static cz.vse.campuss.helpers.NodeHelper.hideAfterSeconds;
@@ -58,6 +55,11 @@ public class Uschovat1Controller {
         fadeIn(ovladaciPrvky);
         // získání instance userDataContaineru
         userDataContainer = UserDataContainer.getInstance();
+
+        // pokud je student již uložený, zobrazí se jeho jméno a příjmení
+        if (userDataContainer.getStudent() != null) {
+            odeslatISIC(null);
+        }
     }
 
     /**
@@ -65,6 +67,7 @@ public class Uschovat1Controller {
      */
     @FXML
     public void domuKlik() throws IOException {
+        userDataContainer.setStudent(null);
         StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 
@@ -98,6 +101,8 @@ public class Uschovat1Controller {
         // získání studenta podle ISIC karty
         Student student = DatabaseHelper.fetchStudentByISIC(vstupISIC.getText());
 
+        Satna satna = SatnaSelection.getInstance().getSelectedSatna();
+
         // uložení studenta do aktuální scény
         userDataContainer.setStudent(student);
 
@@ -111,6 +116,7 @@ public class Uschovat1Controller {
             checkBoxObleceni.setDisable(true);
             checkBoxObleceni.setSelected(false);
         }
+
         // pokud student byl nalezen, zobrazí se jeho jméno a příjmení a vizuálně se upraví pole pro ISIC
         // pokud student již má uloženo zavazadlo, nebude si moci uložit další - to samé platí pro oblečení
         else {
@@ -120,16 +126,20 @@ public class Uschovat1Controller {
             checkBoxObleceni.setDisable(false);
             checkBoxZavazadlo.setDisable(false);
 
-            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK) != -1) && (DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA) != -1)) {
+            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK, satna.getId()) != -1) && (DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA, satna.getId()) != -1)) {
                 checkBoxObleceni.setDisable(true);
                 checkBoxZavazadlo.setDisable(true);
             }
 
-            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK) != -1)) {
+            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK, satna.getId()) != -1)) {
                 checkBoxObleceni.setDisable(true);
             }
 
-            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA) != -1)) {
+            if ((DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA, satna.getId()) != -1)) {
+                checkBoxZavazadlo.setDisable(true);
+            }
+
+            if (satna.getId() == 2) {
                 checkBoxZavazadlo.setDisable(true);
             }
         }
@@ -146,6 +156,11 @@ public class Uschovat1Controller {
 
         else if (checkBoxZavazadlo.isDisabled()) {
             textKontrolaZaskrtnuti.setText("Student již má zavazadlo uložené.");
+            hideAfterSeconds(textKontrolaZaskrtnuti);
+        }
+
+        if (checkBoxZavazadlo.isDisabled() && SatnaSelection.getInstance().getSelectedSatna().getId() == 2) {
+            textKontrolaZaskrtnuti.setText("V této šatně není možné uložit zavazadlo.");
             hideAfterSeconds(textKontrolaZaskrtnuti);
         }
     }

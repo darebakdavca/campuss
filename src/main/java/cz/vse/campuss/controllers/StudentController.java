@@ -3,6 +3,7 @@ package cz.vse.campuss.controllers;
 import cz.vse.campuss.helpers.DatabaseHelper;
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.UserDataContainer;
+import cz.vse.campuss.model.Satna;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
 import javafx.fxml.FXML;
@@ -13,8 +14,6 @@ import java.time.temporal.ChronoUnit;
 
 import java.io.IOException;
 import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javafx.application.Platform;
 import javafx.scene.text.Text;
 
@@ -37,6 +36,7 @@ public class StudentController {
     public Text satnaOut;
     public Text osloveniOut;
 
+    UserDataContainer userDataContainer = UserDataContainer.getInstance();
     private Student student;
 
     /**
@@ -44,7 +44,6 @@ public class StudentController {
      */
     @FXML
     private void initialize() {
-        UserDataContainer userDataContainer = UserDataContainer.getInstance();
         student = userDataContainer.getStudent();
         // Vytvoření nového timeru, který bude každou sekundu volat metodu startCountdown
         // Refreshuj odpočet
@@ -64,9 +63,7 @@ public class StudentController {
         LocalDate today = LocalDate.now();
         String jmeno = student.getJmeno();
 
-        /**
-         * Podle času vypíše oslovení
-         */
+        // Podle času vypíše oslovení
         if (now.isAfter(LocalTime.of(5, 0)) && now.isBefore(LocalTime.of(10, 0))) {
             osloveniOut.setText("Dobré ráno, " + jmeno + "!");
         } else if (now.isAfter(LocalTime.of(10, 0)) && now.isBefore(LocalTime.of(12, 0))) {
@@ -112,9 +109,7 @@ public class StudentController {
             countdownText = seconds + " s do zavření, ";
         }
 
-        /**
-         * Zobrazení odpočtu
-         */
+        // Zobrazení odpočtu
 
         Platform.runLater(() -> closingOut.setText(countdownText));
     }
@@ -127,12 +122,12 @@ public class StudentController {
     public void fetchData() {
 
         if (student != null) {
+            Satna satna = DatabaseHelper.getSatnaFromISIC(student.getIsic());
+
+            int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK, satna.getId());
+            int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA, satna.getId());
 
 
-            int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK);
-            int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA);
-
-            String satna = DatabaseHelper.getSatnaFromISIC(student.getIsic());
             if (vesakLocation != -1) {
                 obleceniOut.setText(String.valueOf(vesakLocation));
             } else {
@@ -145,7 +140,7 @@ public class StudentController {
                 zavazadlaOut.setText("Neuloženo");
             }
 
-            satnaOut.setText(satna);
+            satnaOut.setText(satna.getSatnaNazev());
 
         } else {
             throw new RuntimeException("Student je prázdný!");
@@ -170,6 +165,7 @@ public class StudentController {
      * @throws IOException Výjimka při chybě při načítání scény
      */
     public void logoutKlik(MouseEvent mouseEvent) throws IOException {
+        userDataContainer.setStudent(null);
         switchFXML(rootPane, FXMLView.PRIHLASOVANI);
     }
 }

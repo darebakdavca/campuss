@@ -2,6 +2,7 @@ package cz.vse.campuss.controllers;
 
 import cz.vse.campuss.helpers.FXMLView;
 import cz.vse.campuss.helpers.StageManager;
+import cz.vse.campuss.helpers.UserDataContainer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -25,6 +26,8 @@ public class PotrvzeniController {
     public static String textButton;
     public AnchorPane rootPane;
 
+    UserDataContainer userDataContainer = UserDataContainer.getInstance();
+
     /**
      * Inicializace kontroléru
      */
@@ -40,6 +43,7 @@ public class PotrvzeniController {
      */
     @FXML
     public void domuKlik() throws IOException {
+        userDataContainer.setStudent(null);
         StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 
@@ -49,9 +53,11 @@ public class PotrvzeniController {
     @FXML
     public void uschovatKlik() throws IOException {
         if(potrvzeniText.getText().equals("Uschování proběhlo úspěšně!")) {
+            userDataContainer.setStudent(null);
             StageManager.switchFXML(rootPane, FXMLView.USCHOVAT1);
         }
         else {
+            userDataContainer.setStudent(null);
             StageManager.switchFXML(rootPane, FXMLView.VYZVEDNOUT1);
         }
     }

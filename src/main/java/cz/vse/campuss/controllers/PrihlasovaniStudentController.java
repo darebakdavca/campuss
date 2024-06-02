@@ -1,9 +1,7 @@
 package cz.vse.campuss.controllers;
 
-import cz.vse.campuss.helpers.DatabaseHelper;
-import cz.vse.campuss.helpers.FXMLView;
-import cz.vse.campuss.helpers.StageManager;
-import cz.vse.campuss.helpers.UserDataContainer;
+import cz.vse.campuss.helpers.*;
+import cz.vse.campuss.model.Satna;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
 import javafx.event.ActionEvent;
@@ -62,10 +60,11 @@ public class PrihlasovaniStudentController {
     public void odeslatLogin(ActionEvent actionEvent) throws IOException {
         String isic = DatabaseHelper.getISICByEmail(emailVstup.getText());
         Student student = DatabaseHelper.fetchStudentByISIC(isic);
+        Satna satna = SatnaSelection.getInstance().getSelectedSatna();
 
         if (isic != null) {
-            int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(isic, TypUmisteni.VESAK);
-            int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(isic, TypUmisteni.PODLAHA);
+            int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(isic, TypUmisteni.VESAK, satna.getId());
+            int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(isic, TypUmisteni.PODLAHA, satna.getId());
 
             userDataContainer.setStudent(student);
 

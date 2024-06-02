@@ -1,12 +1,14 @@
 package cz.vse.campuss.helpers;
 
 
+import cz.vse.campuss.model.Satna;
+
 /**
  * Třída pro uchování vybrané šatny
  */
 public class SatnaSelection {
     private static SatnaSelection instance;
-    private String selectedSatna;
+    private Satna selectedSatna;
 
     /**
      * Privátní konstruktor třídy
@@ -28,7 +30,7 @@ public class SatnaSelection {
      * Metoda pro získání vybrané šatny
      * @return Vybraná šatna
      */
-    public String getSelectedSatna() {
+    public Satna getSelectedSatna() {
         return selectedSatna;
     }
 
@@ -36,7 +38,7 @@ public class SatnaSelection {
      * Metoda pro nastavení vybrané šatny
      * @param selectedSatna Vybraná šatna
      */
-    public void setSelectedSatna(String selectedSatna) {
+    public void setSelectedSatna(Satna selectedSatna) {
         this.selectedSatna = selectedSatna;
     }
 }

@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
 
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 
@@ -22,7 +21,7 @@ import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 public class Uschovat2Controller {
 
     // Stav checkboxů
-    private UserDataContainer userDataContainer;
+    private UserDataContainer userDataContainer = UserDataContainer.getInstance();
 
     // FXML elementy
     public VBox boxZavazadlo;
@@ -51,18 +50,18 @@ public class Uschovat2Controller {
         // skrytí progress baru
         rootPane.getChildren().remove(oblastProgress);
         // získání dat z předchozí obrazovky
-        initData(UserDataContainer.getInstance()) ;
+        initData() ;
     }
 
     /**
      * Metoda pro zobrazení obrazovky pro ukázání pozic na základě dat z předchozí obrazovky
-     * @param userDataContainer Data z předchozí obrazovky
      */
-    public void initData(UserDataContainer userDataContainer) {
-        this.userDataContainer = userDataContainer;
+    public void initData() {
+        Satna satna = SatnaSelection.getInstance().getSelectedSatna();
+
         // získání volného vesaku a podlahy
-        Umisteni umisteniVesak = DatabaseHelper.fetchUnusedUmisteni(TypUmisteni.VESAK);
-        Umisteni umisteniPodlaha = DatabaseHelper.fetchUnusedUmisteni(TypUmisteni.PODLAHA);
+        Umisteni umisteniVesak = DatabaseHelper.fetchUnusedUmisteni(TypUmisteni.VESAK, satna);
+        Umisteni umisteniPodlaha = DatabaseHelper.fetchUnusedUmisteni(TypUmisteni.PODLAHA, satna);
 
         // zobrazení boxů na základě stavu checkboxů
         // pokud jsou oba checkboxy zaškrtnuty, zobrazí se oba boxy
@@ -102,6 +101,9 @@ public class Uschovat2Controller {
         // získání studenta
         Student student = userDataContainer.getStudent();
 
+        // získání vybrané šatny
+        Satna satna = SatnaSelection.getInstance().getSelectedSatna();
+
         // ID vesaku a podlahy
         int idVesak = -1;
         int idPodlaha = -1;
@@ -114,9 +116,9 @@ public class Uschovat2Controller {
                 return;
             }
             // aktualizace umístění v databázi - přiřazení isic k číslu umístění
-            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloVesaku.getText()), TypUmisteni.VESAK);
+            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloVesaku.getText()), TypUmisteni.VESAK, satna.getId());
             // vytvoření záznamu v historii a vrácení čísla id
-            idVesak = DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.VESAK, Integer.parseInt(vystupCisloVesaku.getText()), StavUlozeni.USCHOVANO);
+            idVesak = DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.VESAK, Integer.parseInt(vystupCisloVesaku.getText()), StavUlozeni.USCHOVANO, satna);
         }
 
         // Uložení věcí do databáze když je zaškrtnutý pouze checkbox zavazadlo
@@ -127,9 +129,9 @@ public class Uschovat2Controller {
                 return;
             }
             // aktualizace umístění v databázi - přiřazení isic k číslu umístění
-            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloPodlaha.getText()), TypUmisteni.PODLAHA);
+            DatabaseHelper.updateUmisteni(student.getIsic(), Integer.parseInt(vystupCisloPodlaha.getText()), TypUmisteni.PODLAHA, satna.getId());
             // vytvoření záznamu v historii a vrácení čísla id
-            idPodlaha = DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()), StavUlozeni.USCHOVANO);
+            idPodlaha = DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), TypUmisteni.PODLAHA, Integer.parseInt(vystupCisloPodlaha.getText()), StavUlozeni.USCHOVANO, satna);
         }
 
         // získání tasku pro odeslání emailu
@@ -190,6 +192,7 @@ public class Uschovat2Controller {
      */
     @FXML
     public void domuKlik() throws IOException {
+        userDataContainer.setStudent(null);
         StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 }

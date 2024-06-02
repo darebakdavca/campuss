@@ -1,6 +1,7 @@
 package cz.vse.campuss.controllers;
 
 import cz.vse.campuss.helpers.*;
+import cz.vse.campuss.model.Satna;
 import cz.vse.campuss.model.StavUlozeni;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
@@ -29,6 +30,7 @@ import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 public class Vyzvednout2Controller {
     // Student, který vyzvedává věci
     private Student student;
+    UserDataContainer userDataContainer = UserDataContainer.getInstance();
 
     // FXML elementy
     public AnchorPane rootPane;
@@ -64,18 +66,18 @@ public class Vyzvednout2Controller {
         // skrytí progress baru
         rootPane.getChildren().remove(oblastProgress);
         // získání dat z předchozí obrazovky
-        initData(UserDataContainer.getInstance());
+        initData();
     }
 
     /**
      * Metoda pro zobrazení obrazovky pro ukázání pozic na základě dat z předchozí obrazovky
-     * @param userDataContainer Data z předchozí obrazovky
      */
-    public void initData(UserDataContainer userDataContainer) {
+    public void initData() {
         student = userDataContainer.getStudent();
+        Satna satna = SatnaSelection.getInstance().getSelectedSatna();
         // získání volného vesaku a podlahy
-        int umisteniVesak = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK);
-        int umisteniPodlaha = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA);
+        int umisteniVesak = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK, satna.getId());
+        int umisteniPodlaha = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA, satna.getId());
 
         // zobrazení informací o studentovi
         studentJmeno.setText(student.getJmeno() + " " + student.getPrijmeni());
@@ -112,6 +114,7 @@ public class Vyzvednout2Controller {
      */
     @FXML
     public void potvrditVyzvednutiKlik(MouseEvent mouseEvent) {
+        Satna satna = SatnaSelection.getInstance().getSelectedSatna();
         // odebrání starých prvků a přidání progress prvku
         hlavniPrvky.getChildren().remove(blokInformaci);
         hlavniPrvky.getChildren().remove(ovladaciPrvky);
@@ -129,25 +132,23 @@ public class Vyzvednout2Controller {
 
         // Uložení věcí do databáze pro věšák když je vyzvedáváno oblečení
         if (vesak) {
-            idVesak = historieEntryQueryVyzvednuto(student, TypUmisteni.VESAK);
+            idVesak = historieEntryQueryVyzvednuto(student, TypUmisteni.VESAK, satna);
+            DatabaseHelper.removeLocationFromUmisteniByISIC(student, TypUmisteni.VESAK, satna);
         }
 
         // Uložení věcí do databáze pro podlahu když je vyzvedáváno zavazadlo
         if (zavazadlo) {
-            idPodlaha = historieEntryQueryVyzvednuto(student, TypUmisteni.PODLAHA);
+            idPodlaha = historieEntryQueryVyzvednuto(student, TypUmisteni.PODLAHA, satna);
+            DatabaseHelper.removeLocationFromUmisteniByISIC(student, TypUmisteni.PODLAHA, satna);
         }
 
-        // získání čísla ISIC karty aktuálního studenta
-        String isic = student.getIsic();
 
         // získání tasku pro odeslání emailu
         Task<Void> task = getOdesliEmailTask(idVesak, idPodlaha, student);
 
-        // spuštění tasku v novém threadu (neblokující tak hlavní Thread kde běží JavaFX a UI)
+        // spuštění tasku v novém threadu (neblokující tak hlavní Thread kde běžís JavaFX a UI)
         new Thread(task).start();
 
-        // odebrání umístění z databáze
-        DatabaseHelper.removeLocationFromUmisteniByISIC(isic);
     }
 
 
@@ -195,8 +196,8 @@ public class Vyzvednout2Controller {
      * @param student Student, který vyzvedl věc
      * @param typUmisteni Typ umístění, ze kterého se věc vyzvedla
      */
-    private int historieEntryQueryVyzvednuto(Student student, TypUmisteni typUmisteni) {
-        return DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), typUmisteni, DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), typUmisteni), StavUlozeni.VYZVEDNUTO);
+    private int historieEntryQueryVyzvednuto(Student student, TypUmisteni typUmisteni, Satna satna) {
+        return DatabaseHelper.createHistorieEntry(student.getJmeno(), student.getPrijmeni(), student.getIsic(), typUmisteni, DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), typUmisteni, satna.getId()), StavUlozeni.VYZVEDNUTO, satna);
     }
 
     /**
@@ -214,6 +215,7 @@ public class Vyzvednout2Controller {
      */
     @FXML
     public void domuKlik(MouseEvent mouseEvent) throws IOException {
+        userDataContainer.setStudent(null);
         StageManager.switchFXML(rootPane, FXMLView.HOME);
     }
 }

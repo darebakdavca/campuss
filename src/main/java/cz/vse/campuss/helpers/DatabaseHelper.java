@@ -73,12 +73,13 @@ public class DatabaseHelper {
      * @param typUmisteni Typ umístění
      * @return Umístění
      */
-    public static Umisteni fetchUnusedUmisteni(TypUmisteni typUmisteni) {
+    public static Umisteni fetchUnusedUmisteni(TypUmisteni typUmisteni, Satna satna) {
         Umisteni umisteni = null;
-        String sql = "SELECT * FROM Umisteni WHERE typ_umisteni = ? AND id_satny_fk = '1' AND   student IS NULL LIMIT 1";
+        String sql = "SELECT * FROM Umisteni WHERE typ_umisteni = ? AND id_satny_fk = ? AND   student IS NULL ORDER BY cislo  LIMIT 1";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, typUmisteni.getText());
+            pstmt.setInt(2, satna.getId());
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     umisteni = new Umisteni(rs.getInt("id_umisteni"), rs.getInt("cislo"), TypUmisteni.fromString(rs.getString("typ_umisteni")), rs.getString("student"), rs.getInt("id_satny_fk"));
@@ -96,13 +97,14 @@ public class DatabaseHelper {
      * @param cislo Číslo umístění
      * @param typUmisteni Typ umístění
      */
-    public static Umisteni updateUmisteni(String isic, int cislo, TypUmisteni typUmisteni) {
+    public static Umisteni updateUmisteni(String isic, int cislo, TypUmisteni typUmisteni, int idSatny) {
         Umisteni umisteni = null;
-        String sql = "UPDATE Umisteni SET student = ? WHERE typ_umisteni = ? AND cislo = ?";
+        String sql = "UPDATE Umisteni SET student = ? WHERE typ_umisteni = ? AND cislo = ? AND id_satny_fk = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isic);
             pstmt.setInt(3, cislo);
+            pstmt.setInt(4, idSatny);
             if (typUmisteni == TypUmisteni.VESAK) {
                 pstmt.setString(2, "věšák");
             } else if (typUmisteni == TypUmisteni.PODLAHA) {
@@ -123,7 +125,7 @@ public class DatabaseHelper {
      * @param typUmisteni Typ umístění
      * @param cisloUmisteni Číslo umístění
      */
-    public static int createHistorieEntry(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni, StavUlozeni stavUlozeni) {
+    public static int createHistorieEntry(String jmenoStudenta, String prijmeniStudenta, String isic, TypUmisteni typUmisteni, int cisloUmisteni, StavUlozeni stavUlozeni, Satna satna) {
         int id = -1;
 
         String sql = "INSERT INTO Historie (jmeno_studenta, prijmeni_studenta, isic_studenta, satna_nazev, umisteni_typ, umisteni_cislo, stav, cas_zmeny_stavu, satnarka_id, umisteni_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -133,7 +135,7 @@ public class DatabaseHelper {
             pstmt.setString(1, jmenoStudenta); //jméno studenta
             pstmt.setString(2, prijmeniStudenta); //příjmení studenta
             pstmt.setString(3, isic); //isic studenta
-            pstmt.setString(4, SatnaSelection.getInstance().getSelectedSatna());  //název šatny
+            pstmt.setString(4, SatnaSelection.getInstance().getSelectedSatna().getSatnaNazev());  //název šatny
 
             if (typUmisteni == TypUmisteni.VESAK) { //typ umístění
                 pstmt.setString(5, "věšák");
@@ -159,7 +161,7 @@ public class DatabaseHelper {
 
             pstmt.setInt(9, 1); // id šatnářky - ještě není automatické
 
-            pstmt.setInt(10, fetchLocationNumberByISIC(isic, typUmisteni)); // id umístění
+            pstmt.setInt(10, fetchLocationNumberByISIC(isic, typUmisteni, satna.getId())); // id umístění
 
             pstmt.executeUpdate();
 
@@ -235,12 +237,13 @@ public class DatabaseHelper {
      * @param typUmisteni Typ umístění
      * @return Číslo umístění
      */
-    public static int fetchLocationNumberByISIC(String isic, TypUmisteni typUmisteni) {
+     public static int fetchLocationNumberByISIC(String isic, TypUmisteni typUmisteni, int idSatny) {
         int locationNumber = -1;
-        String sql = "SELECT cislo FROM Umisteni WHERE student = ? AND typ_umisteni = ?";
+        String sql = "SELECT cislo FROM Umisteni WHERE student = ? AND typ_umisteni = ? AND id_satny_fk = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isic);
+            pstmt.setInt(3, idSatny);
             if (typUmisteni == TypUmisteni.VESAK) { //typ umístění
                 pstmt.setString(2, "věšák");
             } else if (typUmisteni == TypUmisteni.PODLAHA) {
@@ -259,16 +262,16 @@ public class DatabaseHelper {
 
 
 
-    public static String getSatnaFromISIC(String isic_studenta) {
-        String satnaNazev = null;
-        String sql = "SELECT satna_nazev FROM Historie WHERE isic_studenta = ?";
+    public static Satna getSatnaFromISIC(String isic_studenta) {
+        Satna satna = null;
+        String sql = "SELECT * FROM Historie WHERE isic_studenta = ?";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isic_studenta);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    satnaNazev = rs.getString("satna_nazev");
-                    return satnaNazev;
+                    satna = new Satna(rs.getInt("id_satny"), rs.getString("nazev"));
+                    return satna;
                 } else {
                     System.out.println("No records found for ISIC: " + isic_studenta);
                 }
@@ -276,7 +279,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
-        return satnaNazev;
+        return satna;
     }
 
     public static String getISICByEmail(String email) {
@@ -301,19 +304,40 @@ public class DatabaseHelper {
 
     /**
      * Metoda pro odstranění isic studenta u umístění na základě jeho ISIC karty
-     * @param isic ISIC karta studenta
+     * @param student Student
+     * @param typUmisteni Typ umístění
+     * @param satna Šatna
      */
-    public static void removeLocationFromUmisteniByISIC(String isic) {
-        String sql = "UPDATE Umisteni SET student = NULL WHERE student = ?";
+    public static void removeLocationFromUmisteniByISIC(Student student, TypUmisteni typUmisteni, Satna satna) {
+        String sql = "UPDATE Umisteni SET student = NULL WHERE student = ? AND typ_umisteni = ? AND id_satny_fk = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, isic);
+            pstmt.setString(1, student.getIsic());
+            pstmt.setString(2, typUmisteni.getText());
+            pstmt.setInt(3, satna.getId());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
+    }
+
+    public static Satna getSatnaFromName(String satnaNazev) {
+        Satna satna = null;
+        String sql = "SELECT * FROM Satna WHERE nazev = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, satnaNazev);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    satna = new Satna(rs.getInt("id_satny"), rs.getString("nazev"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+        return satna;
     }
 }
