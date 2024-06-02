@@ -80,7 +80,6 @@ public class MailHelper {
         }
     }
 
-//TODO: načítání informací o umístění z tabulky Umístění, nikoliv z PolozkaHistorie
 
     /**
      * Metoda pro nastavení mapování údajů do HTML šablony
@@ -110,6 +109,10 @@ public class MailHelper {
             nazevSatny = polozkaHistoriePodlaha.getSatnaNazev();
         }
 
+        assert nazevSatny != null;
+        if (nazevSatny.equals("Nová budova")) {
+            cisloPodlaha = "V této šatně není možné uložit zavazadlo.";
+        }
 
 
         // nastavení mapování údajů
