@@ -48,7 +48,7 @@ public class StudentController {
         student = userDataContainer.getStudent();
         // Vytvoření nového timeru, který bude každou sekundu volat metodu startCountdown
         // Refreshuj odpočet
-        Timer timer = new Timer(1000, e -> {
+        Timer timer = new Timer(1, e -> {
             startCountdown(); // Refreshuj odpočet
         });
         timer.start(); // Zahájení odpočtu
@@ -56,13 +56,17 @@ public class StudentController {
         fadeIn(rootPane); // Plynulé zobrazení scény
     }
 
-    // Metoda pro zobrazení času do zavření
+    /**
+     * Metoda pro spuštění odpočtu
+     */
     private void startCountdown() {
         LocalTime now = LocalTime.now();
         LocalDate today = LocalDate.now();
         String jmeno = student.getJmeno();
 
-        // Nastavení oslovení podle denní doby
+        /**
+         * Podle času vypíše oslovení
+         */
         if (now.isAfter(LocalTime.of(5, 0)) && now.isBefore(LocalTime.of(10, 0))) {
             osloveniOut.setText("Dobré ráno, " + jmeno + "!");
         } else if (now.isAfter(LocalTime.of(10, 0)) && now.isBefore(LocalTime.of(12, 0))) {
@@ -108,7 +112,10 @@ public class StudentController {
             countdownText = seconds + " s do zavření, ";
         }
 
-        // Aktualizace odpočtu
+        /**
+         * Zobrazení odpočtu
+         */
+
         Platform.runLater(() -> closingOut.setText(countdownText));
     }
 
@@ -141,11 +148,14 @@ public class StudentController {
             satnaOut.setText(satna);
 
         } else {
-            throw new RuntimeException("Student is null - this err should not occur");
+            throw new RuntimeException("Student je prázdný!");
         }
     }
 
-    // Method to navigate back to the home screen
+    /**
+     * Metoda pro přechod na domovskou obrazovku
+     * @param mouseEvent Event kliknutí myší
+     */
     public void domuKlik(MouseEvent mouseEvent) {
         try {
             switchFXML(rootPane, FXMLView.HOME);

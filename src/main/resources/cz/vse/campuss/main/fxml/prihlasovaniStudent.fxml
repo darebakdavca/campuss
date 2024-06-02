@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -7,21 +9,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="rootPane" prefHeight="850.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.PrihlasovaniStudentController">
 
-    <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <HBox alignment="CENTER" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <VBox alignment="CENTER" spacing="20.0">
             <ImageView fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@pictures/campuss.png" />
             </ImageView>
-            <Text style="-fx-font-size: 50px; -fx-font-weight: bold;" text="Přihlášení do systému" />
-            <HBox alignment="CENTER" spacing="20.0">
-               <TextField fx:id="emailVstup" promptText="Zadejte email" minWidth="200.0"  />
-               <Button mnemonicParsing="false" onAction="#odeslatLogin" text="Odeslat"/>
+            <Text style="-fx-font-size: 50px; -fx-font-weight: bold;" text="Přihlášení do systému studenta" />
+            <HBox alignment="CENTER">
+            <ImageView fitHeight="67.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pictures/Microsoft%20_logo.jpg" />
+               </image>
+            </ImageView>
+               <TextField fx:id="emailVstup" minWidth="200.0" prefHeight="38.0" prefWidth="339.0" promptText="Zadejte email" HBox.hgrow="NEVER">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+               <Button mnemonicParsing="false" onAction="#odeslatLogin" prefHeight="39.0" prefWidth="106.0" text="Odeslat">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <cursor>
+               <Cursor fx:constant="DEFAULT" />
+            </cursor>
             </HBox>
-            <Text fx:id="errorText" text="Nemáte žádné uložené věci." style="-fx-font-size: 25; -fx-fill: red" visible="false" />
+            <Text fx:id="errorText" style="-fx-font-size: 25; -fx-fill: red" text="Nemáte žádné uložené věci." visible="false" />
         </VBox>
     </HBox>
     <ImageView fitWidth="110.0" onMouseClicked="#domuKlik" preserveRatio="true" style="-fx-cursor: hand;" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
