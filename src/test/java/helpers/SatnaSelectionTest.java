@@ -1,6 +1,7 @@
 package helpers;
 
 import cz.vse.campuss.helpers.SatnaSelection;
+import cz.vse.campuss.model.Satna;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,8 +20,9 @@ public class SatnaSelectionTest {
     @Test
     public void testSingletonConsistency() {
         SatnaSelection instance = SatnaSelection.getInstance();
-        instance.setSelectedSatna("Šatna 101");
-        assertEquals("Zvolená šatna by měla být 'Šatna 101'", "Šatna 101", instance.getSelectedSatna());
+        Satna satna = new Satna(1, "Šatna 101");
+        instance.setSelectedSatna(satna);
+        assertEquals("Zvolená šatna by měla být 'Šatna 101'", satna, instance.getSelectedSatna());
     }
 
     @Test
