@@ -8,10 +8,11 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.StudentController">
+<AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vse.campuss.controllers.StudentController">
       <GridPane alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="1440.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -23,6 +24,11 @@
             <RowConstraints />
             <RowConstraints />
          </rowConstraints>
+      <Line endX="1184.68115234375" endY="383.2597351074219" startX="300.49853515625" startY="383.2597351074219" strokeWidth="5.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+         <GridPane.margin>
+            <Insets bottom="15.0" />
+         </GridPane.margin>
+      </Line>
             <GridPane GridPane.rowIndex="2">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -94,7 +100,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
                <GridPane.margin>
-                  <Insets bottom="45.0" />
+                  <Insets bottom="70.0" />
                </GridPane.margin>
             </ImageView>
             <Text fx:id="osloveniOut" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
@@ -102,15 +108,15 @@
                   <Font name="System Bold" size="64.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="70.0" />
+                  <Insets bottom="90.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informace o tých uložených věcích:" textOrigin="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informace o tých uložených věcech:" textOrigin="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
                   <Font size="40.0" />
                </font>
                <GridPane.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="40.0" />
                </GridPane.margin>
             </Text>
       </GridPane>
