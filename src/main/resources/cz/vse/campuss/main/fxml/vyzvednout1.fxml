@@ -20,7 +20,7 @@
         </font>
     </Text>
     <HBox fx:id="zadavaniISIC" alignment="CENTER" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
-        <TextField fx:id="vstupISIC" prefHeight="60.0" HBox.hgrow="ALWAYS" text="S420300843379J" promptText="Vyhledat ISIC...">
+        <TextField fx:id="vstupISIC" prefHeight="60.0" HBox.hgrow="ALWAYS" promptText="Vyhledat ISIC...">
             <font>
                 <Font size="22.0" />
             </font>

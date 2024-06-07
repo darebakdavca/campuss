@@ -6,19 +6,19 @@ import cz.vse.campuss.helpers.UserDataContainer;
 import cz.vse.campuss.model.Satna;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
-import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 
 import java.io.IOException;
 import javax.swing.Timer;
 import javafx.application.Platform;
 import javafx.scene.text.Text;
+import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import static cz.vse.campuss.helpers.NodeHelper.fadeIn;
 import static cz.vse.campuss.helpers.StageManager.switchFXML;
@@ -122,7 +122,7 @@ public class StudentController {
     public void fetchData() {
 
         if (student != null) {
-            Satna satna = DatabaseHelper.getSatnaFromISIC(student.getIsic());
+            Satna satna = DatabaseHelper.getSatnaFromName(DatabaseHelper.getSatnaNazevFromISIC(student.getIsic()));
 
             int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.VESAK, satna.getId());
             int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(student.getIsic(), TypUmisteni.PODLAHA, satna.getId());
@@ -147,17 +147,6 @@ public class StudentController {
         }
     }
 
-    /**
-     * Metoda pro přechod na domovskou obrazovku
-     * @param mouseEvent Event kliknutí myší
-     */
-    public void domuKlik(MouseEvent mouseEvent) {
-        try {
-            switchFXML(rootPane, FXMLView.HOME);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     /**
      * Metoda pro odhlášení

@@ -3,7 +3,8 @@ package cz.vse.campuss.helpers;
 import cz.vse.campuss.model.Student;
 
 /**
- * Třída pro uchování dat o stavu checkboxů a studenta
+ * Třída pro uchování dat o stavu checkboxů a studenta napříc aplikací
+ * Jedná se o singelton návrhový vzor
  */
 public class UserDataContainer {
     private static UserDataContainer instance;

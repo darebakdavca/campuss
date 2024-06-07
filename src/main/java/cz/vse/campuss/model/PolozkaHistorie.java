@@ -1,5 +1,9 @@
 package cz.vse.campuss.model;
 
+/**
+ * Třída PolozkaHistorie představuje jednu položku historie uložení v systému.
+ * Obsahuje informace o studentovi, šatně, umístění, stavu uložení a čase změny stavu.
+ */
 public class PolozkaHistorie {
     private final int id;
     private final String jmenoStudenta;

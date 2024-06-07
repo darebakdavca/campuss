@@ -16,6 +16,7 @@ public class StageManager {
 
     /**
      * Zobrazí scénu v primárním stage
+     * Používá se pouze při spuštění aplikace
      * @param view FXMLView (Obrazovka), která se má zobrazit
      */
     public static void switchScene(final FXMLView view) throws IOException {
@@ -27,7 +28,7 @@ public class StageManager {
 
 
     /**
-     * Zobrazí FXML soubor v primárním stage
+     * Do aktuálního rootPane zobrazí nový AnchorPane s FXML souborem z FXMLView požadované obrazovky
      * @param rootPane AnchorPane, do kterého se má zobrazit FXML soubor
      * @param fxmlView FXMLView (Obrazovka), která se má zobrazit
      */

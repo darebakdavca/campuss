@@ -64,6 +64,7 @@ public class Vyzvednout1Controller {
 
         // pokud je student již uložený, zobrazí se jeho jméno a příjmení
         if (userDataContainer.getStudent() != null) {
+            vstupISIC.setText(userDataContainer.getStudent().getIsic());
             odeslatISIC(null);
         }
 

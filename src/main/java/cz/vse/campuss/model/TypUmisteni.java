@@ -2,6 +2,8 @@ package cz.vse.campuss.model;
 
 /**
  * Typ umístění věci
+ * Věc může být umístěna na věšáku nebo na podlaze
+ * Umožňuje jednoduché větvení logiky na základě typu umístění
  */
 public enum TypUmisteni {
     VESAK("věšák"),

@@ -209,6 +209,11 @@ public class DatabaseHelper {
 
 
 
+    /**
+     * Metoda pro získání položky historie na základě jejího ID
+     * @param id ID položky historie
+     * @return Umístění
+     */
     public static PolozkaHistorie fetchActiveUschovani(int id) {
         PolozkaHistorie polozkaHistorie = null;
         String sql = "SELECT * FROM Historie WHERE id = ?";
@@ -262,18 +267,36 @@ public class DatabaseHelper {
 
 
 
-    public static Satna getSatnaFromISIC(String isic_studenta) {
-        Satna satna = null;
-        String sql = "SELECT * FROM Historie WHERE isic_studenta = ?";
+    /**
+     * Metoda pro získání názvu šatny na základě isic studenta
+     * @param isic_studenta ISIC studenta
+     * @return nazev šatny
+     */
+    public static String getSatnaNazevFromISIC(String isic_studenta) {
+        String satna = null;
+        String sql = "SELECT *\n" +
+                "FROM Historie h1\n" +
+                "WHERE isic_studenta = ? and stav like 'uschováno'\n" +
+                "  AND NOT EXISTS (\n" +
+                "    SELECT 1\n" +
+                "    FROM Historie h2\n" +
+                "    WHERE h2.isic_studenta = h1.isic_studenta\n" +
+                "      AND h2.satna_nazev = h1.satna_nazev\n" +
+                "      AND h2.umisteni_typ = h1.umisteni_typ\n" +
+                "      AND h2.stav = 'vyzvednuto'\n" +
+                "      AND h2.cas_zmeny_stavu > h1.cas_zmeny_stavu\n" +
+                ")\n" +
+                "ORDER BY h1.cas_zmeny_stavu DESC\n" +
+                "LIMIT 1;\n";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, isic_studenta);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    satna = new Satna(rs.getInt("id_satny"), rs.getString("nazev"));
+                    satna = rs.getString("satna_nazev");
                     return satna;
                 } else {
-                    System.out.println("No records found for ISIC: " + isic_studenta);
+                    System.out.println("Žádná šatna nenalezena na základě ISIC studenta: " + isic_studenta);
                 }
             }
         } catch (SQLException e) {
@@ -282,6 +305,12 @@ public class DatabaseHelper {
         return satna;
     }
 
+
+    /**
+     * Metoda pro získání ISIC karty studenta na základě jeho emailu
+     * @param email Email studenta
+     * @return ISIC karta studenta
+     */
     public static String getISICByEmail(String email) {
         String isic = null;
         String sql = "SELECT ISIC FROM Student WHERE email = ?";
@@ -324,6 +353,11 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * Metoda pro získání šatny na základě jejího názvu
+     * @param satnaNazev Název šatny
+     * @return Šatna
+     */
     public static Satna getSatnaFromName(String satnaNazev) {
         Satna satna = null;
         String sql = "SELECT * FROM Satna WHERE nazev = ?";

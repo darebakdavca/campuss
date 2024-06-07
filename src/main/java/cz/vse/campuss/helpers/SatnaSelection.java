@@ -5,6 +5,7 @@ import cz.vse.campuss.model.Satna;
 
 /**
  * Třída pro uchování vybrané šatny
+ * Jedná se o singelton návrhový vzor
  */
 public class SatnaSelection {
     private static SatnaSelection instance;

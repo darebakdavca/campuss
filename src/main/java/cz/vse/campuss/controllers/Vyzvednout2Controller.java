@@ -5,6 +5,7 @@ import cz.vse.campuss.model.Satna;
 import cz.vse.campuss.model.StavUlozeni;
 import cz.vse.campuss.model.Student;
 import cz.vse.campuss.model.TypUmisteni;
+
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -142,13 +143,11 @@ public class Vyzvednout2Controller {
             DatabaseHelper.removeLocationFromUmisteniByISIC(student, TypUmisteni.PODLAHA, satna);
         }
 
-
         // získání tasku pro odeslání emailu
         Task<Void> task = getOdesliEmailTask(idVesak, idPodlaha, student);
 
         // spuštění tasku v novém threadu (neblokující tak hlavní Thread kde běžís JavaFX a UI)
         new Thread(task).start();
-
     }
 
 

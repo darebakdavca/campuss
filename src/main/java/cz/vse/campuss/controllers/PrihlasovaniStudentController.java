@@ -60,9 +60,17 @@ public class PrihlasovaniStudentController {
     public void odeslatLogin(ActionEvent actionEvent) throws IOException {
         String isic = DatabaseHelper.getISICByEmail(emailVstup.getText());
         Student student = DatabaseHelper.fetchStudentByISIC(isic);
-        Satna satna = SatnaSelection.getInstance().getSelectedSatna();
+        Satna satna = DatabaseHelper.getSatnaFromName(DatabaseHelper.getSatnaNazevFromISIC(isic));
+
+
 
         if (isic != null) {
+            if (satna == null) {
+            errorText.setText("Student nemá nic uloženého.");
+            errorText.setVisible(true);
+            hideAfterSeconds(errorText);
+            return;
+            }
             int vesakLocation = DatabaseHelper.fetchLocationNumberByISIC(isic, TypUmisteni.VESAK, satna.getId());
             int podlahaLocation = DatabaseHelper.fetchLocationNumberByISIC(isic, TypUmisteni.PODLAHA, satna.getId());
 
@@ -91,6 +99,7 @@ public class PrihlasovaniStudentController {
      */
     @FXML
     public void domuKlik(MouseEvent mouseEvent) throws IOException {
+        userDataContainer.setStudent(null);
         StageManager.switchFXML(rootPane, FXMLView.PRIHLASOVANI);
     }
 }
